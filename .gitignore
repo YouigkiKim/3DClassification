@@ -3,6 +3,7 @@ data/
 
 # Ignore zip files
 *.zip
+*.docx
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
