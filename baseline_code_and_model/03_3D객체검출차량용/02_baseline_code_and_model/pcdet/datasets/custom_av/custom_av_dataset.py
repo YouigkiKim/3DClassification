@@ -26,7 +26,7 @@ class CustomAvDataset(DatasetTemplate):
         )
         self.split = self.dataset_cfg.DATA_SPLIT[self.mode]
 
-        split_dir = os.path.join(self.root_path, 'ImageSets', (self.split + '.txt'))
+        split_dir = os.path.join(self.root_path, 'ImageSets_Team_3', (self.split + '.txt'))
         self.sample_id_list = [x.strip() for x in open(split_dir).readlines()] if os.path.exists(split_dir) else None
 
         self.custom_av_infos = []
@@ -77,7 +77,7 @@ class CustomAvDataset(DatasetTemplate):
         )
         self.split = split
 
-        split_dir = self.root_path / 'ImageSets' / (self.split + '.txt')
+        split_dir = self.root_path / 'ImageSets_Team_3' / (self.split + '.txt')
         self.sample_id_list = [x.strip() for x in open(split_dir).readlines()] if split_dir.exists() else None
         self.sample_id_list = [sample_id for sample_id in self.sample_id_list if sample_id.strip()]
 
@@ -203,8 +203,8 @@ class CustomAvDataset(DatasetTemplate):
     def create_groundtruth_database(self, info_path=None, used_classes=None, split='train'):
         import torch
 
-        database_save_path = Path(self.root_path) / ('gt_database' if split == 'train' else ('gt_database_%s' % split))
-        db_info_save_path = Path(self.root_path) / ('custom_av_dbinfos_%s.pkl' % split)
+        database_save_path = Path(self.root_path) / ('Team_3_gt_database' if split == 'train' else ('Team_3_gt_database_%s' % split))
+        db_info_save_path = Path(self.root_path) / ('Team_3_custom_av_dbinfos_%s.pkl' % split)
 
         database_save_path.mkdir(parents=True, exist_ok=True)
         all_db_infos = {}
@@ -274,8 +274,8 @@ def create_custom_av_infos(dataset_cfg, class_names, data_path, save_path, worke
     train_split, val_split = 'train', 'val'
     num_features = len(dataset_cfg.POINT_FEATURE_ENCODING.src_feature_list)
 
-    train_filename = save_path / ('custom_av_infos_%s.pkl' % train_split)
-    val_filename = save_path / ('custom_av_infos_%s.pkl' % val_split)
+    train_filename = save_path / ('Team_3_custom_av_infos_%s.pkl' % train_split)
+    val_filename = save_path / ('Team_3_custom_av_infos_%s.pkl' % val_split)
 
     print('------------------------Start to generate data infos------------------------')
 

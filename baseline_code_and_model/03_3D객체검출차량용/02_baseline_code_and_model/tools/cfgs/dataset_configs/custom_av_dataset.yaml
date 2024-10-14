@@ -15,9 +15,8 @@ DATA_SPLIT: {
 }
 
 INFO_PATH: {
-    'train': [Team_2_custom_av_infos_train.pkl],
-    'test': [Team_2_custom_av_infos_val.pkl],
-
+    'train': [Team_3_custom_av_infos_train.pkl],
+    'test': [Team_3_custom_av_infos_val.pkl],
 }
 
 POINT_FEATURE_ENCODING: {
@@ -33,7 +32,7 @@ DATA_AUGMENTOR:
         - NAME: gt_sampling
           USE_ROAD_PLANE: False
           DB_INFO_PATH:
-              - custom_av_dbinfos_train.pkl
+              - Team_3_custom_av_dbinfos_train.pkl
           PREPARE: {
              filter_by_min_points: ['Vehicle:5', 'Pedestrian:5', 'Cyclist:5'],
           }
