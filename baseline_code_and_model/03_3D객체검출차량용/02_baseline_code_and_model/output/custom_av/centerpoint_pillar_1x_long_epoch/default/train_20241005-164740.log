@@ -1,0 +1,347 @@
+2024-10-05 16:47:40,331   INFO  **********************Start logging**********************
+2024-10-05 16:47:40,332   INFO  CUDA_VISIBLE_DEVICES=2,3
+2024-10-05 16:47:40,332   INFO  Training in distributed mode : total_batch_size: 8
+2024-10-05 16:47:40,332   INFO  cfg_file         cfgs/custom_av/centerpoint_pillar_1x_long_epoch.yaml
+2024-10-05 16:47:40,332   INFO  batch_size       4
+2024-10-05 16:47:40,332   INFO  epochs           80
+2024-10-05 16:47:40,332   INFO  workers          4
+2024-10-05 16:47:40,332   INFO  extra_tag        default
+2024-10-05 16:47:40,332   INFO  ckpt             None
+2024-10-05 16:47:40,332   INFO  pretrained_model None
+2024-10-05 16:47:40,332   INFO  launcher         pytorch
+2024-10-05 16:47:40,332   INFO  tcp_port         18888
+2024-10-05 16:47:40,332   INFO  sync_bn          False
+2024-10-05 16:47:40,332   INFO  fix_random_seed  False
+2024-10-05 16:47:40,332   INFO  ckpt_save_interval 1
+2024-10-05 16:47:40,332   INFO  local_rank       0
+2024-10-05 16:47:40,332   INFO  max_ckpt_save_num 30
+2024-10-05 16:47:40,332   INFO  merge_all_iters_to_one_epoch False
+2024-10-05 16:47:40,332   INFO  set_cfgs         None
+2024-10-05 16:47:40,332   INFO  max_waiting_mins 0
+2024-10-05 16:47:40,332   INFO  start_epoch      0
+2024-10-05 16:47:40,332   INFO  num_epochs_to_eval 0
+2024-10-05 16:47:40,332   INFO  save_to_file     False
+2024-10-05 16:47:40,332   INFO  use_tqdm_to_record False
+2024-10-05 16:47:40,333   INFO  logger_iter_interval 50
+2024-10-05 16:47:40,333   INFO  ckpt_save_time_interval 300
+2024-10-05 16:47:40,333   INFO  wo_gpu_stat      False
+2024-10-05 16:47:40,333   INFO  use_amp          False
+2024-10-05 16:47:40,333   INFO  cfg.ROOT_DIR: /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model
+2024-10-05 16:47:40,333   INFO  cfg.LOCAL_RANK: 0
+2024-10-05 16:47:40,333   INFO  cfg.CLASS_NAMES: ['Vehicle', 'Pedestrian', 'Cyclist']
+2024-10-05 16:47:40,333   INFO  ----------- DATA_CONFIG -----------
+2024-10-05 16:47:40,333   INFO  cfg.DATA_CONFIG.DATASET: CustomAvDataset
+2024-10-05 16:47:40,333   INFO  cfg.DATA_CONFIG.DATA_PATH: ../data/custom_av
+2024-10-05 16:47:40,333   INFO  cfg.DATA_CONFIG.POINT_CLOUD_RANGE: [-70.0, -70.0, -4.0, 70.0, 70.0, 4.0]
+2024-10-05 16:47:40,333   INFO  ----------- MAP_CLASS_TO_KITTI -----------
+2024-10-05 16:47:40,333   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Vehicle: Car
+2024-10-05 16:47:40,333   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Pedestrian: Pedestrian
+2024-10-05 16:47:40,333   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Cyclist: Cyclist
+2024-10-05 16:47:40,333   INFO  ----------- DATA_SPLIT -----------
+2024-10-05 16:47:40,333   INFO  cfg.DATA_CONFIG.DATA_SPLIT.train: train
+2024-10-05 16:47:40,333   INFO  cfg.DATA_CONFIG.DATA_SPLIT.test: val
+2024-10-05 16:47:40,333   INFO  ----------- INFO_PATH -----------
+2024-10-05 16:47:40,333   INFO  cfg.DATA_CONFIG.INFO_PATH.train: ['custom_av_infos_train.pkl']
+2024-10-05 16:47:40,333   INFO  cfg.DATA_CONFIG.INFO_PATH.test: ['custom_av_infos_val.pkl']
+2024-10-05 16:47:40,333   INFO  ----------- POINT_FEATURE_ENCODING -----------
+2024-10-05 16:47:40,333   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.encoding_type: absolute_coordinates_encoding
+2024-10-05 16:47:40,333   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.used_feature_list: ['x', 'y', 'z']
+2024-10-05 16:47:40,333   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.src_feature_list: ['x', 'y', 'z', 'intensity']
+2024-10-05 16:47:40,334   INFO  ----------- DATA_AUGMENTOR -----------
+2024-10-05 16:47:40,334   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.DISABLE_AUG_LIST: ['placeholder']
+2024-10-05 16:47:40,334   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.AUG_CONFIG_LIST: [{'NAME': 'gt_sampling', 'USE_ROAD_PLANE': False, 'DB_INFO_PATH': ['custom_av_dbinfos_train.pkl'], 'PREPARE': {'filter_by_min_points': ['Vehicle:5', 'Pedestrian:5', 'Cyclist:5']}, 'SAMPLE_GROUPS': ['Vehicle:15', 'Pedestrian:10', 'Cyclist:10'], 'NUM_POINT_FEATURES': 4, 'DATABASE_WITH_FAKELIDAR': False, 'REMOVE_EXTRA_WIDTH': [0.0, 0.0, 0.0], 'LIMIT_WHOLE_SCENE': True}, {'NAME': 'random_world_flip', 'ALONG_AXIS_LIST': ['x', 'y']}, {'NAME': 'random_world_rotation', 'WORLD_ROT_ANGLE': [-0.78539816, 0.78539816]}, {'NAME': 'random_world_scaling', 'WORLD_SCALE_RANGE': [0.95, 1.05]}]
+2024-10-05 16:47:40,334   INFO  cfg.DATA_CONFIG.DATA_PROCESSOR: [{'NAME': 'mask_points_and_boxes_outside_range', 'REMOVE_OUTSIDE_BOXES': True}, {'NAME': 'shuffle_points', 'SHUFFLE_ENABLED': {'train': True, 'test': True}}, {'NAME': 'transform_points_to_voxels', 'VOXEL_SIZE': [0.25, 0.25, 8.0], 'MAX_POINTS_PER_VOXEL': 20, 'MAX_NUMBER_OF_VOXELS': {'train': 150000, 'test': 150000}}]
+2024-10-05 16:47:40,334   INFO  cfg.DATA_CONFIG._BASE_CONFIG_: cfgs/dataset_configs/custom_av_dataset.yaml
+2024-10-05 16:47:40,334   INFO  ----------- MODEL -----------
+2024-10-05 16:47:40,334   INFO  cfg.MODEL.NAME: CenterPoint
+2024-10-05 16:47:40,334   INFO  ----------- VFE -----------
+2024-10-05 16:47:40,334   INFO  cfg.MODEL.VFE.NAME: PillarVFE
+2024-10-05 16:47:40,334   INFO  cfg.MODEL.VFE.WITH_DISTANCE: False
+2024-10-05 16:47:40,334   INFO  cfg.MODEL.VFE.USE_ABSLOTE_XYZ: True
+2024-10-05 16:47:40,334   INFO  cfg.MODEL.VFE.USE_NORM: True
+2024-10-05 16:47:40,334   INFO  cfg.MODEL.VFE.NUM_FILTERS: [64, 64]
+2024-10-05 16:47:40,334   INFO  ----------- MAP_TO_BEV -----------
+2024-10-05 16:47:40,334   INFO  cfg.MODEL.MAP_TO_BEV.NAME: PointPillarScatter
+2024-10-05 16:47:40,334   INFO  cfg.MODEL.MAP_TO_BEV.NUM_BEV_FEATURES: 64
+2024-10-05 16:47:40,334   INFO  ----------- BACKBONE_2D -----------
+2024-10-05 16:47:40,334   INFO  cfg.MODEL.BACKBONE_2D.NAME: BaseBEVBackbone
+2024-10-05 16:47:40,334   INFO  cfg.MODEL.BACKBONE_2D.LAYER_NUMS: [3, 5, 5]
+2024-10-05 16:47:40,334   INFO  cfg.MODEL.BACKBONE_2D.LAYER_STRIDES: [1, 2, 2]
+2024-10-05 16:47:40,334   INFO  cfg.MODEL.BACKBONE_2D.NUM_FILTERS: [64, 128, 256]
+2024-10-05 16:47:40,334   INFO  cfg.MODEL.BACKBONE_2D.UPSAMPLE_STRIDES: [1, 2, 4]
+2024-10-05 16:47:40,334   INFO  cfg.MODEL.BACKBONE_2D.NUM_UPSAMPLE_FILTERS: [128, 128, 128]
+2024-10-05 16:47:40,335   INFO  ----------- DENSE_HEAD -----------
+2024-10-05 16:47:40,335   INFO  cfg.MODEL.DENSE_HEAD.NAME: CenterHead
+2024-10-05 16:47:40,335   INFO  cfg.MODEL.DENSE_HEAD.CLASS_AGNOSTIC: False
+2024-10-05 16:47:40,335   INFO  cfg.MODEL.DENSE_HEAD.CLASS_NAMES_EACH_HEAD: [['Vehicle', 'Pedestrian', 'Cyclist']]
+2024-10-05 16:47:40,335   INFO  cfg.MODEL.DENSE_HEAD.SHARED_CONV_CHANNEL: 64
+2024-10-05 16:47:40,335   INFO  cfg.MODEL.DENSE_HEAD.USE_BIAS_BEFORE_NORM: True
+2024-10-05 16:47:40,335   INFO  cfg.MODEL.DENSE_HEAD.NUM_HM_CONV: 2
+2024-10-05 16:47:40,335   INFO  ----------- SEPARATE_HEAD_CFG -----------
+2024-10-05 16:47:40,335   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_ORDER: ['center', 'center_z', 'dim', 'rot']
+2024-10-05 16:47:40,335   INFO  ----------- HEAD_DICT -----------
+2024-10-05 16:47:40,335   INFO  ----------- center -----------
+2024-10-05 16:47:40,335   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center.out_channels: 2
+2024-10-05 16:47:40,335   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center.num_conv: 2
+2024-10-05 16:47:40,335   INFO  ----------- center_z -----------
+2024-10-05 16:47:40,335   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center_z.out_channels: 1
+2024-10-05 16:47:40,335   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center_z.num_conv: 2
+2024-10-05 16:47:40,335   INFO  ----------- dim -----------
+2024-10-05 16:47:40,335   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.dim.out_channels: 3
+2024-10-05 16:47:40,335   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.dim.num_conv: 2
+2024-10-05 16:47:40,335   INFO  ----------- rot -----------
+2024-10-05 16:47:40,335   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.rot.out_channels: 2
+2024-10-05 16:47:40,335   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.rot.num_conv: 2
+2024-10-05 16:47:40,335   INFO  ----------- TARGET_ASSIGNER_CONFIG -----------
+2024-10-05 16:47:40,335   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.FEATURE_MAP_STRIDE: 1
+2024-10-05 16:47:40,336   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NUM_MAX_OBJS: 500
+2024-10-05 16:47:40,336   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.GAUSSIAN_OVERLAP: 0.1
+2024-10-05 16:47:40,336   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.MIN_RADIUS: 2
+2024-10-05 16:47:40,336   INFO  ----------- LOSS_CONFIG -----------
+2024-10-05 16:47:40,336   INFO  ----------- LOSS_WEIGHTS -----------
+2024-10-05 16:47:40,336   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.cls_weight: 1.0
+2024-10-05 16:47:40,336   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.loc_weight: 2.0
+2024-10-05 16:47:40,336   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.code_weights: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+2024-10-05 16:47:40,336   INFO  ----------- POST_PROCESSING -----------
+2024-10-05 16:47:40,336   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.SCORE_THRESH: 0.1
+2024-10-05 16:47:40,336   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.POST_CENTER_LIMIT_RANGE: [-80, -80, -10.0, 80, 80, 10.0]
+2024-10-05 16:47:40,336   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.MAX_OBJ_PER_SAMPLE: 500
+2024-10-05 16:47:40,336   INFO  ----------- NMS_CONFIG -----------
+2024-10-05 16:47:40,336   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_TYPE: nms_gpu
+2024-10-05 16:47:40,336   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_THRESH: 0.7
+2024-10-05 16:47:40,336   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_PRE_MAXSIZE: 4096
+2024-10-05 16:47:40,336   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_POST_MAXSIZE: 500
+2024-10-05 16:47:40,336   INFO  ----------- POST_PROCESSING -----------
+2024-10-05 16:47:40,336   INFO  cfg.MODEL.POST_PROCESSING.RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
+2024-10-05 16:47:40,337   INFO  cfg.MODEL.POST_PROCESSING.EVAL_METRIC: waymo
+2024-10-05 16:47:40,337   INFO  ----------- OPTIMIZATION -----------
+2024-10-05 16:47:40,337   INFO  cfg.OPTIMIZATION.BATCH_SIZE_PER_GPU: 4
+2024-10-05 16:47:40,337   INFO  cfg.OPTIMIZATION.NUM_EPOCHS: 80
+2024-10-05 16:47:40,337   INFO  cfg.OPTIMIZATION.OPTIMIZER: adam_onecycle
+2024-10-05 16:47:40,337   INFO  cfg.OPTIMIZATION.LR: 0.003
+2024-10-05 16:47:40,337   INFO  cfg.OPTIMIZATION.WEIGHT_DECAY: 0.01
+2024-10-05 16:47:40,337   INFO  cfg.OPTIMIZATION.MOMENTUM: 0.9
+2024-10-05 16:47:40,337   INFO  cfg.OPTIMIZATION.MOMS: [0.95, 0.85]
+2024-10-05 16:47:40,337   INFO  cfg.OPTIMIZATION.PCT_START: 0.4
+2024-10-05 16:47:40,337   INFO  cfg.OPTIMIZATION.DIV_FACTOR: 10
+2024-10-05 16:47:40,337   INFO  cfg.OPTIMIZATION.DECAY_STEP_LIST: [35, 45]
+2024-10-05 16:47:40,337   INFO  cfg.OPTIMIZATION.LR_DECAY: 0.1
+2024-10-05 16:47:40,337   INFO  cfg.OPTIMIZATION.LR_CLIP: 1e-07
+2024-10-05 16:47:40,337   INFO  cfg.OPTIMIZATION.LR_WARMUP: False
+2024-10-05 16:47:40,337   INFO  cfg.OPTIMIZATION.WARMUP_EPOCH: 1
+2024-10-05 16:47:40,337   INFO  cfg.OPTIMIZATION.GRAD_NORM_CLIP: 10
+2024-10-05 16:47:40,337   INFO  cfg.TAG: centerpoint_pillar_1x_long_epoch
+2024-10-05 16:47:40,337   INFO  cfg.EXP_GROUP_PATH: custom_av
+2024-10-05 16:47:40,358   INFO  ----------- Create dataloader & network & optimizer -----------
+2024-10-05 16:47:41,582   INFO  Database filter by min points Vehicle: 333140 => 327400
+2024-10-05 16:47:41,600   INFO  Database filter by min points Pedestrian: 135951 => 131923
+2024-10-05 16:47:41,603   INFO  Database filter by min points Cyclist: 11958 => 11684
+2024-10-05 16:47:41,619   INFO  Loading Custom AV dataset.
+2024-10-05 16:47:41,755   INFO  Total samples for Custom AV dataset: 13739
+2024-10-05 16:47:45,884   INFO  ==> Loading parameters from checkpoint /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/custom_av/centerpoint_pillar_1x_long_epoch/default/ckpt/checkpoint_epoch_80.pth to CPU
+2024-10-05 16:47:45,956   INFO  ==> Loading optimizer parameters from checkpoint /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/custom_av/centerpoint_pillar_1x_long_epoch/default/ckpt/checkpoint_epoch_80.pth to CPU
+2024-10-05 16:47:45,990   INFO  ==> Done
+2024-10-05 16:47:47,109   INFO  ----------- Model CenterPoint created, param count: 5223979 -----------
+2024-10-05 16:47:47,109   INFO  DistributedDataParallel(
+  (module): CenterPoint(
+    (vfe): PillarVFE(
+      (pfn_layers): ModuleList(
+        (0): PFNLayer(
+          (linear): Linear(in_features=9, out_features=32, bias=False)
+          (norm): BatchNorm1d(32, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        )
+        (1): PFNLayer(
+          (linear): Linear(in_features=64, out_features=64, bias=False)
+          (norm): BatchNorm1d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        )
+      )
+    )
+    (backbone_3d): None
+    (map_to_bev_module): PointPillarScatter()
+    (pfe): None
+    (backbone_2d): BaseBEVBackbone(
+      (blocks): ModuleList(
+        (0): Sequential(
+          (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+          (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), bias=False)
+          (2): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (3): ReLU()
+          (4): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (5): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (6): ReLU()
+          (7): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (8): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (9): ReLU()
+          (10): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (11): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (12): ReLU()
+        )
+        (1): Sequential(
+          (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+          (1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (2): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (3): ReLU()
+          (4): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (5): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (6): ReLU()
+          (7): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (8): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (9): ReLU()
+          (10): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (11): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (12): ReLU()
+          (13): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (14): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (15): ReLU()
+          (16): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (17): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (18): ReLU()
+        )
+        (2): Sequential(
+          (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+          (1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (2): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (3): ReLU()
+          (4): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (5): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (6): ReLU()
+          (7): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (8): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (9): ReLU()
+          (10): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (11): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (12): ReLU()
+          (13): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (14): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (15): ReLU()
+          (16): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (17): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (18): ReLU()
+        )
+      )
+      (deblocks): ModuleList(
+        (0): Sequential(
+          (0): ConvTranspose2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+        (1): Sequential(
+          (0): ConvTranspose2d(128, 128, kernel_size=(2, 2), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+        (2): Sequential(
+          (0): ConvTranspose2d(256, 128, kernel_size=(4, 4), stride=(4, 4), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+      )
+    )
+    (dense_head): CenterHead(
+      (shared_conv): Sequential(
+        (0): Conv2d(384, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+      (heads_list): ModuleList(
+        (0): SeparateHead(
+          (center): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 2, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (center_z): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (dim): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (rot): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 2, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (hm): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+        )
+      )
+      (hm_loss_func): FocalLossCenterNet()
+      (reg_loss_func): RegLossCenterNet()
+    )
+    (point_head): None
+    (roi_head): None
+  )
+)
+2024-10-05 16:47:47,111   INFO  **********************Start training custom_av/centerpoint_pillar_1x_long_epoch(default)**********************
+2024-10-05 16:48:19,475   INFO  **********************End training custom_av/centerpoint_pillar_1x_long_epoch(default)**********************
+
+
+
+2024-10-05 16:48:19,475   INFO  **********************Start evaluation custom_av/centerpoint_pillar_1x_long_epoch(default)**********************
+2024-10-05 16:48:19,478   INFO  Loading Custom AV dataset.
+2024-10-05 16:48:19,646   INFO  Total samples for Custom AV dataset: 3435
+2024-10-05 16:48:19,648   INFO  ==> Loading parameters from checkpoint /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/custom_av/centerpoint_pillar_1x_long_epoch/default/ckpt/checkpoint_epoch_80.pth to CPU
+2024-10-05 16:48:19,676   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+8caccce
+2024-10-05 16:48:19,705   INFO  ==> Done (loaded 179/179)
+2024-10-05 16:48:19,707   INFO  *************** EPOCH 80 EVALUATION *****************
+2024-10-05 16:50:34,961   INFO  *************** Performance of EPOCH 80 *****************
+2024-10-05 16:50:34,962   INFO  Generate label finished(sec_per_example: 0.0394 second).
+2024-10-05 16:50:34,962   INFO  recall_roi_0.3: 0.000000
+2024-10-05 16:50:34,962   INFO  recall_rcnn_0.3: 0.953604
+2024-10-05 16:50:34,962   INFO  recall_roi_0.5: 0.000000
+2024-10-05 16:50:34,962   INFO  recall_rcnn_0.5: 0.934912
+2024-10-05 16:50:34,962   INFO  recall_roi_0.7: 0.000000
+2024-10-05 16:50:34,962   INFO  recall_rcnn_0.7: 0.776728
+2024-10-05 16:50:34,963   INFO  Average predicted number of objects(3435 samples): 125.587
+2024-10-05 16:53:11,228   INFO  
+OBJECT_TYPE_TYPE_VEHICLE_LEVEL_1/AP: 0.8641 
+OBJECT_TYPE_TYPE_VEHICLE_LEVEL_1/APH: 0.8581 
+OBJECT_TYPE_TYPE_VEHICLE_LEVEL_1/APL: 0.8641 
+OBJECT_TYPE_TYPE_VEHICLE_LEVEL_2/AP: 0.8494 
+OBJECT_TYPE_TYPE_VEHICLE_LEVEL_2/APH: 0.8435 
+OBJECT_TYPE_TYPE_VEHICLE_LEVEL_2/APL: 0.8494 
+OBJECT_TYPE_TYPE_PEDESTRIAN_LEVEL_1/AP: 0.8417 
+OBJECT_TYPE_TYPE_PEDESTRIAN_LEVEL_1/APH: 0.8028 
+OBJECT_TYPE_TYPE_PEDESTRIAN_LEVEL_1/APL: 0.8417 
+OBJECT_TYPE_TYPE_PEDESTRIAN_LEVEL_2/AP: 0.8202 
+OBJECT_TYPE_TYPE_PEDESTRIAN_LEVEL_2/APH: 0.7823 
+OBJECT_TYPE_TYPE_PEDESTRIAN_LEVEL_2/APL: 0.8202 
+OBJECT_TYPE_TYPE_SIGN_LEVEL_1/AP: 0.0000 
+OBJECT_TYPE_TYPE_SIGN_LEVEL_1/APH: 0.0000 
+OBJECT_TYPE_TYPE_SIGN_LEVEL_1/APL: 0.0000 
+OBJECT_TYPE_TYPE_SIGN_LEVEL_2/AP: 0.0000 
+OBJECT_TYPE_TYPE_SIGN_LEVEL_2/APH: 0.0000 
+OBJECT_TYPE_TYPE_SIGN_LEVEL_2/APL: 0.0000 
+OBJECT_TYPE_TYPE_CYCLIST_LEVEL_1/AP: 0.8744 
+OBJECT_TYPE_TYPE_CYCLIST_LEVEL_1/APH: 0.8585 
+OBJECT_TYPE_TYPE_CYCLIST_LEVEL_1/APL: 0.8744 
+OBJECT_TYPE_TYPE_CYCLIST_LEVEL_2/AP: 0.8560 
+OBJECT_TYPE_TYPE_CYCLIST_LEVEL_2/APH: 0.8403 
+OBJECT_TYPE_TYPE_CYCLIST_LEVEL_2/APL: 0.8560 
+
+2024-10-05 16:53:11,230   INFO  Result is saved to /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/custom_av/centerpoint_pillar_1x_long_epoch/default/eval/eval_with_train/epoch_80/val
+2024-10-05 16:53:11,230   INFO  ****************Evaluation done.*****************
+2024-10-05 16:53:11,257   INFO  Epoch 80 has been evaluated
+2024-10-05 16:53:41,288   INFO  **********************End evaluation custom_av/centerpoint_pillar_1x_long_epoch(default)**********************

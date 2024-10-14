@@ -1,0 +1,823 @@
+2024-10-10 10:37:49,133   INFO  **********************Start logging**********************
+2024-10-10 10:37:49,133   INFO  CUDA_VISIBLE_DEVICES=2
+2024-10-10 10:37:49,133   INFO  Training in distributed mode : total_batch_size: 1
+2024-10-10 10:37:49,133   INFO  cfg_file         cfgs/waymo_models/centerpoint_dyn_pillar_1x.yaml
+2024-10-10 10:37:49,133   INFO  batch_size       1
+2024-10-10 10:37:49,133   INFO  epochs           2
+2024-10-10 10:37:49,133   INFO  workers          4
+2024-10-10 10:37:49,133   INFO  extra_tag        default
+2024-10-10 10:37:49,133   INFO  ckpt             None
+2024-10-10 10:37:49,133   INFO  pretrained_model None
+2024-10-10 10:37:49,133   INFO  launcher         pytorch
+2024-10-10 10:37:49,133   INFO  tcp_port         18888
+2024-10-10 10:37:49,133   INFO  sync_bn          False
+2024-10-10 10:37:49,133   INFO  fix_random_seed  False
+2024-10-10 10:37:49,133   INFO  ckpt_save_interval 1
+2024-10-10 10:37:49,133   INFO  local_rank       0
+2024-10-10 10:37:49,133   INFO  max_ckpt_save_num 30
+2024-10-10 10:37:49,133   INFO  merge_all_iters_to_one_epoch False
+2024-10-10 10:37:49,133   INFO  set_cfgs         None
+2024-10-10 10:37:49,133   INFO  max_waiting_mins 0
+2024-10-10 10:37:49,133   INFO  start_epoch      0
+2024-10-10 10:37:49,133   INFO  num_epochs_to_eval 0
+2024-10-10 10:37:49,133   INFO  save_to_file     False
+2024-10-10 10:37:49,133   INFO  use_tqdm_to_record False
+2024-10-10 10:37:49,133   INFO  logger_iter_interval 50
+2024-10-10 10:37:49,133   INFO  ckpt_save_time_interval 300
+2024-10-10 10:37:49,133   INFO  wo_gpu_stat      False
+2024-10-10 10:37:49,133   INFO  use_amp          False
+2024-10-10 10:37:49,133   INFO  cfg.ROOT_DIR: /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model
+2024-10-10 10:37:49,133   INFO  cfg.LOCAL_RANK: 0
+2024-10-10 10:37:49,133   INFO  cfg.CLASS_NAMES: ['Vehicle', 'Pedestrian', 'Cyclist']
+2024-10-10 10:37:49,133   INFO  ----------- DATA_CONFIG -----------
+2024-10-10 10:37:49,133   INFO  cfg.DATA_CONFIG.DATASET: CustomAvDataset
+2024-10-10 10:37:49,133   INFO  cfg.DATA_CONFIG.DATA_PATH: ../data/custom_av
+2024-10-10 10:37:49,134   INFO  cfg.DATA_CONFIG.POINT_CLOUD_RANGE: [-70.0, -70.0, -4.0, 70.0, 70.0, 4.0]
+2024-10-10 10:37:49,134   INFO  ----------- MAP_CLASS_TO_KITTI -----------
+2024-10-10 10:37:49,134   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Vehicle: Car
+2024-10-10 10:37:49,134   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Pedestrian: Pedestrian
+2024-10-10 10:37:49,134   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Cyclist: Cyclist
+2024-10-10 10:37:49,134   INFO  ----------- DATA_SPLIT -----------
+2024-10-10 10:37:49,134   INFO  cfg.DATA_CONFIG.DATA_SPLIT.train: train
+2024-10-10 10:37:49,134   INFO  cfg.DATA_CONFIG.DATA_SPLIT.test: val
+2024-10-10 10:37:49,134   INFO  ----------- INFO_PATH -----------
+2024-10-10 10:37:49,134   INFO  cfg.DATA_CONFIG.INFO_PATH.train: ['custom_av_infos_train.pkl']
+2024-10-10 10:37:49,134   INFO  cfg.DATA_CONFIG.INFO_PATH.test: ['custom_av_infos_val.pkl']
+2024-10-10 10:37:49,134   INFO  ----------- POINT_FEATURE_ENCODING -----------
+2024-10-10 10:37:49,134   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.encoding_type: absolute_coordinates_encoding
+2024-10-10 10:37:49,134   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.used_feature_list: ['x', 'y', 'z']
+2024-10-10 10:37:49,134   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.src_feature_list: ['x', 'y', 'z', 'intensity']
+2024-10-10 10:37:49,134   INFO  ----------- DATA_AUGMENTOR -----------
+2024-10-10 10:37:49,134   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.DISABLE_AUG_LIST: ['placeholder']
+2024-10-10 10:37:49,134   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.AUG_CONFIG_LIST: [{'NAME': 'gt_sampling', 'USE_ROAD_PLANE': False, 'DB_INFO_PATH': ['custom_av_dbinfos_train.pkl'], 'PREPARE': {'filter_by_min_points': ['Vehicle:5', 'Pedestrian:5', 'Cyclist:5']}, 'SAMPLE_GROUPS': ['Vehicle:15', 'Pedestrian:10', 'Cyclist:10'], 'NUM_POINT_FEATURES': 4, 'DATABASE_WITH_FAKELIDAR': False, 'REMOVE_EXTRA_WIDTH': [0.0, 0.0, 0.0], 'LIMIT_WHOLE_SCENE': True}, {'NAME': 'random_world_flip', 'ALONG_AXIS_LIST': ['x', 'y']}, {'NAME': 'random_world_rotation', 'WORLD_ROT_ANGLE': [-0.78539816, 0.78539816]}, {'NAME': 'random_world_scaling', 'WORLD_SCALE_RANGE': [0.95, 1.05]}]
+2024-10-10 10:37:49,134   INFO  cfg.DATA_CONFIG.DATA_PROCESSOR: [{'NAME': 'mask_points_and_boxes_outside_range', 'REMOVE_OUTSIDE_BOXES': True}, {'NAME': 'shuffle_points', 'SHUFFLE_ENABLED': {'train': True, 'test': True}}, {'NAME': 'transform_points_to_voxels_placeholder', 'VOXEL_SIZE': [0.25, 0.25, 8.0]}]
+2024-10-10 10:37:49,134   INFO  cfg.DATA_CONFIG._BASE_CONFIG_: cfgs/dataset_configs/custom_av_dataset.yaml
+2024-10-10 10:37:49,134   INFO  ----------- MODEL -----------
+2024-10-10 10:37:49,134   INFO  cfg.MODEL.NAME: CenterPoint
+2024-10-10 10:37:49,134   INFO  ----------- VFE -----------
+2024-10-10 10:37:49,134   INFO  cfg.MODEL.VFE.NAME: DynPillarVFE
+2024-10-10 10:37:49,134   INFO  cfg.MODEL.VFE.WITH_DISTANCE: False
+2024-10-10 10:37:49,134   INFO  cfg.MODEL.VFE.USE_ABSLOTE_XYZ: True
+2024-10-10 10:37:49,134   INFO  cfg.MODEL.VFE.USE_NORM: True
+2024-10-10 10:37:49,134   INFO  cfg.MODEL.VFE.NUM_FILTERS: [64, 64]
+2024-10-10 10:37:49,134   INFO  ----------- MAP_TO_BEV -----------
+2024-10-10 10:37:49,134   INFO  cfg.MODEL.MAP_TO_BEV.NAME: PointPillarScatter
+2024-10-10 10:37:49,134   INFO  cfg.MODEL.MAP_TO_BEV.NUM_BEV_FEATURES: 64
+2024-10-10 10:37:49,134   INFO  ----------- BACKBONE_2D -----------
+2024-10-10 10:37:49,134   INFO  cfg.MODEL.BACKBONE_2D.NAME: BaseBEVBackbone
+2024-10-10 10:37:49,134   INFO  cfg.MODEL.BACKBONE_2D.LAYER_NUMS: [3, 5, 5]
+2024-10-10 10:37:49,134   INFO  cfg.MODEL.BACKBONE_2D.LAYER_STRIDES: [1, 2, 2]
+2024-10-10 10:37:49,134   INFO  cfg.MODEL.BACKBONE_2D.NUM_FILTERS: [64, 128, 256]
+2024-10-10 10:37:49,134   INFO  cfg.MODEL.BACKBONE_2D.UPSAMPLE_STRIDES: [1, 2, 4]
+2024-10-10 10:37:49,134   INFO  cfg.MODEL.BACKBONE_2D.NUM_UPSAMPLE_FILTERS: [128, 128, 128]
+2024-10-10 10:37:49,134   INFO  ----------- DENSE_HEAD -----------
+2024-10-10 10:37:49,134   INFO  cfg.MODEL.DENSE_HEAD.NAME: CenterHead
+2024-10-10 10:37:49,134   INFO  cfg.MODEL.DENSE_HEAD.CLASS_AGNOSTIC: False
+2024-10-10 10:37:49,134   INFO  cfg.MODEL.DENSE_HEAD.CLASS_NAMES_EACH_HEAD: [['Vehicle', 'Pedestrian', 'Cyclist']]
+2024-10-10 10:37:49,134   INFO  cfg.MODEL.DENSE_HEAD.SHARED_CONV_CHANNEL: 64
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.USE_BIAS_BEFORE_NORM: True
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.NUM_HM_CONV: 2
+2024-10-10 10:37:49,135   INFO  ----------- SEPARATE_HEAD_CFG -----------
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_ORDER: ['center', 'center_z', 'dim', 'rot']
+2024-10-10 10:37:49,135   INFO  ----------- HEAD_DICT -----------
+2024-10-10 10:37:49,135   INFO  ----------- center -----------
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center.out_channels: 2
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center.num_conv: 2
+2024-10-10 10:37:49,135   INFO  ----------- center_z -----------
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center_z.out_channels: 1
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center_z.num_conv: 2
+2024-10-10 10:37:49,135   INFO  ----------- dim -----------
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.dim.out_channels: 3
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.dim.num_conv: 2
+2024-10-10 10:37:49,135   INFO  ----------- rot -----------
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.rot.out_channels: 2
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.rot.num_conv: 2
+2024-10-10 10:37:49,135   INFO  ----------- TARGET_ASSIGNER_CONFIG -----------
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.FEATURE_MAP_STRIDE: 1
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NUM_MAX_OBJS: 500
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.GAUSSIAN_OVERLAP: 0.1
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.MIN_RADIUS: 2
+2024-10-10 10:37:49,135   INFO  ----------- LOSS_CONFIG -----------
+2024-10-10 10:37:49,135   INFO  ----------- LOSS_WEIGHTS -----------
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.cls_weight: 1.0
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.loc_weight: 2.0
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.code_weights: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+2024-10-10 10:37:49,135   INFO  ----------- POST_PROCESSING -----------
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.SCORE_THRESH: 0.1
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.POST_CENTER_LIMIT_RANGE: [-80, -80, -10.0, 80, 80, 10.0]
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.MAX_OBJ_PER_SAMPLE: 500
+2024-10-10 10:37:49,135   INFO  ----------- NMS_CONFIG -----------
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_TYPE: nms_gpu
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_THRESH: 0.7
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_PRE_MAXSIZE: 4096
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_POST_MAXSIZE: 500
+2024-10-10 10:37:49,135   INFO  ----------- POST_PROCESSING -----------
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.POST_PROCESSING.RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
+2024-10-10 10:37:49,135   INFO  cfg.MODEL.POST_PROCESSING.EVAL_METRIC: waymo
+2024-10-10 10:37:49,135   INFO  ----------- OPTIMIZATION -----------
+2024-10-10 10:37:49,135   INFO  cfg.OPTIMIZATION.BATCH_SIZE_PER_GPU: 1
+2024-10-10 10:37:49,135   INFO  cfg.OPTIMIZATION.NUM_EPOCHS: 2
+2024-10-10 10:37:49,135   INFO  cfg.OPTIMIZATION.OPTIMIZER: adam_onecycle
+2024-10-10 10:37:49,135   INFO  cfg.OPTIMIZATION.LR: 0.003
+2024-10-10 10:37:49,135   INFO  cfg.OPTIMIZATION.WEIGHT_DECAY: 0.01
+2024-10-10 10:37:49,135   INFO  cfg.OPTIMIZATION.MOMENTUM: 0.9
+2024-10-10 10:37:49,136   INFO  cfg.OPTIMIZATION.MOMS: [0.95, 0.85]
+2024-10-10 10:37:49,136   INFO  cfg.OPTIMIZATION.PCT_START: 0.4
+2024-10-10 10:37:49,136   INFO  cfg.OPTIMIZATION.DIV_FACTOR: 10
+2024-10-10 10:37:49,136   INFO  cfg.OPTIMIZATION.DECAY_STEP_LIST: [35, 45]
+2024-10-10 10:37:49,136   INFO  cfg.OPTIMIZATION.LR_DECAY: 0.1
+2024-10-10 10:37:49,136   INFO  cfg.OPTIMIZATION.LR_CLIP: 1e-07
+2024-10-10 10:37:49,136   INFO  cfg.OPTIMIZATION.LR_WARMUP: False
+2024-10-10 10:37:49,136   INFO  cfg.OPTIMIZATION.WARMUP_EPOCH: 1
+2024-10-10 10:37:49,136   INFO  cfg.OPTIMIZATION.GRAD_NORM_CLIP: 10
+2024-10-10 10:37:49,136   INFO  cfg.TAG: centerpoint_dyn_pillar_1x
+2024-10-10 10:37:49,136   INFO  cfg.EXP_GROUP_PATH: waymo_models
+2024-10-10 10:37:49,156   INFO  ----------- Create dataloader & network & optimizer -----------
+2024-10-10 10:37:49,521   INFO  Database filter by min points Vehicle: 84700 => 83962
+2024-10-10 10:37:49,527   INFO  Database filter by min points Pedestrian: 46175 => 45511
+2024-10-10 10:37:49,528   INFO  Database filter by min points Cyclist: 3054 => 3018
+2024-10-10 10:37:49,532   INFO  Loading Custom AV dataset.
+2024-10-10 10:37:49,575   INFO  Total samples for Custom AV dataset: 3950
+2024-10-10 10:37:53,921   INFO  ----------- Model CenterPoint created, param count: 5223979 -----------
+2024-10-10 10:37:53,921   INFO  DistributedDataParallel(
+  (module): CenterPoint(
+    (vfe): DynamicPillarVFE(
+      (pfn_layers): ModuleList(
+        (0): PFNLayerV2(
+          (linear): Linear(in_features=9, out_features=32, bias=False)
+          (norm): BatchNorm1d(32, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): PFNLayerV2(
+          (linear): Linear(in_features=64, out_features=64, bias=False)
+          (norm): BatchNorm1d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+    )
+    (backbone_3d): None
+    (map_to_bev_module): PointPillarScatter()
+    (pfe): None
+    (backbone_2d): BaseBEVBackbone(
+      (blocks): ModuleList(
+        (0): Sequential(
+          (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+          (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), bias=False)
+          (2): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (3): ReLU()
+          (4): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (5): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (6): ReLU()
+          (7): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (8): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (9): ReLU()
+          (10): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (11): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (12): ReLU()
+        )
+        (1): Sequential(
+          (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+          (1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (2): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (3): ReLU()
+          (4): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (5): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (6): ReLU()
+          (7): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (8): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (9): ReLU()
+          (10): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (11): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (12): ReLU()
+          (13): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (14): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (15): ReLU()
+          (16): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (17): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (18): ReLU()
+        )
+        (2): Sequential(
+          (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+          (1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (2): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (3): ReLU()
+          (4): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (5): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (6): ReLU()
+          (7): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (8): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (9): ReLU()
+          (10): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (11): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (12): ReLU()
+          (13): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (14): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (15): ReLU()
+          (16): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (17): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (18): ReLU()
+        )
+      )
+      (deblocks): ModuleList(
+        (0): Sequential(
+          (0): ConvTranspose2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+        (1): Sequential(
+          (0): ConvTranspose2d(128, 128, kernel_size=(2, 2), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+        (2): Sequential(
+          (0): ConvTranspose2d(256, 128, kernel_size=(4, 4), stride=(4, 4), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+      )
+    )
+    (dense_head): CenterHead(
+      (shared_conv): Sequential(
+        (0): Conv2d(384, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+      (heads_list): ModuleList(
+        (0): SeparateHead(
+          (center): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 2, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (center_z): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (dim): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (rot): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 2, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (hm): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+        )
+      )
+      (hm_loss_func): FocalLossCenterNet()
+      (reg_loss_func): RegLossCenterNet()
+    )
+    (point_head): None
+    (roi_head): None
+  )
+)
+2024-10-10 10:37:53,924   INFO  **********************Start training waymo_models/centerpoint_dyn_pillar_1x(default)**********************
+2024-10-10 10:38:23,837   INFO  Train:    1/2 ( 50%) [   0/3950 (  0%)]  Loss: 94.26 (94.3)  LR: 3.000e-04  Time cost: 00:00/28:24 [00:29/56:48]  Acc_iter 1           Data time: 0.06(0.06)  Forward time: 0.37(0.37)  Batch time: 0.43(0.43)
+2024-10-10 10:38:34,566   INFO  Train:    1/2 ( 50%) [  49/3950 (  1%)]  Loss: 8.872 (18.0)  LR: 3.016e-04  Time cost: 00:11/14:30 [00:40/29:12]  Acc_iter 50          Data time: 0.00(0.00)  Forward time: 0.21(0.22)  Batch time: 0.21(0.22)
+2024-10-10 10:38:45,552   INFO  Train:    1/2 ( 50%) [  99/3950 (  3%)]  Loss: 8.165 (13.5)  LR: 3.065e-04  Time cost: 00:22/14:12 [00:51/28:47]  Acc_iter 100         Data time: 0.00(0.00)  Forward time: 0.22(0.22)  Batch time: 0.23(0.22)
+2024-10-10 10:38:56,531   INFO  Train:    1/2 ( 50%) [ 149/3950 (  4%)]  Loss: 9.182 (11.8)  LR: 3.148e-04  Time cost: 00:33/13:59 [01:02/28:31]  Acc_iter 150         Data time: 0.00(0.00)  Forward time: 0.21(0.22)  Batch time: 0.21(0.22)
+2024-10-10 10:38:57,243   INFO  3080x4                      Thu Oct 10 10:38:57 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 30°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 80°C,  95 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 76°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 85°C, 100 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:39:08,285   INFO  Train:    1/2 ( 50%) [ 199/3950 (  5%)]  Loss: 7.891 (10.8)  LR: 3.263e-04  Time cost: 00:44/14:01 [01:14/28:48]  Acc_iter 200         Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.22)
+2024-10-10 10:39:19,301   INFO  Train:    1/2 ( 50%) [ 249/3950 (  6%)]  Loss: 7.396 (10.3)  LR: 3.412e-04  Time cost: 00:55/13:47 [01:25/28:30]  Acc_iter 250         Data time: 0.00(0.00)  Forward time: 0.21(0.22)  Batch time: 0.21(0.22)
+2024-10-10 10:39:30,380   INFO  Train:    1/2 ( 50%) [ 299/3950 (  8%)]  Loss: 7.512 (9.81)  LR: 3.592e-04  Time cost: 01:06/13:35 [01:36/28:16]  Acc_iter 300         Data time: 0.00(0.00)  Forward time: 0.22(0.22)  Batch time: 0.22(0.22)
+2024-10-10 10:39:31,039   INFO  3080x4                      Thu Oct 10 10:39:31 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 30°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 78°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 86°C,  97 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:39:42,295   INFO  Train:    1/2 ( 50%) [ 349/3950 (  9%)]  Loss: 7.678 (9.43)  LR: 3.804e-04  Time cost: 01:18/13:31 [01:48/28:21]  Acc_iter 350         Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.24(0.23)
+2024-10-10 10:39:53,533   INFO  Train:    1/2 ( 50%) [ 399/3950 ( 10%)]  Loss: 7.435 (9.13)  LR: 4.048e-04  Time cost: 01:30/13:20 [01:59/28:10]  Acc_iter 400         Data time: 0.00(0.00)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:40:04,683   INFO  Train:    1/2 ( 50%) [ 449/3950 ( 11%)]  Loss: 7.143 (8.87)  LR: 4.323e-04  Time cost: 01:41/13:07 [02:10/27:56]  Acc_iter 450         Data time: 0.00(0.00)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 10:40:05,344   INFO  3080x4                      Thu Oct 10 10:40:05 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 30°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 71°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 87°C,  86 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:40:16,731   INFO  Train:    1/2 ( 50%) [ 499/3950 ( 13%)]  Loss: 7.788 (8.66)  LR: 4.627e-04  Time cost: 01:53/13:02 [02:22/27:57]  Acc_iter 500         Data time: 0.00(0.01)  Forward time: 0.24(0.22)  Batch time: 0.24(0.23)
+2024-10-10 10:40:28,035   INFO  Train:    1/2 ( 50%) [ 549/3950 ( 14%)]  Loss: 6.311 (8.49)  LR: 4.961e-04  Time cost: 02:04/12:50 [02:34/27:45]  Acc_iter 550         Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:40:39,255   INFO  Train:    1/2 ( 50%) [ 599/3950 ( 15%)]  Loss: 6.692 (8.35)  LR: 5.324e-04  Time cost: 02:15/12:38 [02:45/27:33]  Acc_iter 600         Data time: 0.00(0.00)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:40:39,937   INFO  3080x4                      Thu Oct 10 10:40:39 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 30°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 69°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 83°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 88°C,  97 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:40:51,169   INFO  Train:    1/2 ( 50%) [ 649/3950 ( 16%)]  Loss: 6.641 (8.23)  LR: 5.714e-04  Time cost: 02:27/12:30 [02:57/27:28]  Acc_iter 650         Data time: 0.00(0.01)  Forward time: 0.24(0.22)  Batch time: 0.24(0.23)
+2024-10-10 10:41:02,434   INFO  Train:    1/2 ( 50%) [ 699/3950 ( 18%)]  Loss: 6.613 (8.14)  LR: 6.131e-04  Time cost: 02:39/12:18 [03:08/27:15]  Acc_iter 700         Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:41:13,708   INFO  Train:    1/2 ( 50%) [ 749/3950 ( 19%)]  Loss: 6.350 (8.04)  LR: 6.573e-04  Time cost: 02:50/12:06 [03:19/27:03]  Acc_iter 750         Data time: 0.00(0.00)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:41:14,343   INFO  3080x4                      Thu Oct 10 10:41:14 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 30°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 72°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 87°C,  93 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:41:25,481   INFO  Train:    1/2 ( 50%) [ 799/3950 ( 20%)]  Loss: 6.763 (7.96)  LR: 7.040e-04  Time cost: 03:02/11:57 [03:31/26:56]  Acc_iter 800         Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:41:36,828   INFO  Train:    1/2 ( 50%) [ 849/3950 ( 21%)]  Loss: 6.894 (7.88)  LR: 7.530e-04  Time cost: 03:13/11:45 [03:42/26:44]  Acc_iter 850         Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:41:48,085   INFO  Train:    1/2 ( 50%) [ 899/3950 ( 23%)]  Loss: 6.869 (7.81)  LR: 8.042e-04  Time cost: 03:24/11:33 [03:54/26:32]  Acc_iter 900         Data time: 0.00(0.00)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:41:48,742   INFO  3080x4                      Thu Oct 10 10:41:48 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 30°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 67°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 89°C,  96 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:41:59,965   INFO  Train:    1/2 ( 50%) [ 949/3950 ( 24%)]  Loss: 6.467 (7.75)  LR: 8.576e-04  Time cost: 03:36/11:24 [04:06/26:24]  Acc_iter 950         Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:42:11,242   INFO  Train:    1/2 ( 50%) [ 999/3950 ( 25%)]  Loss: 6.825 (7.70)  LR: 9.129e-04  Time cost: 03:47/11:12 [04:17/26:12]  Acc_iter 1000        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:42:22,500   INFO  Train:    1/2 ( 50%) [1049/3950 ( 27%)]  Loss: 5.493 (7.64)  LR: 9.700e-04  Time cost: 03:59/11:00 [04:28/26:00]  Acc_iter 1050        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:42:23,205   INFO  3080x4                      Thu Oct 10 10:42:23 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 73°C,  95 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 89°C, 100 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:42:34,383   INFO  Train:    1/2 ( 50%) [1099/3950 ( 28%)]  Loss: 7.084 (7.59)  LR: 1.029e-03  Time cost: 04:10/10:50 [04:40/25:51]  Acc_iter 1100        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:42:45,613   INFO  Train:    1/2 ( 50%) [1149/3950 ( 29%)]  Loss: 7.192 (7.55)  LR: 1.089e-03  Time cost: 04:22/10:38 [04:51/25:39]  Acc_iter 1150        Data time: 0.00(0.01)  Forward time: 0.24(0.22)  Batch time: 0.24(0.23)
+2024-10-10 10:42:56,744   INFO  Train:    1/2 ( 50%) [1199/3950 ( 30%)]  Loss: 6.627 (7.51)  LR: 1.151e-03  Time cost: 04:33/10:26 [05:02/25:26]  Acc_iter 1200        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:42:57,391   INFO  3080x4                      Thu Oct 10 10:42:57 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 72°C,  74 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 86°C,  99 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:43:08,598   INFO  Train:    1/2 ( 50%) [1249/3950 ( 32%)]  Loss: 6.673 (7.47)  LR: 1.214e-03  Time cost: 04:45/10:16 [05:14/25:17]  Acc_iter 1250        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:43:19,817   INFO  Train:    1/2 ( 50%) [1299/3950 ( 33%)]  Loss: 7.126 (7.42)  LR: 1.278e-03  Time cost: 04:56/10:04 [05:25/25:05]  Acc_iter 1300        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:43:23,663   INFO  Save latest model to /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/centerpoint_dyn_pillar_1x/default/ckpt/latest_model
+2024-10-10 10:43:31,020   INFO  Train:    1/2 ( 50%) [1349/3950 ( 34%)]  Loss: 6.275 (7.38)  LR: 1.343e-03  Time cost: 05:07/09:52 [05:37/24:52]  Acc_iter 1350        Data time: 0.00(0.01)  Forward time: 0.24(0.22)  Batch time: 0.24(0.23)
+2024-10-10 10:43:31,692   INFO  3080x4                      Thu Oct 10 10:43:31 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 73°C,  98 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 86°C, 100 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:43:42,964   INFO  Train:    1/2 ( 50%) [1399/3950 ( 35%)]  Loss: 5.827 (7.34)  LR: 1.408e-03  Time cost: 05:19/09:42 [05:49/24:43]  Acc_iter 1400        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:43:54,179   INFO  Train:    1/2 ( 50%) [1449/3950 ( 37%)]  Loss: 5.678 (7.30)  LR: 1.475e-03  Time cost: 05:30/09:30 [06:00/24:31]  Acc_iter 1450        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:44:05,343   INFO  Train:    1/2 ( 50%) [1499/3950 ( 38%)]  Loss: 8.833 (7.27)  LR: 1.541e-03  Time cost: 05:41/09:18 [06:11/24:19]  Acc_iter 1500        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:44:06,014   INFO  3080x4                      Thu Oct 10 10:44:05 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 30°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 67°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 89°C,  98 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:44:17,325   INFO  Train:    1/2 ( 50%) [1549/3950 ( 39%)]  Loss: 6.383 (7.24)  LR: 1.608e-03  Time cost: 05:53/09:08 [06:23/24:10]  Acc_iter 1550        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:44:28,531   INFO  Train:    1/2 ( 50%) [1599/3950 ( 40%)]  Loss: 7.427 (7.21)  LR: 1.675e-03  Time cost: 06:05/08:56 [06:34/23:57]  Acc_iter 1600        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:44:39,807   INFO  Train:    1/2 ( 50%) [1649/3950 ( 42%)]  Loss: 6.344 (7.18)  LR: 1.743e-03  Time cost: 06:16/08:44 [06:45/23:45]  Acc_iter 1650        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:44:40,481   INFO  3080x4                      Thu Oct 10 10:44:40 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 30°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 66°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 89°C, 100 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:44:51,667   INFO  Train:    1/2 ( 50%) [1699/3950 ( 43%)]  Loss: 5.488 (7.14)  LR: 1.809e-03  Time cost: 06:28/08:34 [06:57/23:36]  Acc_iter 1700        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:45:02,881   INFO  Train:    1/2 ( 50%) [1749/3950 ( 44%)]  Loss: 5.542 (7.11)  LR: 1.876e-03  Time cost: 06:39/08:22 [07:08/23:24]  Acc_iter 1750        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:45:14,081   INFO  Train:    1/2 ( 50%) [1799/3950 ( 46%)]  Loss: 5.303 (7.08)  LR: 1.942e-03  Time cost: 06:50/08:10 [07:20/23:11]  Acc_iter 1800        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:45:14,768   INFO  3080x4                      Thu Oct 10 10:45:14 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 67°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 89°C, 100 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:45:25,914   INFO  Train:    1/2 ( 50%) [1849/3950 ( 47%)]  Loss: 6.504 (7.05)  LR: 2.007e-03  Time cost: 07:02/07:59 [07:31/23:01]  Acc_iter 1850        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:45:36,996   INFO  Train:    1/2 ( 50%) [1899/3950 ( 48%)]  Loss: 5.551 (7.03)  LR: 2.071e-03  Time cost: 07:13/07:48 [07:43/22:49]  Acc_iter 1900        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:45:48,122   INFO  Train:    1/2 ( 50%) [1949/3950 ( 49%)]  Loss: 7.158 (7.00)  LR: 2.134e-03  Time cost: 07:24/07:36 [07:54/22:37]  Acc_iter 1950        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:45:48,769   INFO  3080x4                      Thu Oct 10 10:45:48 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 66°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 89°C,  99 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:45:59,947   INFO  Train:    1/2 ( 50%) [1999/3950 ( 51%)]  Loss: 5.214 (6.97)  LR: 2.196e-03  Time cost: 07:36/07:25 [08:06/22:27]  Acc_iter 2000        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:46:11,098   INFO  Train:    1/2 ( 50%) [2049/3950 ( 52%)]  Loss: 5.026 (6.94)  LR: 2.257e-03  Time cost: 07:47/07:13 [08:17/22:14]  Acc_iter 2050        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:46:22,290   INFO  Train:    1/2 ( 50%) [2099/3950 ( 53%)]  Loss: 5.926 (6.91)  LR: 2.316e-03  Time cost: 07:58/07:02 [08:28/22:02]  Acc_iter 2100        Data time: 0.00(0.01)  Forward time: 0.24(0.22)  Batch time: 0.24(0.23)
+2024-10-10 10:46:22,980   INFO  3080x4                      Thu Oct 10 10:46:22 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 70°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 88°C,  98 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:46:34,138   INFO  Train:    1/2 ( 50%) [2149/3950 ( 54%)]  Loss: 5.881 (6.89)  LR: 2.374e-03  Time cost: 08:10/06:51 [08:40/21:52]  Acc_iter 2150        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:46:45,327   INFO  Train:    1/2 ( 50%) [2199/3950 ( 56%)]  Loss: 4.565 (6.86)  LR: 2.429e-03  Time cost: 08:21/06:39 [08:51/21:40]  Acc_iter 2200        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:46:56,616   INFO  Train:    1/2 ( 50%) [2249/3950 ( 57%)]  Loss: 5.499 (6.84)  LR: 2.483e-03  Time cost: 08:33/06:27 [09:02/21:28]  Acc_iter 2250        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:46:57,288   INFO  3080x4                      Thu Oct 10 10:46:57 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 30°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 66°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 87°C,  98 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:47:08,444   INFO  Train:    1/2 ( 50%) [2299/3950 ( 58%)]  Loss: 5.651 (6.81)  LR: 2.535e-03  Time cost: 08:45/06:16 [09:14/21:18]  Acc_iter 2300        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:47:19,617   INFO  Train:    1/2 ( 50%) [2349/3950 ( 59%)]  Loss: 4.983 (6.79)  LR: 2.584e-03  Time cost: 08:56/06:05 [09:25/21:06]  Acc_iter 2350        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:47:30,874   INFO  Train:    1/2 ( 50%) [2399/3950 ( 61%)]  Loss: 5.527 (6.76)  LR: 2.632e-03  Time cost: 09:07/05:53 [09:36/20:54]  Acc_iter 2400        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:47:31,568   INFO  3080x4                      Thu Oct 10 10:47:31 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 69°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 88°C, 100 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:47:42,743   INFO  Train:    1/2 ( 50%) [2449/3950 ( 62%)]  Loss: 5.115 (6.74)  LR: 2.677e-03  Time cost: 09:19/05:42 [09:48/20:44]  Acc_iter 2450        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:47:53,960   INFO  Train:    1/2 ( 50%) [2499/3950 ( 63%)]  Loss: 5.888 (6.71)  LR: 2.719e-03  Time cost: 09:30/05:31 [10:00/20:32]  Acc_iter 2500        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 10:48:05,249   INFO  Train:    1/2 ( 50%) [2549/3950 ( 65%)]  Loss: 4.631 (6.69)  LR: 2.759e-03  Time cost: 09:41/05:19 [10:11/20:20]  Acc_iter 2550        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:48:05,933   INFO  3080x4                      Thu Oct 10 10:48:05 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 71°C,  93 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 88°C,  83 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:48:17,150   INFO  Train:    1/2 ( 50%) [2599/3950 ( 66%)]  Loss: 6.157 (6.67)  LR: 2.795e-03  Time cost: 09:53/05:08 [10:23/20:10]  Acc_iter 2600        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:48:23,688   INFO  Save latest model to /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/centerpoint_dyn_pillar_1x/default/ckpt/latest_model
+2024-10-10 10:48:28,428   INFO  Train:    1/2 ( 50%) [2649/3950 ( 67%)]  Loss: 5.760 (6.64)  LR: 2.830e-03  Time cost: 10:05/04:57 [10:34/19:58]  Acc_iter 2650        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:48:39,651   INFO  Train:    1/2 ( 50%) [2699/3950 ( 68%)]  Loss: 6.113 (6.62)  LR: 2.861e-03  Time cost: 10:16/04:45 [10:45/19:47]  Acc_iter 2700        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:48:40,317   INFO  3080x4                      Thu Oct 10 10:48:40 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 68°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 89°C,  98 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:48:51,473   INFO  Train:    1/2 ( 50%) [2749/3950 ( 70%)]  Loss: 5.490 (6.60)  LR: 2.889e-03  Time cost: 10:28/04:34 [10:57/19:36]  Acc_iter 2750        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:49:02,644   INFO  Train:    1/2 ( 50%) [2799/3950 ( 71%)]  Loss: 5.075 (6.59)  LR: 2.914e-03  Time cost: 10:39/04:22 [11:08/19:24]  Acc_iter 2800        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:49:13,869   INFO  Train:    1/2 ( 50%) [2849/3950 ( 72%)]  Loss: 4.528 (6.57)  LR: 2.936e-03  Time cost: 10:50/04:11 [11:19/19:12]  Acc_iter 2850        Data time: 0.00(0.01)  Forward time: 0.24(0.22)  Batch time: 0.24(0.23)
+2024-10-10 10:49:14,594   INFO  3080x4                      Thu Oct 10 10:49:14 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 30°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 73°C,  93 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 89°C,  88 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:49:25,679   INFO  Train:    1/2 ( 50%) [2899/3950 ( 73%)]  Loss: 4.959 (6.55)  LR: 2.955e-03  Time cost: 11:02/04:00 [11:31/19:02]  Acc_iter 2900        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:49:36,718   INFO  Train:    1/2 ( 50%) [2949/3950 ( 75%)]  Loss: 5.475 (6.53)  LR: 2.970e-03  Time cost: 11:13/03:48 [11:42/18:50]  Acc_iter 2950        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:49:47,883   INFO  Train:    1/2 ( 50%) [2999/3950 ( 76%)]  Loss: 5.557 (6.51)  LR: 2.983e-03  Time cost: 11:24/03:36 [11:53/18:38]  Acc_iter 3000        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:49:48,577   INFO  3080x4                      Thu Oct 10 10:49:48 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 71°C,  84 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 88°C,  82 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:49:59,737   INFO  Train:    1/2 ( 50%) [3049/3950 ( 77%)]  Loss: 5.379 (6.49)  LR: 2.992e-03  Time cost: 11:36/03:25 [12:05/18:27]  Acc_iter 3050        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:50:10,954   INFO  Train:    1/2 ( 50%) [3099/3950 ( 78%)]  Loss: 5.945 (6.47)  LR: 2.998e-03  Time cost: 11:47/03:14 [12:17/18:15]  Acc_iter 3100        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:50:22,368   INFO  Train:    1/2 ( 50%) [3149/3950 ( 80%)]  Loss: 4.893 (6.45)  LR: 3.000e-03  Time cost: 11:58/03:02 [12:28/18:04]  Acc_iter 3150        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:50:23,078   INFO  3080x4                      Thu Oct 10 10:50:23 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 55°C,   0 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 71°C,  14 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:50:34,308   INFO  Train:    1/2 ( 50%) [3199/3950 ( 81%)]  Loss: 5.201 (6.43)  LR: 2.999e-03  Time cost: 12:10/02:51 [12:40/17:53]  Acc_iter 3200        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 10:50:45,442   INFO  Train:    1/2 ( 50%) [3249/3950 ( 82%)]  Loss: 6.313 (6.41)  LR: 2.997e-03  Time cost: 12:22/02:40 [12:51/17:41]  Acc_iter 3250        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:50:56,595   INFO  Train:    1/2 ( 50%) [3299/3950 ( 84%)]  Loss: 5.334 (6.39)  LR: 2.994e-03  Time cost: 12:33/02:28 [13:02/17:30]  Acc_iter 3300        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:50:57,281   INFO  3080x4                      Thu Oct 10 10:50:57 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 58°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 81°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 86°C, 100 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:51:08,391   INFO  Train:    1/2 ( 50%) [3349/3950 ( 85%)]  Loss: 4.623 (6.37)  LR: 2.988e-03  Time cost: 12:44/02:17 [13:14/17:19]  Acc_iter 3350        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:51:19,574   INFO  Train:    1/2 ( 50%) [3399/3950 ( 86%)]  Loss: 4.786 (6.36)  LR: 2.981e-03  Time cost: 12:56/02:05 [13:25/17:07]  Acc_iter 3400        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:51:30,733   INFO  Train:    1/2 ( 50%) [3449/3950 ( 87%)]  Loss: 5.003 (6.34)  LR: 2.973e-03  Time cost: 13:07/01:54 [13:36/16:55]  Acc_iter 3450        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 10:51:31,430   INFO  3080x4                      Thu Oct 10 10:51:31 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 65°C,  86 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 81°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 87°C,  97 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:51:42,462   INFO  Train:    1/2 ( 50%) [3499/3950 ( 89%)]  Loss: 6.096 (6.32)  LR: 2.962e-03  Time cost: 13:19/01:42 [13:48/16:44]  Acc_iter 3500        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:51:53,484   INFO  Train:    1/2 ( 50%) [3549/3950 ( 90%)]  Loss: 4.815 (6.31)  LR: 2.950e-03  Time cost: 13:30/01:31 [13:59/16:32]  Acc_iter 3550        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:52:04,591   INFO  Train:    1/2 ( 50%) [3599/3950 ( 91%)]  Loss: 4.428 (6.29)  LR: 2.937e-03  Time cost: 13:41/01:20 [14:10/16:21]  Acc_iter 3600        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:52:05,267   INFO  3080x4                      Thu Oct 10 10:52:05 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 30°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 70°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 81°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 88°C,  97 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:52:16,360   INFO  Train:    1/2 ( 50%) [3649/3950 ( 92%)]  Loss: 4.300 (6.27)  LR: 2.922e-03  Time cost: 13:52/01:08 [14:22/16:10]  Acc_iter 3650        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:52:27,445   INFO  Train:    1/2 ( 50%) [3699/3950 ( 94%)]  Loss: 4.951 (6.25)  LR: 2.905e-03  Time cost: 14:04/00:57 [14:33/15:58]  Acc_iter 3700        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:52:38,616   INFO  Train:    1/2 ( 50%) [3749/3950 ( 95%)]  Loss: 4.993 (6.23)  LR: 2.887e-03  Time cost: 14:15/00:45 [14:44/15:46]  Acc_iter 3750        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 10:52:39,286   INFO  3080x4                      Thu Oct 10 10:52:39 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 72°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 89°C,  99 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:52:50,354   INFO  Train:    1/2 ( 50%) [3799/3950 ( 96%)]  Loss: 5.340 (6.22)  LR: 2.867e-03  Time cost: 14:26/00:34 [14:56/15:35]  Acc_iter 3800        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:53:01,444   INFO  Train:    1/2 ( 50%) [3849/3950 ( 97%)]  Loss: 3.572 (6.20)  LR: 2.846e-03  Time cost: 14:38/00:23 [15:07/15:23]  Acc_iter 3850        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:53:12,569   INFO  Train:    1/2 ( 50%) [3899/3950 ( 99%)]  Loss: 4.541 (6.18)  LR: 2.824e-03  Time cost: 14:49/00:11 [15:18/15:12]  Acc_iter 3900        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 10:53:13,225   INFO  3080x4                      Thu Oct 10 10:53:13 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 66°C,  11 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 85°C, 100 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:53:23,631   INFO  Save latest model to /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/centerpoint_dyn_pillar_1x/default/ckpt/latest_model
+2024-10-10 10:53:24,510   INFO  Train:    1/2 ( 50%) [3949/3950 (100%)]  Loss: 4.567 (6.16)  LR: 2.800e-03  Time cost: 15:01/00:00 [15:30/15:01]  Acc_iter 3950        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 10:53:41,208   INFO  Train:    2/2 (100%) [   0/3950 (  0%)]  Loss: 4.826 (4.83)  LR: 2.799e-03  Time cost: 00:00/19:35 [15:47/19:35]  Acc_iter 3951        Data time: 0.07(0.07)  Forward time: 0.23(0.23)  Batch time: 0.30(0.30)
+2024-10-10 10:53:52,101   INFO  Train:    2/2 (100%) [  49/3950 (  1%)]  Loss: 4.652 (4.85)  LR: 2.774e-03  Time cost: 00:11/14:33 [15:58/14:33]  Acc_iter 4000        Data time: 0.00(0.00)  Forward time: 0.22(0.22)  Batch time: 0.22(0.22)
+2024-10-10 10:54:03,136   INFO  Train:    2/2 (100%) [  99/3950 (  3%)]  Loss: 4.954 (4.89)  LR: 2.747e-03  Time cost: 00:22/14:15 [16:09/14:15]  Acc_iter 4050        Data time: 0.00(0.00)  Forward time: 0.21(0.22)  Batch time: 0.21(0.22)
+2024-10-10 10:54:03,837   INFO  3080x4                      Thu Oct 10 10:54:03 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 70°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 81°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 87°C,  91 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:54:14,898   INFO  Train:    2/2 (100%) [ 149/3950 (  4%)]  Loss: 4.705 (4.91)  LR: 2.719e-03  Time cost: 00:33/14:21 [16:20/14:21]  Acc_iter 4100        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 10:54:26,064   INFO  Train:    2/2 (100%) [ 199/3950 (  5%)]  Loss: 5.426 (4.89)  LR: 2.689e-03  Time cost: 00:45/14:06 [16:32/14:06]  Acc_iter 4150        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 10:54:37,302   INFO  Train:    2/2 (100%) [ 249/3950 (  6%)]  Loss: 4.515 (4.84)  LR: 2.658e-03  Time cost: 00:56/13:54 [16:43/13:54]  Acc_iter 4200        Data time: 0.00(0.00)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:54:37,989   INFO  3080x4                      Thu Oct 10 10:54:37 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 71°C,  95 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 88°C,  97 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:54:49,121   INFO  Train:    2/2 (100%) [ 299/3950 (  8%)]  Loss: 4.498 (4.85)  LR: 2.626e-03  Time cost: 01:08/13:50 [16:55/13:50]  Acc_iter 4250        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:55:00,289   INFO  Train:    2/2 (100%) [ 349/3950 (  9%)]  Loss: 4.803 (4.85)  LR: 2.593e-03  Time cost: 01:19/13:36 [17:06/13:36]  Acc_iter 4300        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:55:11,543   INFO  Train:    2/2 (100%) [ 399/3950 ( 10%)]  Loss: 5.927 (4.83)  LR: 2.558e-03  Time cost: 01:30/13:24 [17:17/13:24]  Acc_iter 4350        Data time: 0.00(0.00)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:55:12,231   INFO  3080x4                      Thu Oct 10 10:55:12 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 71°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 88°C, 100 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:55:23,418   INFO  Train:    2/2 (100%) [ 449/3950 ( 11%)]  Loss: 5.366 (4.81)  LR: 2.522e-03  Time cost: 01:42/13:17 [17:29/13:17]  Acc_iter 4400        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:55:34,535   INFO  Train:    2/2 (100%) [ 499/3950 ( 13%)]  Loss: 4.879 (4.81)  LR: 2.485e-03  Time cost: 01:53/13:04 [17:40/13:04]  Acc_iter 4450        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:55:45,626   INFO  Train:    2/2 (100%) [ 549/3950 ( 14%)]  Loss: 4.683 (4.79)  LR: 2.447e-03  Time cost: 02:04/12:51 [17:51/12:51]  Acc_iter 4500        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:55:46,298   INFO  3080x4                      Thu Oct 10 10:55:46 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 69°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 87°C,  84 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:55:57,535   INFO  Train:    2/2 (100%) [ 599/3950 ( 15%)]  Loss: 4.180 (4.77)  LR: 2.408e-03  Time cost: 02:16/12:43 [18:03/12:43]  Acc_iter 4550        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:56:08,613   INFO  Train:    2/2 (100%) [ 649/3950 ( 16%)]  Loss: 4.468 (4.76)  LR: 2.368e-03  Time cost: 02:27/12:30 [18:14/12:30]  Acc_iter 4600        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.24(0.23)
+2024-10-10 10:56:19,855   INFO  Train:    2/2 (100%) [ 699/3950 ( 18%)]  Loss: 4.148 (4.74)  LR: 2.327e-03  Time cost: 02:38/12:18 [18:25/12:18]  Acc_iter 4650        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:56:20,501   INFO  3080x4                      Thu Oct 10 10:56:20 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 69°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 87°C,  99 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:56:31,592   INFO  Train:    2/2 (100%) [ 749/3950 ( 19%)]  Loss: 3.977 (4.73)  LR: 2.285e-03  Time cost: 02:50/12:08 [18:37/12:08]  Acc_iter 4700        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:56:42,673   INFO  Train:    2/2 (100%) [ 799/3950 ( 20%)]  Loss: 3.748 (4.72)  LR: 2.242e-03  Time cost: 03:01/11:55 [18:48/11:55]  Acc_iter 4750        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 10:56:53,752   INFO  Train:    2/2 (100%) [ 849/3950 ( 21%)]  Loss: 4.701 (4.71)  LR: 2.199e-03  Time cost: 03:12/11:43 [18:59/11:43]  Acc_iter 4800        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:56:54,438   INFO  3080x4                      Thu Oct 10 10:56:54 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 71°C,  93 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 88°C,  89 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:57:05,480   INFO  Train:    2/2 (100%) [ 899/3950 ( 23%)]  Loss: 4.936 (4.70)  LR: 2.154e-03  Time cost: 03:24/11:33 [19:11/11:33]  Acc_iter 4850        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 10:57:16,512   INFO  Train:    2/2 (100%) [ 949/3950 ( 24%)]  Loss: 4.774 (4.70)  LR: 2.109e-03  Time cost: 03:35/11:21 [19:22/11:21]  Acc_iter 4900        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:57:27,653   INFO  Train:    2/2 (100%) [ 999/3950 ( 25%)]  Loss: 4.801 (4.69)  LR: 2.063e-03  Time cost: 03:46/11:09 [19:33/11:09]  Acc_iter 4950        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:57:28,309   INFO  3080x4                      Thu Oct 10 10:57:28 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 66°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 89°C, 100 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:57:39,552   INFO  Train:    2/2 (100%) [1049/3950 ( 27%)]  Loss: 4.752 (4.67)  LR: 2.017e-03  Time cost: 03:58/10:59 [19:45/10:59]  Acc_iter 5000        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:57:50,654   INFO  Train:    2/2 (100%) [1099/3950 ( 28%)]  Loss: 3.769 (4.66)  LR: 1.970e-03  Time cost: 04:09/10:47 [19:56/10:47]  Acc_iter 5050        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 10:58:01,733   INFO  Train:    2/2 (100%) [1149/3950 ( 29%)]  Loss: 4.182 (4.65)  LR: 1.923e-03  Time cost: 04:20/10:35 [20:07/10:35]  Acc_iter 5100        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 10:58:02,425   INFO  3080x4                      Thu Oct 10 10:58:02 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 73°C,  76 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 85°C, 100 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:58:13,566   INFO  Train:    2/2 (100%) [1199/3950 ( 30%)]  Loss: 4.252 (4.64)  LR: 1.875e-03  Time cost: 04:32/10:25 [20:19/10:25]  Acc_iter 5150        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:58:24,610   INFO  Train:    2/2 (100%) [1249/3950 ( 32%)]  Loss: 4.370 (4.63)  LR: 1.826e-03  Time cost: 04:43/10:13 [20:30/10:13]  Acc_iter 5200        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.23(0.23)
+2024-10-10 10:58:35,730   INFO  Train:    2/2 (100%) [1299/3950 ( 33%)]  Loss: 5.888 (4.62)  LR: 1.778e-03  Time cost: 04:54/10:01 [20:41/10:01]  Acc_iter 5250        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 10:58:36,400   INFO  3080x4                      Thu Oct 10 10:58:36 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 71°C,  79 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 88°C,  85 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:58:41,087   INFO  Save latest model to /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/centerpoint_dyn_pillar_1x/default/ckpt/latest_model
+2024-10-10 10:58:47,480   INFO  Train:    2/2 (100%) [1349/3950 ( 34%)]  Loss: 4.000 (4.61)  LR: 1.729e-03  Time cost: 05:06/09:50 [20:53/09:50]  Acc_iter 5300        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 10:58:58,526   INFO  Train:    2/2 (100%) [1399/3950 ( 35%)]  Loss: 4.668 (4.60)  LR: 1.680e-03  Time cost: 05:17/09:38 [21:04/09:38]  Acc_iter 5350        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:59:09,598   INFO  Train:    2/2 (100%) [1449/3950 ( 37%)]  Loss: 4.344 (4.59)  LR: 1.630e-03  Time cost: 05:28/09:26 [21:15/09:26]  Acc_iter 5400        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 10:59:10,269   INFO  3080x4                      Thu Oct 10 10:59:10 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 72°C,  77 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 87°C,  91 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:59:21,400   INFO  Train:    2/2 (100%) [1499/3950 ( 38%)]  Loss: 4.152 (4.59)  LR: 1.581e-03  Time cost: 05:40/09:16 [21:27/09:16]  Acc_iter 5450        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:59:32,462   INFO  Train:    2/2 (100%) [1549/3950 ( 39%)]  Loss: 3.969 (4.58)  LR: 1.531e-03  Time cost: 05:51/09:04 [21:38/09:04]  Acc_iter 5500        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:59:43,548   INFO  Train:    2/2 (100%) [1599/3950 ( 40%)]  Loss: 5.047 (4.57)  LR: 1.481e-03  Time cost: 06:02/08:52 [21:49/08:52]  Acc_iter 5550        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 10:59:44,207   INFO  3080x4                      Thu Oct 10 10:59:44 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 72°C,  81 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 88°C, 100 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 10:59:55,281   INFO  Train:    2/2 (100%) [1649/3950 ( 42%)]  Loss: 4.309 (4.56)  LR: 1.431e-03  Time cost: 06:14/08:42 [22:01/08:42]  Acc_iter 5600        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:00:06,305   INFO  Train:    2/2 (100%) [1699/3950 ( 43%)]  Loss: 4.551 (4.55)  LR: 1.382e-03  Time cost: 06:25/08:30 [22:12/08:30]  Acc_iter 5650        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:00:17,381   INFO  Train:    2/2 (100%) [1749/3950 ( 44%)]  Loss: 5.276 (4.55)  LR: 1.332e-03  Time cost: 06:36/08:18 [22:23/08:18]  Acc_iter 5700        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 11:00:18,053   INFO  3080x4                      Thu Oct 10 11:00:18 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 72°C,  82 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 89°C, 100 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 11:00:29,202   INFO  Train:    2/2 (100%) [1799/3950 ( 46%)]  Loss: 3.998 (4.54)  LR: 1.283e-03  Time cost: 06:48/08:07 [22:35/08:07]  Acc_iter 5750        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 11:00:40,224   INFO  Train:    2/2 (100%) [1849/3950 ( 47%)]  Loss: 5.012 (4.53)  LR: 1.234e-03  Time cost: 06:59/07:56 [22:46/07:56]  Acc_iter 5800        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:00:51,304   INFO  Train:    2/2 (100%) [1899/3950 ( 48%)]  Loss: 4.108 (4.53)  LR: 1.185e-03  Time cost: 07:10/07:44 [22:57/07:44]  Acc_iter 5850        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:00:51,979   INFO  3080x4                      Thu Oct 10 11:00:51 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 72°C,  91 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 89°C, 100 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 11:01:02,969   INFO  Train:    2/2 (100%) [1949/3950 ( 49%)]  Loss: 4.408 (4.52)  LR: 1.137e-03  Time cost: 07:22/07:33 [23:09/07:33]  Acc_iter 5900        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:01:13,972   INFO  Train:    2/2 (100%) [1999/3950 ( 51%)]  Loss: 3.665 (4.51)  LR: 1.089e-03  Time cost: 07:33/07:21 [23:20/07:21]  Acc_iter 5950        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:01:25,033   INFO  Train:    2/2 (100%) [2049/3950 ( 52%)]  Loss: 3.531 (4.50)  LR: 1.041e-03  Time cost: 07:44/07:10 [23:31/07:10]  Acc_iter 6000        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:01:25,693   INFO  3080x4                      Thu Oct 10 11:01:25 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 71°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 88°C, 100 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 11:01:36,801   INFO  Train:    2/2 (100%) [2099/3950 ( 53%)]  Loss: 4.325 (4.49)  LR: 9.942e-04  Time cost: 07:55/06:59 [23:42/06:59]  Acc_iter 6050        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 11:01:47,865   INFO  Train:    2/2 (100%) [2149/3950 ( 54%)]  Loss: 4.779 (4.48)  LR: 9.476e-04  Time cost: 08:06/06:47 [23:53/06:47]  Acc_iter 6100        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.23(0.23)
+2024-10-10 11:01:58,900   INFO  Train:    2/2 (100%) [2199/3950 ( 56%)]  Loss: 4.022 (4.48)  LR: 9.017e-04  Time cost: 08:17/06:36 [24:04/06:36]  Acc_iter 6150        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 11:01:59,612   INFO  3080x4                      Thu Oct 10 11:01:59 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 74°C,  91 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 87°C,  99 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 11:02:10,654   INFO  Train:    2/2 (100%) [2249/3950 ( 57%)]  Loss: 3.996 (4.47)  LR: 8.565e-04  Time cost: 08:29/06:25 [24:16/06:25]  Acc_iter 6200        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.23(0.23)
+2024-10-10 11:02:21,690   INFO  Train:    2/2 (100%) [2299/3950 ( 58%)]  Loss: 4.119 (4.46)  LR: 8.120e-04  Time cost: 08:40/06:13 [24:27/06:13]  Acc_iter 6250        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 11:02:32,894   INFO  Train:    2/2 (100%) [2349/3950 ( 59%)]  Loss: 3.898 (4.46)  LR: 7.682e-04  Time cost: 08:51/06:02 [24:38/06:02]  Acc_iter 6300        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:02:33,578   INFO  3080x4                      Thu Oct 10 11:02:33 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 69°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 89°C, 100 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 11:02:44,652   INFO  Train:    2/2 (100%) [2399/3950 ( 61%)]  Loss: 4.269 (4.45)  LR: 7.252e-04  Time cost: 09:03/05:51 [24:50/05:51]  Acc_iter 6350        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:02:55,699   INFO  Train:    2/2 (100%) [2449/3950 ( 62%)]  Loss: 3.318 (4.44)  LR: 6.831e-04  Time cost: 09:14/05:39 [25:01/05:39]  Acc_iter 6400        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 11:03:06,857   INFO  Train:    2/2 (100%) [2499/3950 ( 63%)]  Loss: 4.315 (4.43)  LR: 6.418e-04  Time cost: 09:25/05:28 [25:12/05:28]  Acc_iter 6450        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:03:07,546   INFO  3080x4                      Thu Oct 10 11:03:07 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 68°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 89°C,  90 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 11:03:18,636   INFO  Train:    2/2 (100%) [2549/3950 ( 65%)]  Loss: 3.816 (4.43)  LR: 6.015e-04  Time cost: 09:37/05:17 [25:24/05:17]  Acc_iter 6500        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:03:29,614   INFO  Train:    2/2 (100%) [2599/3950 ( 66%)]  Loss: 4.652 (4.42)  LR: 5.622e-04  Time cost: 09:48/05:05 [25:35/05:05]  Acc_iter 6550        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:03:40,721   INFO  Train:    2/2 (100%) [2649/3950 ( 67%)]  Loss: 4.062 (4.41)  LR: 5.240e-04  Time cost: 09:59/04:54 [25:46/04:54]  Acc_iter 6600        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 11:03:41,412   INFO  3080x4                      Thu Oct 10 11:03:41 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 73°C,  99 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 89°C,  99 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 11:03:41,552   INFO  Save latest model to /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/centerpoint_dyn_pillar_1x/default/ckpt/latest_model
+2024-10-10 11:03:52,567   INFO  Train:    2/2 (100%) [2699/3950 ( 68%)]  Loss: 3.823 (4.41)  LR: 4.868e-04  Time cost: 10:11/04:43 [25:58/04:43]  Acc_iter 6650        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 11:04:03,559   INFO  Train:    2/2 (100%) [2749/3950 ( 70%)]  Loss: 3.358 (4.40)  LR: 4.507e-04  Time cost: 10:22/04:31 [26:09/04:31]  Acc_iter 6700        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:04:14,657   INFO  Train:    2/2 (100%) [2799/3950 ( 71%)]  Loss: 3.757 (4.39)  LR: 4.157e-04  Time cost: 10:33/04:20 [26:20/04:20]  Acc_iter 6750        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 11:04:15,330   INFO  3080x4                      Thu Oct 10 11:04:15 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 66°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 87°C,  98 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 11:04:26,473   INFO  Train:    2/2 (100%) [2849/3950 ( 72%)]  Loss: 3.724 (4.38)  LR: 3.820e-04  Time cost: 10:45/04:09 [26:32/04:09]  Acc_iter 6800        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:04:37,453   INFO  Train:    2/2 (100%) [2899/3950 ( 73%)]  Loss: 4.570 (4.38)  LR: 3.495e-04  Time cost: 10:56/03:57 [26:43/03:57]  Acc_iter 6850        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 11:04:48,540   INFO  Train:    2/2 (100%) [2949/3950 ( 75%)]  Loss: 4.427 (4.37)  LR: 3.182e-04  Time cost: 11:07/03:46 [26:54/03:46]  Acc_iter 6900        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:04:49,240   INFO  3080x4                      Thu Oct 10 11:04:49 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 69°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 89°C, 100 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 11:05:00,369   INFO  Train:    2/2 (100%) [2999/3950 ( 76%)]  Loss: 4.107 (4.36)  LR: 2.883e-04  Time cost: 11:19/03:35 [27:06/03:35]  Acc_iter 6950        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:05:11,483   INFO  Train:    2/2 (100%) [3049/3950 ( 77%)]  Loss: 4.892 (4.36)  LR: 2.596e-04  Time cost: 11:30/03:24 [27:17/03:24]  Acc_iter 7000        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 11:05:22,555   INFO  Train:    2/2 (100%) [3099/3950 ( 78%)]  Loss: 3.729 (4.35)  LR: 2.324e-04  Time cost: 11:41/03:12 [27:28/03:12]  Acc_iter 7050        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:05:23,247   INFO  3080x4                      Thu Oct 10 11:05:23 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 69°C,  88 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 88°C, 100 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 11:05:34,328   INFO  Train:    2/2 (100%) [3149/3950 ( 80%)]  Loss: 3.914 (4.35)  LR: 2.065e-04  Time cost: 11:53/03:01 [27:40/03:01]  Acc_iter 7100        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:05:45,267   INFO  Train:    2/2 (100%) [3199/3950 ( 81%)]  Loss: 3.798 (4.34)  LR: 1.820e-04  Time cost: 12:04/02:49 [27:51/02:49]  Acc_iter 7150        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 11:05:56,334   INFO  Train:    2/2 (100%) [3249/3950 ( 82%)]  Loss: 3.823 (4.33)  LR: 1.590e-04  Time cost: 12:15/02:38 [28:02/02:38]  Acc_iter 7200        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:05:57,006   INFO  3080x4                      Thu Oct 10 11:05:56 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 68°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 87°C,  88 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 11:06:08,064   INFO  Train:    2/2 (100%) [3299/3950 ( 84%)]  Loss: 3.962 (4.33)  LR: 1.375e-04  Time cost: 12:27/02:27 [28:14/02:27]  Acc_iter 7250        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 11:06:19,136   INFO  Train:    2/2 (100%) [3349/3950 ( 85%)]  Loss: 4.082 (4.32)  LR: 1.175e-04  Time cost: 12:38/02:16 [28:25/02:16]  Acc_iter 7300        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 11:06:30,098   INFO  Train:    2/2 (100%) [3399/3950 ( 86%)]  Loss: 4.119 (4.32)  LR: 9.895e-05  Time cost: 12:49/02:04 [28:36/02:04]  Acc_iter 7350        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 11:06:30,790   INFO  3080x4                      Thu Oct 10 11:06:30 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 69°C,  99 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 88°C, 100 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 11:06:41,814   INFO  Train:    2/2 (100%) [3449/3950 ( 87%)]  Loss: 3.633 (4.31)  LR: 8.197e-05  Time cost: 13:00/01:53 [28:47/01:53]  Acc_iter 7400        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:06:52,968   INFO  Train:    2/2 (100%) [3499/3950 ( 89%)]  Loss: 3.193 (4.31)  LR: 6.654e-05  Time cost: 13:12/01:42 [28:59/01:42]  Acc_iter 7450        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:07:04,010   INFO  Train:    2/2 (100%) [3549/3950 ( 90%)]  Loss: 4.074 (4.30)  LR: 5.270e-05  Time cost: 13:23/01:30 [29:10/01:30]  Acc_iter 7500        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:07:04,704   INFO  3080x4                      Thu Oct 10 11:07:04 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     8 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 70°C,  96 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 87°C,  99 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 11:07:15,874   INFO  Train:    2/2 (100%) [3599/3950 ( 91%)]  Loss: 4.882 (4.30)  LR: 4.044e-05  Time cost: 13:34/01:19 [29:21/01:19]  Acc_iter 7550        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 11:07:26,937   INFO  Train:    2/2 (100%) [3649/3950 ( 92%)]  Loss: 3.477 (4.29)  LR: 2.978e-05  Time cost: 13:46/01:08 [29:33/01:08]  Acc_iter 7600        Data time: 0.00(0.01)  Forward time: 0.21(0.22)  Batch time: 0.21(0.23)
+2024-10-10 11:07:38,049   INFO  Train:    2/2 (100%) [3699/3950 ( 94%)]  Loss: 3.706 (4.29)  LR: 2.074e-05  Time cost: 13:57/00:56 [29:44/00:56]  Acc_iter 7650        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:07:38,731   INFO  3080x4                      Thu Oct 10 11:07:38 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 67°C, 100 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 88°C,  89 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 11:07:49,768   INFO  Train:    2/2 (100%) [3749/3950 ( 95%)]  Loss: 4.202 (4.28)  LR: 1.332e-05  Time cost: 14:08/00:45 [29:55/00:45]  Acc_iter 7700        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.23(0.23)
+2024-10-10 11:08:00,905   INFO  Train:    2/2 (100%) [3799/3950 ( 96%)]  Loss: 4.939 (4.28)  LR: 7.536e-06  Time cost: 14:19/00:34 [30:06/00:34]  Acc_iter 7750        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:08:11,966   INFO  Train:    2/2 (100%) [3849/3950 ( 97%)]  Loss: 3.572 (4.27)  LR: 3.390e-06  Time cost: 14:31/00:22 [30:18/00:22]  Acc_iter 7800        Data time: 0.00(0.01)  Forward time: 0.23(0.22)  Batch time: 0.23(0.23)
+2024-10-10 11:08:12,625   INFO  3080x4                      Thu Oct 10 11:08:12 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 29°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 73°C,  88 % |  9631 / 10018 MB | ailab(9623M) ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 82°C,   0 % |  7973 / 10018 MB | ailab(7965M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 89°C, 100 % |  8448 / 10010 MB | ailab(8277M) ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-10 11:08:23,587   INFO  Train:    2/2 (100%) [3899/3950 ( 99%)]  Loss: 3.620 (4.27)  LR: 8.868e-07  Time cost: 14:42/00:11 [30:29/00:11]  Acc_iter 7850        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:08:34,639   INFO  Train:    2/2 (100%) [3949/3950 (100%)]  Loss: 5.225 (4.27)  LR: 3.033e-08  Time cost: 14:53/00:00 [30:40/00:00]  Acc_iter 7900        Data time: 0.00(0.01)  Forward time: 0.22(0.22)  Batch time: 0.22(0.23)
+2024-10-10 11:08:35,867   INFO  **********************End training waymo_models/centerpoint_dyn_pillar_1x(default)**********************
+
+
+
+2024-10-10 11:08:35,868   INFO  **********************Start evaluation waymo_models/centerpoint_dyn_pillar_1x(default)**********************
+2024-10-10 11:08:35,875   INFO  Loading Custom AV dataset.
+2024-10-10 11:08:35,892   INFO  Total samples for Custom AV dataset: 988
+2024-10-10 11:08:35,894   INFO  ==> Loading parameters from checkpoint /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/centerpoint_dyn_pillar_1x/default/ckpt/checkpoint_epoch_2.pth to CPU
+2024-10-10 11:08:35,920   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+0000000
+2024-10-10 11:08:35,930   INFO  ==> Done (loaded 179/179)
+2024-10-10 11:08:35,932   INFO  *************** EPOCH 2 EVALUATION *****************
+2024-10-10 11:11:39,662   INFO  *************** Performance of EPOCH 2 *****************
+2024-10-10 11:11:39,662   INFO  Generate label finished(sec_per_example: 0.1860 second).
+2024-10-10 11:11:39,662   INFO  recall_roi_0.3: 0.000000
+2024-10-10 11:11:39,662   INFO  recall_rcnn_0.3: 0.867465
+2024-10-10 11:11:39,662   INFO  recall_roi_0.5: 0.000000
+2024-10-10 11:11:39,662   INFO  recall_rcnn_0.5: 0.794290
+2024-10-10 11:11:39,662   INFO  recall_roi_0.7: 0.000000
+2024-10-10 11:11:39,662   INFO  recall_rcnn_0.7: 0.425622
+2024-10-10 11:11:39,662   INFO  Average predicted number of objects(988 samples): 217.468
+2024-10-10 11:13:50,032   INFO  
+OBJECT_TYPE_TYPE_VEHICLE_LEVEL_1/AP: 0.5063 
+OBJECT_TYPE_TYPE_VEHICLE_LEVEL_1/APH: 0.4933 
+OBJECT_TYPE_TYPE_VEHICLE_LEVEL_1/APL: 0.5063 
+OBJECT_TYPE_TYPE_VEHICLE_LEVEL_2/AP: 0.4997 
+OBJECT_TYPE_TYPE_VEHICLE_LEVEL_2/APH: 0.4868 
+OBJECT_TYPE_TYPE_VEHICLE_LEVEL_2/APL: 0.4997 
+OBJECT_TYPE_TYPE_PEDESTRIAN_LEVEL_1/AP: 0.4254 
+OBJECT_TYPE_TYPE_PEDESTRIAN_LEVEL_1/APH: 0.2213 
+OBJECT_TYPE_TYPE_PEDESTRIAN_LEVEL_1/APL: 0.4254 
+OBJECT_TYPE_TYPE_PEDESTRIAN_LEVEL_2/AP: 0.4170 
+OBJECT_TYPE_TYPE_PEDESTRIAN_LEVEL_2/APH: 0.2170 
+OBJECT_TYPE_TYPE_PEDESTRIAN_LEVEL_2/APL: 0.4170 
+OBJECT_TYPE_TYPE_SIGN_LEVEL_1/AP: 0.0000 
+OBJECT_TYPE_TYPE_SIGN_LEVEL_1/APH: 0.0000 
+OBJECT_TYPE_TYPE_SIGN_LEVEL_1/APL: 0.0000 
+OBJECT_TYPE_TYPE_SIGN_LEVEL_2/AP: 0.0000 
+OBJECT_TYPE_TYPE_SIGN_LEVEL_2/APH: 0.0000 
+OBJECT_TYPE_TYPE_SIGN_LEVEL_2/APL: 0.0000 
+OBJECT_TYPE_TYPE_CYCLIST_LEVEL_1/AP: 0.4313 
+OBJECT_TYPE_TYPE_CYCLIST_LEVEL_1/APH: 0.3763 
+OBJECT_TYPE_TYPE_CYCLIST_LEVEL_1/APL: 0.4313 
+OBJECT_TYPE_TYPE_CYCLIST_LEVEL_2/AP: 0.4253 
+OBJECT_TYPE_TYPE_CYCLIST_LEVEL_2/APH: 0.3711 
+OBJECT_TYPE_TYPE_CYCLIST_LEVEL_2/APL: 0.4253 
+
+2024-10-10 11:13:50,033   INFO  Result is saved to /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/centerpoint_dyn_pillar_1x/default/eval/eval_with_train/epoch_2/val
+2024-10-10 11:13:50,033   INFO  ****************Evaluation done.*****************
+2024-10-10 11:13:50,044   INFO  Epoch 2 has been evaluated
+2024-10-10 11:14:20,074   INFO  **********************End evaluation waymo_models/centerpoint_dyn_pillar_1x(default)**********************

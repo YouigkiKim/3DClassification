@@ -1,0 +1,284 @@
+2024-10-07 17:19:07,136   INFO  **********************Start logging**********************
+2024-10-07 17:19:07,136   INFO  CUDA_VISIBLE_DEVICES=2
+2024-10-07 17:19:07,136   INFO  Training in distributed mode : total_batch_size: 1
+2024-10-07 17:19:07,136   INFO  cfg_file         cfgs/waymo_models/pointpillar_1x.yaml
+2024-10-07 17:19:07,136   INFO  batch_size       1
+2024-10-07 17:19:07,136   INFO  epochs           30
+2024-10-07 17:19:07,136   INFO  workers          4
+2024-10-07 17:19:07,136   INFO  extra_tag        default
+2024-10-07 17:19:07,136   INFO  ckpt             None
+2024-10-07 17:19:07,136   INFO  pretrained_model None
+2024-10-07 17:19:07,136   INFO  launcher         pytorch
+2024-10-07 17:19:07,136   INFO  tcp_port         18888
+2024-10-07 17:19:07,136   INFO  sync_bn          False
+2024-10-07 17:19:07,136   INFO  fix_random_seed  False
+2024-10-07 17:19:07,136   INFO  ckpt_save_interval 1
+2024-10-07 17:19:07,136   INFO  local_rank       0
+2024-10-07 17:19:07,136   INFO  max_ckpt_save_num 30
+2024-10-07 17:19:07,136   INFO  merge_all_iters_to_one_epoch False
+2024-10-07 17:19:07,136   INFO  set_cfgs         None
+2024-10-07 17:19:07,136   INFO  max_waiting_mins 0
+2024-10-07 17:19:07,136   INFO  start_epoch      0
+2024-10-07 17:19:07,136   INFO  num_epochs_to_eval 0
+2024-10-07 17:19:07,136   INFO  save_to_file     False
+2024-10-07 17:19:07,136   INFO  use_tqdm_to_record False
+2024-10-07 17:19:07,136   INFO  logger_iter_interval 50
+2024-10-07 17:19:07,136   INFO  ckpt_save_time_interval 300
+2024-10-07 17:19:07,136   INFO  wo_gpu_stat      False
+2024-10-07 17:19:07,136   INFO  use_amp          False
+2024-10-07 17:19:07,136   INFO  cfg.ROOT_DIR: /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model
+2024-10-07 17:19:07,136   INFO  cfg.LOCAL_RANK: 0
+2024-10-07 17:19:07,136   INFO  cfg.CLASS_NAMES: ['Vehicle', 'Pedestrian', 'Cyclist']
+2024-10-07 17:19:07,137   INFO  ----------- DATA_CONFIG -----------
+2024-10-07 17:19:07,137   INFO  cfg.DATA_CONFIG.DATASET: CustomAvDataset
+2024-10-07 17:19:07,137   INFO  cfg.DATA_CONFIG.DATA_PATH: ../data/custom_av
+2024-10-07 17:19:07,137   INFO  cfg.DATA_CONFIG.POINT_CLOUD_RANGE: [-70.0, -70.0, -4.0, 70.0, 70.0, 4.0]
+2024-10-07 17:19:07,137   INFO  ----------- MAP_CLASS_TO_KITTI -----------
+2024-10-07 17:19:07,137   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Vehicle: Car
+2024-10-07 17:19:07,137   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Pedestrian: Pedestrian
+2024-10-07 17:19:07,137   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Cyclist: Cyclist
+2024-10-07 17:19:07,137   INFO  ----------- DATA_SPLIT -----------
+2024-10-07 17:19:07,137   INFO  cfg.DATA_CONFIG.DATA_SPLIT.train: train
+2024-10-07 17:19:07,137   INFO  cfg.DATA_CONFIG.DATA_SPLIT.test: val
+2024-10-07 17:19:07,137   INFO  ----------- INFO_PATH -----------
+2024-10-07 17:19:07,137   INFO  cfg.DATA_CONFIG.INFO_PATH.train: ['custom_av_infos_train.pkl']
+2024-10-07 17:19:07,137   INFO  cfg.DATA_CONFIG.INFO_PATH.test: ['custom_av_infos_val.pkl']
+2024-10-07 17:19:07,137   INFO  ----------- POINT_FEATURE_ENCODING -----------
+2024-10-07 17:19:07,137   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.encoding_type: absolute_coordinates_encoding
+2024-10-07 17:19:07,137   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.used_feature_list: ['x', 'y', 'z']
+2024-10-07 17:19:07,137   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.src_feature_list: ['x', 'y', 'z', 'intensity']
+2024-10-07 17:19:07,137   INFO  ----------- DATA_AUGMENTOR -----------
+2024-10-07 17:19:07,137   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.DISABLE_AUG_LIST: ['placeholder']
+2024-10-07 17:19:07,137   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.AUG_CONFIG_LIST: [{'NAME': 'gt_sampling', 'USE_ROAD_PLANE': False, 'DB_INFO_PATH': ['custom_av_dbinfos_train.pkl'], 'PREPARE': {'filter_by_min_points': ['Vehicle:5', 'Pedestrian:5', 'Cyclist:5']}, 'SAMPLE_GROUPS': ['Vehicle:15', 'Pedestrian:10', 'Cyclist:10'], 'NUM_POINT_FEATURES': 4, 'DATABASE_WITH_FAKELIDAR': False, 'REMOVE_EXTRA_WIDTH': [0.0, 0.0, 0.0], 'LIMIT_WHOLE_SCENE': True}, {'NAME': 'random_world_flip', 'ALONG_AXIS_LIST': ['x', 'y']}, {'NAME': 'random_world_rotation', 'WORLD_ROT_ANGLE': [-0.78539816, 0.78539816]}, {'NAME': 'random_world_scaling', 'WORLD_SCALE_RANGE': [0.95, 1.05]}]
+2024-10-07 17:19:07,137   INFO  cfg.DATA_CONFIG.DATA_PROCESSOR: [{'NAME': 'mask_points_and_boxes_outside_range', 'REMOVE_OUTSIDE_BOXES': True}, {'NAME': 'shuffle_points', 'SHUFFLE_ENABLED': {'train': True, 'test': True}}, {'NAME': 'transform_points_to_voxels', 'VOXEL_SIZE': [0.25, 0.25, 8.0], 'MAX_POINTS_PER_VOXEL': 20, 'MAX_NUMBER_OF_VOXELS': {'train': 150000, 'test': 150000}}]
+2024-10-07 17:19:07,137   INFO  cfg.DATA_CONFIG._BASE_CONFIG_: cfgs/dataset_configs/custom_av_dataset.yaml
+2024-10-07 17:19:07,137   INFO  ----------- MODEL -----------
+2024-10-07 17:19:07,137   INFO  cfg.MODEL.NAME: PointPillar
+2024-10-07 17:19:07,137   INFO  ----------- VFE -----------
+2024-10-07 17:19:07,137   INFO  cfg.MODEL.VFE.NAME: PillarVFE
+2024-10-07 17:19:07,137   INFO  cfg.MODEL.VFE.WITH_DISTANCE: False
+2024-10-07 17:19:07,137   INFO  cfg.MODEL.VFE.USE_ABSLOTE_XYZ: True
+2024-10-07 17:19:07,137   INFO  cfg.MODEL.VFE.USE_NORM: True
+2024-10-07 17:19:07,137   INFO  cfg.MODEL.VFE.NUM_FILTERS: [64, 64]
+2024-10-07 17:19:07,137   INFO  ----------- MAP_TO_BEV -----------
+2024-10-07 17:19:07,137   INFO  cfg.MODEL.MAP_TO_BEV.NAME: PointPillarScatter
+2024-10-07 17:19:07,137   INFO  cfg.MODEL.MAP_TO_BEV.NUM_BEV_FEATURES: 64
+2024-10-07 17:19:07,137   INFO  ----------- BACKBONE_2D -----------
+2024-10-07 17:19:07,137   INFO  cfg.MODEL.BACKBONE_2D.NAME: BaseBEVBackbone
+2024-10-07 17:19:07,137   INFO  cfg.MODEL.BACKBONE_2D.LAYER_NUMS: [3, 5, 5]
+2024-10-07 17:19:07,137   INFO  cfg.MODEL.BACKBONE_2D.LAYER_STRIDES: [1, 2, 2]
+2024-10-07 17:19:07,137   INFO  cfg.MODEL.BACKBONE_2D.NUM_FILTERS: [64, 128, 256]
+2024-10-07 17:19:07,137   INFO  cfg.MODEL.BACKBONE_2D.UPSAMPLE_STRIDES: [1, 2, 4]
+2024-10-07 17:19:07,137   INFO  cfg.MODEL.BACKBONE_2D.NUM_UPSAMPLE_FILTERS: [128, 128, 128]
+2024-10-07 17:19:07,137   INFO  ----------- DENSE_HEAD -----------
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.DENSE_HEAD.NAME: AnchorHeadSingle
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.DENSE_HEAD.CLASS_AGNOSTIC: False
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.DENSE_HEAD.USE_DIRECTION_CLASSIFIER: True
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.DENSE_HEAD.DIR_OFFSET: 0.78539
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.DENSE_HEAD.DIR_LIMIT_OFFSET: 0.0
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.DENSE_HEAD.NUM_DIR_BINS: 2
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.DENSE_HEAD.ANCHOR_GENERATOR_CONFIG: [{'class_name': 'Vehicle', 'anchor_sizes': [[4.7, 2.1, 1.7]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [0], 'align_center': False, 'feature_map_stride': 1, 'matched_threshold': 0.55, 'unmatched_threshold': 0.4}, {'class_name': 'Pedestrian', 'anchor_sizes': [[0.91, 0.86, 1.73]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [0], 'align_center': False, 'feature_map_stride': 1, 'matched_threshold': 0.5, 'unmatched_threshold': 0.35}, {'class_name': 'Cyclist', 'anchor_sizes': [[1.78, 0.84, 1.78]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [0], 'align_center': False, 'feature_map_stride': 1, 'matched_threshold': 0.5, 'unmatched_threshold': 0.35}]
+2024-10-07 17:19:07,138   INFO  ----------- TARGET_ASSIGNER_CONFIG -----------
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NAME: AxisAlignedTargetAssigner
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.POS_FRACTION: -1.0
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.SAMPLE_SIZE: 512
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NORM_BY_NUM_EXAMPLES: False
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.MATCH_HEIGHT: False
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.BOX_CODER: ResidualCoder
+2024-10-07 17:19:07,138   INFO  ----------- LOSS_CONFIG -----------
+2024-10-07 17:19:07,138   INFO  ----------- LOSS_WEIGHTS -----------
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.cls_weight: 1.0
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.loc_weight: 2.0
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.dir_weight: 0.2
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.code_weights: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+2024-10-07 17:19:07,138   INFO  ----------- POST_PROCESSING -----------
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.POST_PROCESSING.RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.POST_PROCESSING.SCORE_THRESH: 0.1
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.POST_PROCESSING.OUTPUT_RAW_SCORE: False
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.POST_PROCESSING.EVAL_METRIC: waymo
+2024-10-07 17:19:07,138   INFO  ----------- NMS_CONFIG -----------
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.MULTI_CLASSES_NMS: False
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_TYPE: nms_gpu
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_THRESH: 0.7
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_PRE_MAXSIZE: 4096
+2024-10-07 17:19:07,138   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_POST_MAXSIZE: 500
+2024-10-07 17:19:07,138   INFO  ----------- OPTIMIZATION -----------
+2024-10-07 17:19:07,138   INFO  cfg.OPTIMIZATION.BATCH_SIZE_PER_GPU: 1
+2024-10-07 17:19:07,138   INFO  cfg.OPTIMIZATION.NUM_EPOCHS: 30
+2024-10-07 17:19:07,138   INFO  cfg.OPTIMIZATION.OPTIMIZER: adam_onecycle
+2024-10-07 17:19:07,138   INFO  cfg.OPTIMIZATION.LR: 0.003
+2024-10-07 17:19:07,138   INFO  cfg.OPTIMIZATION.WEIGHT_DECAY: 0.01
+2024-10-07 17:19:07,138   INFO  cfg.OPTIMIZATION.MOMENTUM: 0.9
+2024-10-07 17:19:07,138   INFO  cfg.OPTIMIZATION.MOMS: [0.95, 0.85]
+2024-10-07 17:19:07,138   INFO  cfg.OPTIMIZATION.PCT_START: 0.4
+2024-10-07 17:19:07,138   INFO  cfg.OPTIMIZATION.DIV_FACTOR: 10
+2024-10-07 17:19:07,138   INFO  cfg.OPTIMIZATION.DECAY_STEP_LIST: [35, 45]
+2024-10-07 17:19:07,138   INFO  cfg.OPTIMIZATION.LR_DECAY: 0.1
+2024-10-07 17:19:07,139   INFO  cfg.OPTIMIZATION.LR_CLIP: 1e-07
+2024-10-07 17:19:07,139   INFO  cfg.OPTIMIZATION.LR_WARMUP: False
+2024-10-07 17:19:07,139   INFO  cfg.OPTIMIZATION.WARMUP_EPOCH: 1
+2024-10-07 17:19:07,139   INFO  cfg.OPTIMIZATION.GRAD_NORM_CLIP: 10
+2024-10-07 17:19:07,139   INFO  cfg.TAG: pointpillar_1x
+2024-10-07 17:19:07,139   INFO  cfg.EXP_GROUP_PATH: waymo_models
+2024-10-07 17:19:07,152   INFO  ----------- Create dataloader & network & optimizer -----------
+2024-10-07 17:19:07,483   INFO  Database filter by min points Vehicle: 84700 => 83962
+2024-10-07 17:19:07,488   INFO  Database filter by min points Pedestrian: 46175 => 45511
+2024-10-07 17:19:07,489   INFO  Database filter by min points Cyclist: 3054 => 3018
+2024-10-07 17:19:07,492   INFO  Loading Custom AV dataset.
+2024-10-07 17:19:07,528   INFO  Total samples for Custom AV dataset: 3950
+2024-10-07 17:19:10,653   INFO  ==> Loading parameters from checkpoint /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/pointpillar_1x/default/ckpt/latest_model.pth to CPU
+2024-10-07 17:19:10,682   INFO  ==> Loading optimizer parameters from checkpoint /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/pointpillar_1x/default/ckpt/latest_model.pth to CPU
+2024-10-07 17:19:10,706   INFO  ==> Done
+2024-10-07 17:19:10,775   INFO  ----------- Model PointPillar created, param count: 4838696 -----------
+2024-10-07 17:19:10,775   INFO  DistributedDataParallel(
+  (module): PointPillar(
+    (vfe): PillarVFE(
+      (pfn_layers): ModuleList(
+        (0): PFNLayer(
+          (linear): Linear(in_features=9, out_features=32, bias=False)
+          (norm): BatchNorm1d(32, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        )
+        (1): PFNLayer(
+          (linear): Linear(in_features=64, out_features=64, bias=False)
+          (norm): BatchNorm1d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        )
+      )
+    )
+    (backbone_3d): None
+    (map_to_bev_module): PointPillarScatter()
+    (pfe): None
+    (backbone_2d): BaseBEVBackbone(
+      (blocks): ModuleList(
+        (0): Sequential(
+          (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+          (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), bias=False)
+          (2): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (3): ReLU()
+          (4): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (5): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (6): ReLU()
+          (7): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (8): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (9): ReLU()
+          (10): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (11): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (12): ReLU()
+        )
+        (1): Sequential(
+          (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+          (1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (2): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (3): ReLU()
+          (4): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (5): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (6): ReLU()
+          (7): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (8): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (9): ReLU()
+          (10): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (11): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (12): ReLU()
+          (13): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (14): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (15): ReLU()
+          (16): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (17): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (18): ReLU()
+        )
+        (2): Sequential(
+          (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+          (1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (2): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (3): ReLU()
+          (4): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (5): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (6): ReLU()
+          (7): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (8): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (9): ReLU()
+          (10): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (11): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (12): ReLU()
+          (13): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (14): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (15): ReLU()
+          (16): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (17): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (18): ReLU()
+        )
+      )
+      (deblocks): ModuleList(
+        (0): Sequential(
+          (0): ConvTranspose2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+        (1): Sequential(
+          (0): ConvTranspose2d(128, 128, kernel_size=(2, 2), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+        (2): Sequential(
+          (0): ConvTranspose2d(256, 128, kernel_size=(4, 4), stride=(4, 4), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+      )
+    )
+    (dense_head): AnchorHeadSingle(
+      (cls_loss_func): SigmoidFocalClassificationLoss()
+      (reg_loss_func): WeightedSmoothL1Loss()
+      (dir_loss_func): WeightedCrossEntropyLoss()
+      (conv_cls): Conv2d(384, 18, kernel_size=(1, 1), stride=(1, 1))
+      (conv_box): Conv2d(384, 42, kernel_size=(1, 1), stride=(1, 1))
+      (conv_dir_cls): Conv2d(384, 12, kernel_size=(1, 1), stride=(1, 1))
+    )
+    (point_head): None
+    (roi_head): None
+  )
+)
+2024-10-07 17:19:10,776   INFO  **********************Start training waymo_models/pointpillar_1x(default)**********************
+2024-10-07 17:19:38,101   INFO  Train:    6/30 ( 20%) [1282/3950 ( 32%)]  Loss: 0.4497 (0.450)  LR: 1.932e-03  Time cost: 00:00/17:18 [00:27/10:32:32]  Acc_iter 76333       Data time: 0.11(0.11)  Forward time: 0.28(0.28)  Batch time: 0.39(0.39)
+2024-10-07 17:19:41,263   INFO  Train:    6/30 ( 20%) [1299/3950 ( 33%)]  Loss: 0.4946 (0.623)  LR: 1.931e-03  Time cost: 00:03/08:43 [00:30/5:20:29]  Acc_iter 76350       Data time: 0.00(0.01)  Forward time: 0.19(0.19)  Batch time: 0.19(0.20)
+2024-10-07 17:19:41,966   INFO  3080x4                      Mon Oct  7 17:19:41 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 32°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 35°C,   0 % |     5 / 10018 MB | ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 48°C,   0 % |  8073 / 10018 MB | ailab(8065M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 40°C,  13 % |   168 / 10010 MB | ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-07 17:19:51,283   INFO  Train:    6/30 ( 20%) [1349/3950 ( 34%)]  Loss: 0.9083 (0.681)  LR: 1.928e-03  Time cost: 00:13/08:39 [00:40/5:23:59]  Acc_iter 76400       Data time: 0.00(0.01)  Forward time: 0.18(0.19)  Batch time: 0.18(0.20)
+2024-10-07 17:20:00,657   INFO  Train:    6/30 ( 20%) [1399/3950 ( 35%)]  Loss: 0.4676 (0.674)  LR: 1.925e-03  Time cost: 00:22/08:16 [00:49/5:15:30]  Acc_iter 76450       Data time: 0.00(0.01)  Forward time: 0.18(0.19)  Batch time: 0.18(0.19)
+2024-10-07 17:20:09,995   INFO  Train:    6/30 ( 20%) [1449/3950 ( 37%)]  Loss: 0.5126 (0.692)  LR: 1.922e-03  Time cost: 00:32/08:00 [00:59/5:11:37]  Acc_iter 76500       Data time: 0.00(0.01)  Forward time: 0.18(0.19)  Batch time: 0.18(0.19)
+2024-10-07 17:20:10,686   INFO  3080x4                      Mon Oct  7 17:20:10 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 32°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 34°C,   0 % |     5 / 10018 MB | ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 61°C,   0 % |  8587 / 10018 MB | ailab(8579M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 40°C,  13 % |   168 / 10010 MB | ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-07 17:20:20,055   INFO  Train:    6/30 ( 20%) [1499/3950 ( 38%)]  Loss: 0.6036 (0.691)  LR: 1.919e-03  Time cost: 00:42/07:56 [01:09/5:14:49]  Acc_iter 76550       Data time: 0.00(0.01)  Forward time: 0.19(0.19)  Batch time: 0.19(0.19)
+2024-10-07 17:20:29,378   INFO  Train:    6/30 ( 20%) [1549/3950 ( 39%)]  Loss: 0.4589 (0.692)  LR: 1.915e-03  Time cost: 00:51/07:42 [01:18/5:12:18]  Acc_iter 76600       Data time: 0.00(0.01)  Forward time: 0.19(0.19)  Batch time: 0.19(0.19)
+2024-10-07 17:20:38,753   INFO  Train:    6/30 ( 20%) [1599/3950 ( 40%)]  Loss: 0.5421 (0.696)  LR: 1.912e-03  Time cost: 01:01/07:31 [01:27/5:10:48]  Acc_iter 76650       Data time: 0.00(0.01)  Forward time: 0.18(0.19)  Batch time: 0.18(0.19)
+2024-10-07 17:20:39,436   INFO  3080x4                      Mon Oct  7 17:20:39 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 32°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 33°C,   0 % |     5 / 10018 MB | ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 69°C,   0 % |  8587 / 10018 MB | ailab(8579M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 41°C,  13 % |   168 / 10010 MB | ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-07 17:20:48,850   INFO  Train:    6/30 ( 20%) [1649/3950 ( 42%)]  Loss: 0.8916 (0.689)  LR: 1.909e-03  Time cost: 01:11/07:24 [01:38/5:12:50]  Acc_iter 76700       Data time: 0.00(0.01)  Forward time: 0.19(0.19)  Batch time: 0.20(0.19)
+2024-10-07 17:20:58,335   INFO  Train:    6/30 ( 20%) [1699/3950 ( 43%)]  Loss: 0.5893 (0.686)  LR: 1.906e-03  Time cost: 01:20/07:14 [01:47/5:11:59]  Acc_iter 76750       Data time: 0.00(0.01)  Forward time: 0.20(0.19)  Batch time: 0.20(0.19)
+2024-10-07 17:21:07,755   INFO  Train:    6/30 ( 20%) [1749/3950 ( 44%)]  Loss: 0.6647 (0.685)  LR: 1.903e-03  Time cost: 01:30/07:03 [01:56/5:11:03]  Acc_iter 76800       Data time: 0.00(0.01)  Forward time: 0.19(0.19)  Batch time: 0.19(0.19)
+2024-10-07 17:21:08,456   INFO  3080x4                      Mon Oct  7 17:21:08 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 32°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 32°C,   0 % |     5 / 10018 MB | ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 73°C,   0 % |  8587 / 10018 MB | ailab(8579M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 42°C,  12 % |   168 / 10010 MB | ailab(132M) ailab(24M) ailab(9M)
+
+2024-10-07 17:21:17,846   INFO  Train:    6/30 ( 20%) [1799/3950 ( 46%)]  Loss: 0.3717 (0.683)  LR: 1.899e-03  Time cost: 01:40/06:55 [02:07/5:12:21]  Acc_iter 76850       Data time: 0.00(0.01)  Forward time: 0.19(0.19)  Batch time: 0.19(0.19)
+2024-10-07 17:21:27,274   INFO  Train:    6/30 ( 20%) [1849/3950 ( 47%)]  Loss: 0.5923 (0.682)  LR: 1.896e-03  Time cost: 01:49/06:45 [02:16/5:11:31]  Acc_iter 76900       Data time: 0.00(0.01)  Forward time: 0.19(0.19)  Batch time: 0.19(0.19)
+2024-10-07 17:21:36,713   INFO  Train:    6/30 ( 20%) [1899/3950 ( 48%)]  Loss: 0.5179 (0.681)  LR: 1.893e-03  Time cost: 01:59/06:34 [02:25/5:10:49]  Acc_iter 76950       Data time: 0.00(0.01)  Forward time: 0.19(0.19)  Batch time: 0.19(0.19)
+2024-10-07 17:21:37,409   INFO  3080x4                      Mon Oct  7 17:21:37 2024  470.256.02
+[0] NVIDIA GeForce RTX 3080 | 32°C,   0 % |     5 / 10018 MB | ailab(4M)
+[1] NVIDIA GeForce RTX 3080 | 32°C,   0 % |     5 / 10018 MB | ailab(4M)
+[2] NVIDIA GeForce RTX 3080 | 76°C,   0 % |  8587 / 10018 MB | ailab(8579M) ailab(4M)
+[3] NVIDIA GeForce RTX 3080 | 43°C,  12 % |   168 / 10010 MB | ailab(132M) ailab(24M) ailab(9M)
+
