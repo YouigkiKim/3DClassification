@@ -488,3 +488,4 @@
 [3] NVIDIA GeForce RTX 3090 | 47'C,  98 % | 20583 / 24260 MB | ailab(20319M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
 
 2024-10-14 17:46:58,774   INFO  Train:   67/80 ( 84%) [ 264/659 ( 40%)]  Loss: 2.204 (2.02)  LR: 2.169e-05  Time cost: 02:01/03:01 [23:33/1:08:44]  Acc_iter 240800      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:47:21,606   INFO  Train:   67/80 ( 84%) [ 314/659 ( 48%)]  Loss: 2.142 (2.03)  LR: 2.044e-05  Time cost: 02:24/02:38 [23:56/1:08:16]  Acc_iter 240850      Data time: 0.00(0.01)  Forward time: 0.46(0.45)  Batch time: 0.46(0.46)
