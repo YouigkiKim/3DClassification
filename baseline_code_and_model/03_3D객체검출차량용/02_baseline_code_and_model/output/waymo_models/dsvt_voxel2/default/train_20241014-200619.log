@@ -1,0 +1,626 @@
+2024-10-14 20:06:19,526   INFO  **********************Start logging**********************
+2024-10-14 20:06:19,527   INFO  CUDA_VISIBLE_DEVICES=2,3
+2024-10-14 20:06:19,527   INFO  Training in distributed mode : total_batch_size: 6
+2024-10-14 20:06:19,527   INFO  cfg_file         cfgs/waymo_models/dsvt_voxel2.yaml
+2024-10-14 20:06:19,527   INFO  batch_size       3
+2024-10-14 20:06:19,527   INFO  epochs           24
+2024-10-14 20:06:19,527   INFO  workers          4
+2024-10-14 20:06:19,527   INFO  extra_tag        default
+2024-10-14 20:06:19,527   INFO  ckpt             None
+2024-10-14 20:06:19,527   INFO  pretrained_model None
+2024-10-14 20:06:19,527   INFO  launcher         pytorch
+2024-10-14 20:06:19,527   INFO  tcp_port         18888
+2024-10-14 20:06:19,527   INFO  sync_bn          False
+2024-10-14 20:06:19,527   INFO  fix_random_seed  False
+2024-10-14 20:06:19,527   INFO  ckpt_save_interval 1
+2024-10-14 20:06:19,527   INFO  local_rank       0
+2024-10-14 20:06:19,527   INFO  max_ckpt_save_num 30
+2024-10-14 20:06:19,527   INFO  merge_all_iters_to_one_epoch False
+2024-10-14 20:06:19,527   INFO  set_cfgs         None
+2024-10-14 20:06:19,527   INFO  max_waiting_mins 0
+2024-10-14 20:06:19,527   INFO  start_epoch      0
+2024-10-14 20:06:19,527   INFO  num_epochs_to_eval 0
+2024-10-14 20:06:19,527   INFO  save_to_file     False
+2024-10-14 20:06:19,527   INFO  use_tqdm_to_record False
+2024-10-14 20:06:19,527   INFO  logger_iter_interval 50
+2024-10-14 20:06:19,528   INFO  ckpt_save_time_interval 300
+2024-10-14 20:06:19,528   INFO  wo_gpu_stat      False
+2024-10-14 20:06:19,528   INFO  use_amp          False
+2024-10-14 20:06:19,528   INFO  cfg.ROOT_DIR: /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model
+2024-10-14 20:06:19,528   INFO  cfg.LOCAL_RANK: 0
+2024-10-14 20:06:19,528   INFO  cfg.CLASS_NAMES: ['Vehicle', 'Pedestrian', 'Cyclist']
+2024-10-14 20:06:19,528   INFO  ----------- DATA_CONFIG -----------
+2024-10-14 20:06:19,528   INFO  cfg.DATA_CONFIG.DATASET: CustomAvDataset
+2024-10-14 20:06:19,528   INFO  cfg.DATA_CONFIG.DATA_PATH: /home/ailab/AILabDataset/01_Open_Dataset/39_AutoDna/3d_object_detection/3d_mod_av_db
+2024-10-14 20:06:19,528   INFO  cfg.DATA_CONFIG.POINT_CLOUD_RANGE: [-70.0, -70.0, -4.0, 70.0, 70.0, 4.0]
+2024-10-14 20:06:19,528   INFO  ----------- MAP_CLASS_TO_KITTI -----------
+2024-10-14 20:06:19,528   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Vehicle: Car
+2024-10-14 20:06:19,528   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Pedestrian: Pedestrian
+2024-10-14 20:06:19,528   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Cyclist: Cyclist
+2024-10-14 20:06:19,528   INFO  ----------- DATA_SPLIT -----------
+2024-10-14 20:06:19,528   INFO  cfg.DATA_CONFIG.DATA_SPLIT.train: train
+2024-10-14 20:06:19,528   INFO  cfg.DATA_CONFIG.DATA_SPLIT.test: val
+2024-10-14 20:06:19,528   INFO  ----------- INFO_PATH -----------
+2024-10-14 20:06:19,528   INFO  cfg.DATA_CONFIG.INFO_PATH.train: ['Team_3_custom_av_infos_train.pkl']
+2024-10-14 20:06:19,528   INFO  cfg.DATA_CONFIG.INFO_PATH.test: ['Team_3_custom_av_infos_val.pkl']
+2024-10-14 20:06:19,528   INFO  ----------- POINT_FEATURE_ENCODING -----------
+2024-10-14 20:06:19,528   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.encoding_type: absolute_coordinates_encoding
+2024-10-14 20:06:19,528   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.used_feature_list: ['x', 'y', 'z']
+2024-10-14 20:06:19,528   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.src_feature_list: ['x', 'y', 'z', 'intensity']
+2024-10-14 20:06:19,528   INFO  ----------- DATA_AUGMENTOR -----------
+2024-10-14 20:06:19,528   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.DISABLE_AUG_LIST: ['placeholder']
+2024-10-14 20:06:19,528   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.AUG_CONFIG_LIST: [{'NAME': 'gt_sampling', 'USE_ROAD_PLANE': False, 'DB_INFO_PATH': ['Team_3_custom_av_dbinfos_train.pkl'], 'PREPARE': {'filter_by_min_points': ['Car:5', 'Pedestrian:5', 'Cyclist:5']}, 'SAMPLE_GROUPS': ['Vehicle:15', 'Pedestrian:10', 'Cyclist:10'], 'NUM_POINT_FEATURES': 4, 'DATABASE_WITH_FAKELIDAR': False, 'REMOVE_EXTRA_WIDTH': [0.0, 0.0, 0.0], 'LIMIT_WHOLE_SCENE': True}, {'NAME': 'random_world_flip', 'ALONG_AXIS_LIST': ['x', 'y']}, {'NAME': 'random_world_rotation', 'WORLD_ROT_ANGLE': [-0.78539816, 0.78539816]}, {'NAME': 'random_world_scaling', 'WORLD_SCALE_RANGE': [0.95, 1.05]}, {'NAME': 'random_world_translation', 'NOISE_TRANSLATE_STD': [0.5, 0.5, 0.5]}]
+2024-10-14 20:06:19,529   INFO  cfg.DATA_CONFIG.DATA_PROCESSOR: [{'NAME': 'mask_points_and_boxes_outside_range', 'REMOVE_OUTSIDE_BOXES': True}, {'NAME': 'shuffle_points', 'SHUFFLE_ENABLED': {'train': True, 'test': False}}, {'NAME': 'transform_points_to_voxels_placeholder', 'VOXEL_SIZE': [0.25, 0.25, 0.25]}]
+2024-10-14 20:06:19,529   INFO  cfg.DATA_CONFIG._BASE_CONFIG_: cfgs/dataset_configs/custom_av_dataset.yaml
+2024-10-14 20:06:19,529   INFO  ----------- MODEL -----------
+2024-10-14 20:06:19,529   INFO  cfg.MODEL.NAME: CenterPoint
+2024-10-14 20:06:19,529   INFO  ----------- VFE -----------
+2024-10-14 20:06:19,529   INFO  cfg.MODEL.VFE.NAME: DynamicVoxelVFE
+2024-10-14 20:06:19,529   INFO  cfg.MODEL.VFE.WITH_DISTANCE: False
+2024-10-14 20:06:19,529   INFO  cfg.MODEL.VFE.USE_ABSLOTE_XYZ: True
+2024-10-14 20:06:19,529   INFO  cfg.MODEL.VFE.USE_NORM: True
+2024-10-14 20:06:19,529   INFO  cfg.MODEL.VFE.NUM_FILTERS: [192, 192]
+2024-10-14 20:06:19,529   INFO  ----------- BACKBONE_3D -----------
+2024-10-14 20:06:19,529   INFO  cfg.MODEL.BACKBONE_3D.NAME: DSVT
+2024-10-14 20:06:19,529   INFO  ----------- INPUT_LAYER -----------
+2024-10-14 20:06:19,529   INFO  cfg.MODEL.BACKBONE_3D.INPUT_LAYER.sparse_shape: [560, 560, 32]
+2024-10-14 20:06:19,529   INFO  cfg.MODEL.BACKBONE_3D.INPUT_LAYER.downsample_stride: [[1, 1, 4], [1, 1, 4], [1, 1, 2]]
+2024-10-14 20:06:19,529   INFO  cfg.MODEL.BACKBONE_3D.INPUT_LAYER.d_model: [192, 192, 192, 192]
+2024-10-14 20:06:19,529   INFO  cfg.MODEL.BACKBONE_3D.INPUT_LAYER.set_info: [[48, 1], [48, 1], [48, 1], [48, 1]]
+2024-10-14 20:06:19,529   INFO  cfg.MODEL.BACKBONE_3D.INPUT_LAYER.window_shape: [[12, 12, 32], [12, 12, 8], [12, 12, 2], [12, 12, 1]]
+2024-10-14 20:06:19,529   INFO  cfg.MODEL.BACKBONE_3D.INPUT_LAYER.hybrid_factor: [2, 2, 1]
+2024-10-14 20:06:19,529   INFO  cfg.MODEL.BACKBONE_3D.INPUT_LAYER.shifts_list: [[[0, 0, 0], [6, 6, 0]], [[0, 0, 0], [6, 6, 0]], [[0, 0, 0], [6, 6, 0]], [[0, 0, 0], [6, 6, 0]]]
+2024-10-14 20:06:19,529   INFO  cfg.MODEL.BACKBONE_3D.INPUT_LAYER.normalize_pos: False
+2024-10-14 20:06:19,529   INFO  cfg.MODEL.BACKBONE_3D.block_name: ['DSVTBlock', 'DSVTBlock', 'DSVTBlock', 'DSVTBlock']
+2024-10-14 20:06:19,529   INFO  cfg.MODEL.BACKBONE_3D.set_info: [[48, 1], [48, 1], [48, 1], [48, 1]]
+2024-10-14 20:06:19,529   INFO  cfg.MODEL.BACKBONE_3D.d_model: [192, 192, 192, 192]
+2024-10-14 20:06:19,529   INFO  cfg.MODEL.BACKBONE_3D.nhead: [8, 8, 8, 8]
+2024-10-14 20:06:19,529   INFO  cfg.MODEL.BACKBONE_3D.dim_feedforward: [384, 384, 384, 384]
+2024-10-14 20:06:19,529   INFO  cfg.MODEL.BACKBONE_3D.dropout: 0.0
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.BACKBONE_3D.activation: gelu
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.BACKBONE_3D.reduction_type: attention
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.BACKBONE_3D.output_shape: [280, 280]
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.BACKBONE_3D.conv_out_channel: 192
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.BACKBONE_3D.USE_CHECKPOINT: True
+2024-10-14 20:06:19,530   INFO  ----------- MAP_TO_BEV -----------
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.MAP_TO_BEV.NAME: PointPillarScatter3d
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.MAP_TO_BEV.INPUT_SHAPE: [280, 280, 1]
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.MAP_TO_BEV.NUM_BEV_FEATURES: 192
+2024-10-14 20:06:19,530   INFO  ----------- BACKBONE_2D -----------
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.BACKBONE_2D.NAME: BaseBEVResBackbone
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.BACKBONE_2D.LAYER_NUMS: [1, 2, 2]
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.BACKBONE_2D.LAYER_STRIDES: [1, 2, 2]
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.BACKBONE_2D.NUM_FILTERS: [128, 128, 256]
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.BACKBONE_2D.UPSAMPLE_STRIDES: [1, 2, 4]
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.BACKBONE_2D.NUM_UPSAMPLE_FILTERS: [128, 128, 128]
+2024-10-14 20:06:19,530   INFO  ----------- DENSE_HEAD -----------
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.DENSE_HEAD.NAME: CenterHead
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.DENSE_HEAD.CLASS_AGNOSTIC: False
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.DENSE_HEAD.CLASS_NAMES_EACH_HEAD: [['Vehicle', 'Pedestrian', 'Cyclist']]
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.DENSE_HEAD.SHARED_CONV_CHANNEL: 64
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.DENSE_HEAD.USE_BIAS_BEFORE_NORM: False
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.DENSE_HEAD.NUM_HM_CONV: 2
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.DENSE_HEAD.BN_EPS: 0.001
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.DENSE_HEAD.BN_MOM: 0.01
+2024-10-14 20:06:19,530   INFO  ----------- SEPARATE_HEAD_CFG -----------
+2024-10-14 20:06:19,530   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_ORDER: ['center', 'center_z', 'dim', 'rot']
+2024-10-14 20:06:19,530   INFO  ----------- HEAD_DICT -----------
+2024-10-14 20:06:19,530   INFO  ----------- center -----------
+2024-10-14 20:06:19,531   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center.out_channels: 2
+2024-10-14 20:06:19,531   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center.num_conv: 2
+2024-10-14 20:06:19,531   INFO  ----------- center_z -----------
+2024-10-14 20:06:19,531   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center_z.out_channels: 1
+2024-10-14 20:06:19,531   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center_z.num_conv: 2
+2024-10-14 20:06:19,531   INFO  ----------- dim -----------
+2024-10-14 20:06:19,531   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.dim.out_channels: 3
+2024-10-14 20:06:19,531   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.dim.num_conv: 2
+2024-10-14 20:06:19,531   INFO  ----------- rot -----------
+2024-10-14 20:06:19,531   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.rot.out_channels: 2
+2024-10-14 20:06:19,531   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.rot.num_conv: 2
+2024-10-14 20:06:19,531   INFO  ----------- iou -----------
+2024-10-14 20:06:19,531   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.iou.out_channels: 1
+2024-10-14 20:06:19,531   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.iou.num_conv: 2
+2024-10-14 20:06:19,531   INFO  ----------- TARGET_ASSIGNER_CONFIG -----------
+2024-10-14 20:06:19,531   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.FEATURE_MAP_STRIDE: 1
+2024-10-14 20:06:19,531   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NUM_MAX_OBJS: 500
+2024-10-14 20:06:19,531   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.GAUSSIAN_OVERLAP: 0.1
+2024-10-14 20:06:19,531   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.MIN_RADIUS: 2
+2024-10-14 20:06:19,531   INFO  cfg.MODEL.DENSE_HEAD.IOU_REG_LOSS: True
+2024-10-14 20:06:19,531   INFO  ----------- LOSS_CONFIG -----------
+2024-10-14 20:06:19,531   INFO  ----------- LOSS_WEIGHTS -----------
+2024-10-14 20:06:19,531   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.cls_weight: 1.0
+2024-10-14 20:06:19,531   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.loc_weight: 2.0
+2024-10-14 20:06:19,531   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.code_weights: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+2024-10-14 20:06:19,531   INFO  ----------- POST_PROCESSING -----------
+2024-10-14 20:06:19,531   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.SCORE_THRESH: 0.1
+2024-10-14 20:06:19,531   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.POST_CENTER_LIMIT_RANGE: [-80, -80, -10.0, 80, 80, 10.0]
+2024-10-14 20:06:19,532   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.MAX_OBJ_PER_SAMPLE: 500
+2024-10-14 20:06:19,532   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.USE_IOU_TO_RECTIFY_SCORE: True
+2024-10-14 20:06:19,532   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.IOU_RECTIFIER: [0.68, 0.71, 0.65]
+2024-10-14 20:06:19,532   INFO  ----------- NMS_CONFIG -----------
+2024-10-14 20:06:19,532   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_TYPE: class_specific_nms
+2024-10-14 20:06:19,532   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_THRESH: [0.75, 0.6, 0.55]
+2024-10-14 20:06:19,532   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_PRE_MAXSIZE: [4096, 4096, 4096]
+2024-10-14 20:06:19,532   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_POST_MAXSIZE: [500, 500, 500]
+2024-10-14 20:06:19,532   INFO  ----------- POST_PROCESSING -----------
+2024-10-14 20:06:19,532   INFO  cfg.MODEL.POST_PROCESSING.RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
+2024-10-14 20:06:19,532   INFO  cfg.MODEL.POST_PROCESSING.EVAL_METRIC: waymo
+2024-10-14 20:06:19,532   INFO  ----------- OPTIMIZATION -----------
+2024-10-14 20:06:19,532   INFO  cfg.OPTIMIZATION.BATCH_SIZE_PER_GPU: 3
+2024-10-14 20:06:19,532   INFO  cfg.OPTIMIZATION.NUM_EPOCHS: 24
+2024-10-14 20:06:19,532   INFO  cfg.OPTIMIZATION.OPTIMIZER: adam_onecycle
+2024-10-14 20:06:19,532   INFO  cfg.OPTIMIZATION.LR: 0.003
+2024-10-14 20:06:19,532   INFO  cfg.OPTIMIZATION.WEIGHT_DECAY: 0.05
+2024-10-14 20:06:19,532   INFO  cfg.OPTIMIZATION.MOMENTUM: 0.9
+2024-10-14 20:06:19,532   INFO  cfg.OPTIMIZATION.MOMS: [0.95, 0.85]
+2024-10-14 20:06:19,532   INFO  cfg.OPTIMIZATION.PCT_START: 0.1
+2024-10-14 20:06:19,533   INFO  cfg.OPTIMIZATION.DIV_FACTOR: 100
+2024-10-14 20:06:19,533   INFO  cfg.OPTIMIZATION.DECAY_STEP_LIST: [35, 45]
+2024-10-14 20:06:19,533   INFO  cfg.OPTIMIZATION.LR_DECAY: 0.1
+2024-10-14 20:06:19,533   INFO  cfg.OPTIMIZATION.LR_CLIP: 1e-07
+2024-10-14 20:06:19,533   INFO  cfg.OPTIMIZATION.LR_WARMUP: False
+2024-10-14 20:06:19,533   INFO  cfg.OPTIMIZATION.WARMUP_EPOCH: 1
+2024-10-14 20:06:19,533   INFO  cfg.OPTIMIZATION.GRAD_NORM_CLIP: 10
+2024-10-14 20:06:19,533   INFO  cfg.OPTIMIZATION.LOSS_SCALE_FP16: 32.0
+2024-10-14 20:06:19,533   INFO  ----------- HOOK -----------
+2024-10-14 20:06:19,533   INFO  ----------- DisableAugmentationHook -----------
+2024-10-14 20:06:19,533   INFO  cfg.HOOK.DisableAugmentationHook.DISABLE_AUG_LIST: ['gt_sampling', 'random_world_flip', 'random_world_rotation', 'random_world_scaling', 'random_world_translation']
+2024-10-14 20:06:19,533   INFO  cfg.HOOK.DisableAugmentationHook.NUM_LAST_EPOCHS: 1
+2024-10-14 20:06:19,533   INFO  cfg.TAG: dsvt_voxel2
+2024-10-14 20:06:19,533   INFO  cfg.EXP_GROUP_PATH: waymo_models
+2024-10-14 20:06:19,576   INFO  ----------- Create dataloader & network & optimizer -----------
+2024-10-14 20:06:19,926   INFO  Database filter by min points Pedestrian: 46175 => 45511
+2024-10-14 20:06:19,927   INFO  Database filter by min points Cyclist: 3054 => 3018
+2024-10-14 20:06:19,931   INFO  Loading Custom AV dataset.
+2024-10-14 20:06:19,969   INFO  Total samples for Custom AV dataset: 3950
+2024-10-14 20:06:23,674   INFO  ----------- Model CenterPoint created, param count: 9101996 -----------
+2024-10-14 20:06:23,674   INFO  DistributedDataParallel(
+  (module): CenterPoint(
+    (vfe): DynamicVoxelVFE(
+      (pfn_layers): ModuleList(
+        (0): PFNLayerV2(
+          (linear): Linear(in_features=9, out_features=96, bias=False)
+          (norm): BatchNorm1d(96, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): PFNLayerV2(
+          (linear): Linear(in_features=192, out_features=192, bias=False)
+          (norm): BatchNorm1d(192, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+    )
+    (backbone_3d): DSVT(
+      (input_layer): DSVTInputLayer(
+        (posembed_layers): ModuleList(
+          (0): ModuleList(
+            (0): ModuleList(
+              (0): PositionEmbeddingLearned(
+                (position_embedding_head): Sequential(
+                  (0): Linear(in_features=3, out_features=192, bias=True)
+                  (1): BatchNorm1d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): ReLU(inplace=True)
+                  (3): Linear(in_features=192, out_features=192, bias=True)
+                )
+              )
+              (1): PositionEmbeddingLearned(
+                (position_embedding_head): Sequential(
+                  (0): Linear(in_features=3, out_features=192, bias=True)
+                  (1): BatchNorm1d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): ReLU(inplace=True)
+                  (3): Linear(in_features=192, out_features=192, bias=True)
+                )
+              )
+            )
+          )
+          (1): ModuleList(
+            (0): ModuleList(
+              (0): PositionEmbeddingLearned(
+                (position_embedding_head): Sequential(
+                  (0): Linear(in_features=3, out_features=192, bias=True)
+                  (1): BatchNorm1d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): ReLU(inplace=True)
+                  (3): Linear(in_features=192, out_features=192, bias=True)
+                )
+              )
+              (1): PositionEmbeddingLearned(
+                (position_embedding_head): Sequential(
+                  (0): Linear(in_features=3, out_features=192, bias=True)
+                  (1): BatchNorm1d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): ReLU(inplace=True)
+                  (3): Linear(in_features=192, out_features=192, bias=True)
+                )
+              )
+            )
+          )
+          (2): ModuleList(
+            (0): ModuleList(
+              (0): PositionEmbeddingLearned(
+                (position_embedding_head): Sequential(
+                  (0): Linear(in_features=3, out_features=192, bias=True)
+                  (1): BatchNorm1d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): ReLU(inplace=True)
+                  (3): Linear(in_features=192, out_features=192, bias=True)
+                )
+              )
+              (1): PositionEmbeddingLearned(
+                (position_embedding_head): Sequential(
+                  (0): Linear(in_features=3, out_features=192, bias=True)
+                  (1): BatchNorm1d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): ReLU(inplace=True)
+                  (3): Linear(in_features=192, out_features=192, bias=True)
+                )
+              )
+            )
+          )
+          (3): ModuleList(
+            (0): ModuleList(
+              (0): PositionEmbeddingLearned(
+                (position_embedding_head): Sequential(
+                  (0): Linear(in_features=2, out_features=192, bias=True)
+                  (1): BatchNorm1d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): ReLU(inplace=True)
+                  (3): Linear(in_features=192, out_features=192, bias=True)
+                )
+              )
+              (1): PositionEmbeddingLearned(
+                (position_embedding_head): Sequential(
+                  (0): Linear(in_features=2, out_features=192, bias=True)
+                  (1): BatchNorm1d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): ReLU(inplace=True)
+                  (3): Linear(in_features=192, out_features=192, bias=True)
+                )
+              )
+            )
+          )
+        )
+      )
+      (stage_0): ModuleList(
+        (0): DSVTBlock(
+          (encoder_list): ModuleList(
+            (0): DSVT_EncoderLayer(
+              (win_attn): SetAttention(
+                (self_attn): MultiheadAttention(
+                  (out_proj): NonDynamicallyQuantizableLinear(in_features=192, out_features=192, bias=True)
+                )
+                (linear1): Linear(in_features=192, out_features=384, bias=True)
+                (dropout): Dropout(p=0, inplace=False)
+                (linear2): Linear(in_features=384, out_features=192, bias=True)
+                (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (dropout1): Identity()
+                (dropout2): Identity()
+              )
+              (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+            )
+            (1): DSVT_EncoderLayer(
+              (win_attn): SetAttention(
+                (self_attn): MultiheadAttention(
+                  (out_proj): NonDynamicallyQuantizableLinear(in_features=192, out_features=192, bias=True)
+                )
+                (linear1): Linear(in_features=192, out_features=384, bias=True)
+                (dropout): Dropout(p=0, inplace=False)
+                (linear2): Linear(in_features=384, out_features=192, bias=True)
+                (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (dropout1): Identity()
+                (dropout2): Identity()
+              )
+              (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (residual_norm_stage_0): ModuleList(
+        (0): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      )
+      (stage_0_reduction): Stage_ReductionAtt_Block(
+        (query_func): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+        (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (self_attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=192, out_features=192, bias=True)
+        )
+      )
+      (stage_1): ModuleList(
+        (0): DSVTBlock(
+          (encoder_list): ModuleList(
+            (0): DSVT_EncoderLayer(
+              (win_attn): SetAttention(
+                (self_attn): MultiheadAttention(
+                  (out_proj): NonDynamicallyQuantizableLinear(in_features=192, out_features=192, bias=True)
+                )
+                (linear1): Linear(in_features=192, out_features=384, bias=True)
+                (dropout): Dropout(p=0, inplace=False)
+                (linear2): Linear(in_features=384, out_features=192, bias=True)
+                (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (dropout1): Identity()
+                (dropout2): Identity()
+              )
+              (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+            )
+            (1): DSVT_EncoderLayer(
+              (win_attn): SetAttention(
+                (self_attn): MultiheadAttention(
+                  (out_proj): NonDynamicallyQuantizableLinear(in_features=192, out_features=192, bias=True)
+                )
+                (linear1): Linear(in_features=192, out_features=384, bias=True)
+                (dropout): Dropout(p=0, inplace=False)
+                (linear2): Linear(in_features=384, out_features=192, bias=True)
+                (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (dropout1): Identity()
+                (dropout2): Identity()
+              )
+              (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (residual_norm_stage_1): ModuleList(
+        (0): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      )
+      (stage_1_reduction): Stage_ReductionAtt_Block(
+        (query_func): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+        (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (self_attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=192, out_features=192, bias=True)
+        )
+      )
+      (stage_2): ModuleList(
+        (0): DSVTBlock(
+          (encoder_list): ModuleList(
+            (0): DSVT_EncoderLayer(
+              (win_attn): SetAttention(
+                (self_attn): MultiheadAttention(
+                  (out_proj): NonDynamicallyQuantizableLinear(in_features=192, out_features=192, bias=True)
+                )
+                (linear1): Linear(in_features=192, out_features=384, bias=True)
+                (dropout): Dropout(p=0, inplace=False)
+                (linear2): Linear(in_features=384, out_features=192, bias=True)
+                (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (dropout1): Identity()
+                (dropout2): Identity()
+              )
+              (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+            )
+            (1): DSVT_EncoderLayer(
+              (win_attn): SetAttention(
+                (self_attn): MultiheadAttention(
+                  (out_proj): NonDynamicallyQuantizableLinear(in_features=192, out_features=192, bias=True)
+                )
+                (linear1): Linear(in_features=192, out_features=384, bias=True)
+                (dropout): Dropout(p=0, inplace=False)
+                (linear2): Linear(in_features=384, out_features=192, bias=True)
+                (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (dropout1): Identity()
+                (dropout2): Identity()
+              )
+              (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (residual_norm_stage_2): ModuleList(
+        (0): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      )
+      (stage_2_reduction): Stage_ReductionAtt_Block(
+        (query_func): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (self_attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=192, out_features=192, bias=True)
+        )
+      )
+      (stage_3): ModuleList(
+        (0): DSVTBlock(
+          (encoder_list): ModuleList(
+            (0): DSVT_EncoderLayer(
+              (win_attn): SetAttention(
+                (self_attn): MultiheadAttention(
+                  (out_proj): NonDynamicallyQuantizableLinear(in_features=192, out_features=192, bias=True)
+                )
+                (linear1): Linear(in_features=192, out_features=384, bias=True)
+                (dropout): Dropout(p=0, inplace=False)
+                (linear2): Linear(in_features=384, out_features=192, bias=True)
+                (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (dropout1): Identity()
+                (dropout2): Identity()
+              )
+              (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+            )
+            (1): DSVT_EncoderLayer(
+              (win_attn): SetAttention(
+                (self_attn): MultiheadAttention(
+                  (out_proj): NonDynamicallyQuantizableLinear(in_features=192, out_features=192, bias=True)
+                )
+                (linear1): Linear(in_features=192, out_features=384, bias=True)
+                (dropout): Dropout(p=0, inplace=False)
+                (linear2): Linear(in_features=384, out_features=192, bias=True)
+                (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (dropout1): Identity()
+                (dropout2): Identity()
+              )
+              (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (residual_norm_stage_3): ModuleList(
+        (0): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+    (map_to_bev_module): PointPillarScatter3d()
+    (pfe): None
+    (backbone_2d): BaseBEVResBackbone(
+      (blocks): ModuleList(
+        (0): Sequential(
+          (0): BasicBlock(
+            (conv1): Conv2d(192, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu1): ReLU()
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu2): ReLU()
+            (downsample_layer): Sequential(
+              (0): Conv2d(192, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            )
+          )
+          (1): BasicBlock(
+            (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu1): ReLU()
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu2): ReLU()
+          )
+        )
+        (1): Sequential(
+          (0): BasicBlock(
+            (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu1): ReLU()
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu2): ReLU()
+            (downsample_layer): Sequential(
+              (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+              (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            )
+          )
+          (1): BasicBlock(
+            (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu1): ReLU()
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu2): ReLU()
+          )
+          (2): BasicBlock(
+            (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu1): ReLU()
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu2): ReLU()
+          )
+        )
+        (2): Sequential(
+          (0): BasicBlock(
+            (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu1): ReLU()
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu2): ReLU()
+            (downsample_layer): Sequential(
+              (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+              (1): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            )
+          )
+          (1): BasicBlock(
+            (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu1): ReLU()
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu2): ReLU()
+          )
+          (2): BasicBlock(
+            (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu1): ReLU()
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu2): ReLU()
+          )
+        )
+      )
+      (deblocks): ModuleList(
+        (0): Sequential(
+          (0): ConvTranspose2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+        (1): Sequential(
+          (0): ConvTranspose2d(128, 128, kernel_size=(2, 2), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+        (2): Sequential(
+          (0): ConvTranspose2d(256, 128, kernel_size=(4, 4), stride=(4, 4), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+      )
+    )
+    (dense_head): CenterHead(
+      (shared_conv): Sequential(
+        (0): Conv2d(384, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+      (heads_list): ModuleList(
+        (0): SeparateHead(
+          (center): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 2, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (center_z): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (dim): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (rot): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 2, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (iou): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (hm): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+        )
+      )
+      (hm_loss_func): FocalLossCenterNet()
+      (reg_loss_func): RegLossCenterNet()
+    )
+    (point_head): None
+    (roi_head): None
+  )
+)
+2024-10-14 20:06:23,677   INFO  **********************Start training waymo_models/dsvt_voxel2(default)**********************
