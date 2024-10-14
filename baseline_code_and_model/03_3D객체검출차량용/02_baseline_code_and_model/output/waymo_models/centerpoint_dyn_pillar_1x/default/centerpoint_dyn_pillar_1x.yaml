@@ -4,7 +4,7 @@ DATA_CONFIG:
     # _BASE_CONFIG_: cfgs/dataset_configs/waymo_dataset.yaml
     _BASE_CONFIG_: cfgs/dataset_configs/custom_av_dataset.yaml
 
-    # POINT_CLOUD_RANGE: [-74.88, -74.88, -2, 74.88, 74.88, 4.0]
+    # POINT_CLOUD_RANGE: [-74.88, -74.88, -2, 74.88, 74.88, 4.0]asdf
     POINT_CLOUD_RANGE: [-70.0, -70.0, -4.0, 70.0, 70.0, 4.0]
     DATA_PROCESSOR:
         -   NAME: mask_points_and_boxes_outside_range
@@ -92,9 +92,9 @@ MODEL:
 
 
 OPTIMIZATION:
-    BATCH_SIZE_PER_GPU: 1
+    BATCH_SIZE_PER_GPU: 3
     # NUM_EPOCHS: 30
-    NUM_EPOCHS: 60
+    NUM_EPOCHS: 80
 
     OPTIMIZER: adam_onecycle
     LR: 0.003

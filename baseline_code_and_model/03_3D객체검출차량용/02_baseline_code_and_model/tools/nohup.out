@@ -1,0 +1,944 @@
++ NGPUS=2
++ PY_ARGS='--cfg_file cfgs/waymo_models/centerpoint_dyn_pillar_1x.yaml --pretrained /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/centerpoint_dyn_pillar_1x/default/ckpt/checkpoint_epoch_62.pth'
++ true
++ PORT=47097
+++ nc -z 127.0.0.1 47097
+++ echo 1
++ status=1
++ '[' 1 '!=' 0 ']'
++ break
++ echo 47097
+47097
++ CUDA_VISIBLE_DEVICES=2,3
++ torchrun --nproc_per_node=2 --rdzv_endpoint=localhost:47097 train.py --launcher pytorch --cfg_file cfgs/waymo_models/centerpoint_dyn_pillar_1x.yaml --pretrained /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/centerpoint_dyn_pillar_1x/default/ckpt/checkpoint_epoch_62.pth
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+2024-10-14 17:20:14,414   INFO  **********************Start logging**********************
+2024-10-14 17:20:14,414   INFO  CUDA_VISIBLE_DEVICES=2,3
+2024-10-14 17:20:14,414   INFO  Training in distributed mode : total_batch_size: 6
+2024-10-14 17:20:14,414   INFO  cfg_file         cfgs/waymo_models/centerpoint_dyn_pillar_1x.yaml
+2024-10-14 17:20:14,414   INFO  batch_size       3
+2024-10-14 17:20:14,414   INFO  epochs           80
+2024-10-14 17:20:14,414   INFO  workers          4
+2024-10-14 17:20:14,414   INFO  extra_tag        default
+2024-10-14 17:20:14,414   INFO  ckpt             None
+2024-10-14 17:20:14,414   INFO  pretrained_model /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/centerpoint_dyn_pillar_1x/default/ckpt/checkpoint_epoch_62.pth
+2024-10-14 17:20:14,414   INFO  launcher         pytorch
+2024-10-14 17:20:14,414   INFO  tcp_port         18888
+2024-10-14 17:20:14,414   INFO  sync_bn          False
+2024-10-14 17:20:14,414   INFO  fix_random_seed  False
+2024-10-14 17:20:14,414   INFO  ckpt_save_interval 1
+2024-10-14 17:20:14,414   INFO  local_rank       0
+2024-10-14 17:20:14,414   INFO  max_ckpt_save_num 30
+2024-10-14 17:20:14,414   INFO  merge_all_iters_to_one_epoch False
+2024-10-14 17:20:14,414   INFO  set_cfgs         None
+2024-10-14 17:20:14,414   INFO  max_waiting_mins 0
+2024-10-14 17:20:14,414   INFO  start_epoch      0
+2024-10-14 17:20:14,414   INFO  num_epochs_to_eval 0
+2024-10-14 17:20:14,414   INFO  save_to_file     False
+2024-10-14 17:20:14,414   INFO  use_tqdm_to_record False
+2024-10-14 17:20:14,414   INFO  logger_iter_interval 50
+2024-10-14 17:20:14,414   INFO  ckpt_save_time_interval 300
+2024-10-14 17:20:14,414   INFO  wo_gpu_stat      False
+2024-10-14 17:20:14,414   INFO  use_amp          False
+2024-10-14 17:20:14,414   INFO  cfg.ROOT_DIR: /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model
+2024-10-14 17:20:14,415   INFO  cfg.LOCAL_RANK: 0
+2024-10-14 17:20:14,415   INFO  cfg.CLASS_NAMES: ['Vehicle', 'Pedestrian', 'Cyclist']
+2024-10-14 17:20:14,415   INFO  ----------- DATA_CONFIG -----------
+2024-10-14 17:20:14,415   INFO  cfg.DATA_CONFIG.DATASET: CustomAvDataset
+2024-10-14 17:20:14,415   INFO  cfg.DATA_CONFIG.DATA_PATH: /home/ailab/AILabDataset/01_Open_Dataset/39_AutoDna/3d_object_detection/3d_mod_av_db
+2024-10-14 17:20:14,415   INFO  cfg.DATA_CONFIG.POINT_CLOUD_RANGE: [-70.0, -70.0, -4.0, 70.0, 70.0, 4.0]
+2024-10-14 17:20:14,415   INFO  ----------- MAP_CLASS_TO_KITTI -----------
+2024-10-14 17:20:14,415   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Vehicle: Car
+2024-10-14 17:20:14,415   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Pedestrian: Pedestrian
+2024-10-14 17:20:14,415   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Cyclist: Cyclist
+2024-10-14 17:20:14,415   INFO  ----------- DATA_SPLIT -----------
+2024-10-14 17:20:14,415   INFO  cfg.DATA_CONFIG.DATA_SPLIT.train: train
+2024-10-14 17:20:14,415   INFO  cfg.DATA_CONFIG.DATA_SPLIT.test: val
+2024-10-14 17:20:14,415   INFO  ----------- INFO_PATH -----------
+2024-10-14 17:20:14,415   INFO  cfg.DATA_CONFIG.INFO_PATH.train: ['Team_3_custom_av_infos_train.pkl']
+2024-10-14 17:20:14,415   INFO  cfg.DATA_CONFIG.INFO_PATH.test: ['Team_3_custom_av_infos_val.pkl']
+2024-10-14 17:20:14,415   INFO  ----------- POINT_FEATURE_ENCODING -----------
+2024-10-14 17:20:14,415   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.encoding_type: absolute_coordinates_encoding
+2024-10-14 17:20:14,415   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.used_feature_list: ['x', 'y', 'z']
+2024-10-14 17:20:14,415   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.src_feature_list: ['x', 'y', 'z', 'intensity']
+2024-10-14 17:20:14,415   INFO  ----------- DATA_AUGMENTOR -----------
+2024-10-14 17:20:14,415   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.DISABLE_AUG_LIST: ['placeholder']
+2024-10-14 17:20:14,415   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.AUG_CONFIG_LIST: [{'NAME': 'gt_sampling', 'USE_ROAD_PLANE': False, 'DB_INFO_PATH': ['Team_3_custom_av_dbinfos_train.pkl'], 'PREPARE': {'filter_by_min_points': ['Vehicle:5', 'Pedestrian:5', 'Cyclist:5']}, 'SAMPLE_GROUPS': ['Vehicle:15', 'Pedestrian:10', 'Cyclist:10'], 'NUM_POINT_FEATURES': 4, 'DATABASE_WITH_FAKELIDAR': False, 'REMOVE_EXTRA_WIDTH': [0.0, 0.0, 0.0], 'LIMIT_WHOLE_SCENE': True}, {'NAME': 'random_world_flip', 'ALONG_AXIS_LIST': ['x', 'y']}, {'NAME': 'random_world_rotation', 'WORLD_ROT_ANGLE': [-0.78539816, 0.78539816]}, {'NAME': 'random_world_scaling', 'WORLD_SCALE_RANGE': [0.95, 1.05]}]
+2024-10-14 17:20:14,415   INFO  cfg.DATA_CONFIG.DATA_PROCESSOR: [{'NAME': 'mask_points_and_boxes_outside_range', 'REMOVE_OUTSIDE_BOXES': True}, {'NAME': 'shuffle_points', 'SHUFFLE_ENABLED': {'train': True, 'test': True}}, {'NAME': 'transform_points_to_voxels_placeholder', 'VOXEL_SIZE': [0.25, 0.25, 8.0]}]
+2024-10-14 17:20:14,415   INFO  cfg.DATA_CONFIG._BASE_CONFIG_: cfgs/dataset_configs/custom_av_dataset.yaml
+2024-10-14 17:20:14,415   INFO  ----------- MODEL -----------
+2024-10-14 17:20:14,415   INFO  cfg.MODEL.NAME: CenterPoint
+2024-10-14 17:20:14,415   INFO  ----------- VFE -----------
+2024-10-14 17:20:14,415   INFO  cfg.MODEL.VFE.NAME: DynPillarVFE
+2024-10-14 17:20:14,415   INFO  cfg.MODEL.VFE.WITH_DISTANCE: False
+2024-10-14 17:20:14,415   INFO  cfg.MODEL.VFE.USE_ABSLOTE_XYZ: True
+2024-10-14 17:20:14,416   INFO  cfg.MODEL.VFE.USE_NORM: True
+2024-10-14 17:20:14,416   INFO  cfg.MODEL.VFE.NUM_FILTERS: [64, 64]
+2024-10-14 17:20:14,416   INFO  ----------- MAP_TO_BEV -----------
+2024-10-14 17:20:14,416   INFO  cfg.MODEL.MAP_TO_BEV.NAME: PointPillarScatter
+2024-10-14 17:20:14,416   INFO  cfg.MODEL.MAP_TO_BEV.NUM_BEV_FEATURES: 64
+2024-10-14 17:20:14,416   INFO  ----------- BACKBONE_2D -----------
+2024-10-14 17:20:14,416   INFO  cfg.MODEL.BACKBONE_2D.NAME: BaseBEVBackbone
+2024-10-14 17:20:14,416   INFO  cfg.MODEL.BACKBONE_2D.LAYER_NUMS: [3, 5, 5]
+2024-10-14 17:20:14,416   INFO  cfg.MODEL.BACKBONE_2D.LAYER_STRIDES: [1, 2, 2]
+2024-10-14 17:20:14,416   INFO  cfg.MODEL.BACKBONE_2D.NUM_FILTERS: [64, 128, 256]
+2024-10-14 17:20:14,416   INFO  cfg.MODEL.BACKBONE_2D.UPSAMPLE_STRIDES: [1, 2, 4]
+2024-10-14 17:20:14,416   INFO  cfg.MODEL.BACKBONE_2D.NUM_UPSAMPLE_FILTERS: [128, 128, 128]
+2024-10-14 17:20:14,416   INFO  ----------- DENSE_HEAD -----------
+2024-10-14 17:20:14,416   INFO  cfg.MODEL.DENSE_HEAD.NAME: CenterHead
+2024-10-14 17:20:14,416   INFO  cfg.MODEL.DENSE_HEAD.CLASS_AGNOSTIC: False
+2024-10-14 17:20:14,416   INFO  cfg.MODEL.DENSE_HEAD.CLASS_NAMES_EACH_HEAD: [['Vehicle', 'Pedestrian', 'Cyclist']]
+2024-10-14 17:20:14,416   INFO  cfg.MODEL.DENSE_HEAD.SHARED_CONV_CHANNEL: 64
+2024-10-14 17:20:14,416   INFO  cfg.MODEL.DENSE_HEAD.USE_BIAS_BEFORE_NORM: True
+2024-10-14 17:20:14,416   INFO  cfg.MODEL.DENSE_HEAD.NUM_HM_CONV: 2
+2024-10-14 17:20:14,416   INFO  ----------- SEPARATE_HEAD_CFG -----------
+2024-10-14 17:20:14,416   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_ORDER: ['center', 'center_z', 'dim', 'rot']
+2024-10-14 17:20:14,416   INFO  ----------- HEAD_DICT -----------
+2024-10-14 17:20:14,416   INFO  ----------- center -----------
+2024-10-14 17:20:14,416   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center.out_channels: 2
+2024-10-14 17:20:14,416   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center.num_conv: 2
+2024-10-14 17:20:14,416   INFO  ----------- center_z -----------
+2024-10-14 17:20:14,416   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center_z.out_channels: 1
+2024-10-14 17:20:14,417   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center_z.num_conv: 2
+2024-10-14 17:20:14,417   INFO  ----------- dim -----------
+2024-10-14 17:20:14,417   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.dim.out_channels: 3
+2024-10-14 17:20:14,417   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.dim.num_conv: 2
+2024-10-14 17:20:14,417   INFO  ----------- rot -----------
+2024-10-14 17:20:14,417   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.rot.out_channels: 2
+2024-10-14 17:20:14,417   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.rot.num_conv: 2
+2024-10-14 17:20:14,417   INFO  ----------- TARGET_ASSIGNER_CONFIG -----------
+2024-10-14 17:20:14,417   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.FEATURE_MAP_STRIDE: 1
+2024-10-14 17:20:14,417   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NUM_MAX_OBJS: 500
+2024-10-14 17:20:14,417   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.GAUSSIAN_OVERLAP: 0.1
+2024-10-14 17:20:14,417   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.MIN_RADIUS: 2
+2024-10-14 17:20:14,417   INFO  ----------- LOSS_CONFIG -----------
+2024-10-14 17:20:14,417   INFO  ----------- LOSS_WEIGHTS -----------
+2024-10-14 17:20:14,417   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.cls_weight: 1.0
+2024-10-14 17:20:14,417   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.loc_weight: 2.0
+2024-10-14 17:20:14,417   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.code_weights: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+2024-10-14 17:20:14,417   INFO  ----------- POST_PROCESSING -----------
+2024-10-14 17:20:14,417   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.SCORE_THRESH: 0.1
+2024-10-14 17:20:14,417   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.POST_CENTER_LIMIT_RANGE: [-80, -80, -10.0, 80, 80, 10.0]
+2024-10-14 17:20:14,417   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.MAX_OBJ_PER_SAMPLE: 500
+2024-10-14 17:20:14,417   INFO  ----------- NMS_CONFIG -----------
+2024-10-14 17:20:14,417   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_TYPE: nms_gpu
+2024-10-14 17:20:14,417   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_THRESH: 0.7
+2024-10-14 17:20:14,417   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_PRE_MAXSIZE: 4096
+2024-10-14 17:20:14,418   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_POST_MAXSIZE: 500
+2024-10-14 17:20:14,418   INFO  ----------- POST_PROCESSING -----------
+2024-10-14 17:20:14,418   INFO  cfg.MODEL.POST_PROCESSING.RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
+2024-10-14 17:20:14,418   INFO  cfg.MODEL.POST_PROCESSING.EVAL_METRIC: waymo
+2024-10-14 17:20:14,418   INFO  ----------- OPTIMIZATION -----------
+2024-10-14 17:20:14,418   INFO  cfg.OPTIMIZATION.BATCH_SIZE_PER_GPU: 3
+2024-10-14 17:20:14,418   INFO  cfg.OPTIMIZATION.NUM_EPOCHS: 80
+2024-10-14 17:20:14,418   INFO  cfg.OPTIMIZATION.OPTIMIZER: adam_onecycle
+2024-10-14 17:20:14,418   INFO  cfg.OPTIMIZATION.LR: 0.003
+2024-10-14 17:20:14,418   INFO  cfg.OPTIMIZATION.WEIGHT_DECAY: 0.01
+2024-10-14 17:20:14,418   INFO  cfg.OPTIMIZATION.MOMENTUM: 0.9
+2024-10-14 17:20:14,418   INFO  cfg.OPTIMIZATION.MOMS: [0.95, 0.85]
+2024-10-14 17:20:14,418   INFO  cfg.OPTIMIZATION.PCT_START: 0.4
+2024-10-14 17:20:14,418   INFO  cfg.OPTIMIZATION.DIV_FACTOR: 10
+2024-10-14 17:20:14,418   INFO  cfg.OPTIMIZATION.DECAY_STEP_LIST: [35, 45]
+2024-10-14 17:20:14,418   INFO  cfg.OPTIMIZATION.LR_DECAY: 0.1
+2024-10-14 17:20:14,418   INFO  cfg.OPTIMIZATION.LR_CLIP: 1e-07
+2024-10-14 17:20:14,418   INFO  cfg.OPTIMIZATION.LR_WARMUP: False
+2024-10-14 17:20:14,418   INFO  cfg.OPTIMIZATION.WARMUP_EPOCH: 1
+2024-10-14 17:20:14,418   INFO  cfg.OPTIMIZATION.GRAD_NORM_CLIP: 10
+2024-10-14 17:20:14,418   INFO  cfg.TAG: centerpoint_dyn_pillar_1x
+2024-10-14 17:20:14,418   INFO  cfg.EXP_GROUP_PATH: waymo_models
+2024-10-14 17:20:14,470   INFO  ----------- Create dataloader & network & optimizer -----------
+2024-10-14 17:20:14,815   INFO  Database filter by min points Vehicle: 84700 => 83962
+2024-10-14 17:20:14,822   INFO  Database filter by min points Pedestrian: 46175 => 45511
+2024-10-14 17:20:14,823   INFO  Database filter by min points Cyclist: 3054 => 3018
+2024-10-14 17:20:14,827   INFO  Loading Custom AV dataset.
+2024-10-14 17:20:14,871   INFO  Total samples for Custom AV dataset: 3950
+Traceback (most recent call last):
+  File "/home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/tools/train.py", line 234, in <module>
+    main()
+  File "/home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/tools/train.py", line 144, in main
+    model.load_params_from_file(filename=args.pretrained_model, to_cpu=dist_train, logger=logger)
+  File "/home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/tools/../pcdet/models/detectors/detector3d_template.py", line 363, in load_params_from_file
+    raise FileNotFoundError
+FileNotFoundError
+Traceback (most recent call last):
+  File "/home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/tools/train.py", line 234, in <module>
+    main()
+  File "/home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/tools/train.py", line 144, in main
+    model.load_params_from_file(filename=args.pretrained_model, to_cpu=dist_train, logger=logger)
+  File "/home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/tools/../pcdet/models/detectors/detector3d_template.py", line 363, in load_params_from_file
+    raise FileNotFoundError
+FileNotFoundError
+ERROR:torch.distributed.elastic.multiprocessing.api:failed (exitcode: 1) local_rank: 0 (pid: 8316) of binary: /home/ailab/anaconda3/envs/Team_3/bin/python
+Traceback (most recent call last):
+  File "/home/ailab/anaconda3/envs/Team_3/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/home/ailab/anaconda3/envs/Team_3/lib/python3.9/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 345, in wrapper
+    return f(*args, **kwargs)
+  File "/home/ailab/anaconda3/envs/Team_3/lib/python3.9/site-packages/torch/distributed/run.py", line 719, in main
+    run(args)
+  File "/home/ailab/anaconda3/envs/Team_3/lib/python3.9/site-packages/torch/distributed/run.py", line 710, in run
+    elastic_launch(
+  File "/home/ailab/anaconda3/envs/Team_3/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 131, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/ailab/anaconda3/envs/Team_3/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 259, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+train.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2024-10-14_17:20:22
+  host      : 3090-1
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 8317)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2024-10-14_17:20:22
+  host      : 3090-1
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 8316)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
++ NGPUS=2
++ PY_ARGS='--cfg_file cfgs/waymo_models/centerpoint_dyn_pillar_1x.yaml --pretrained /git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/centerpoint_dyn_pillar_1x/default/ckpt/checkpoint_epoch_62.pth'
++ true
++ PORT=37529
+++ nc -z 127.0.0.1 37529
+++ echo 1
++ status=1
++ '[' 1 '!=' 0 ']'
++ break
++ echo 37529
+37529
++ CUDA_VISIBLE_DEVICES=2,3
++ torchrun --nproc_per_node=2 --rdzv_endpoint=localhost:37529 train.py --launcher pytorch --cfg_file cfgs/waymo_models/centerpoint_dyn_pillar_1x.yaml --pretrained /git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/centerpoint_dyn_pillar_1x/default/ckpt/checkpoint_epoch_62.pth
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+2024-10-14 17:22:38,705   INFO  **********************Start logging**********************
+2024-10-14 17:22:38,705   INFO  CUDA_VISIBLE_DEVICES=2,3
+2024-10-14 17:22:38,705   INFO  Training in distributed mode : total_batch_size: 6
+2024-10-14 17:22:38,705   INFO  cfg_file         cfgs/waymo_models/centerpoint_dyn_pillar_1x.yaml
+2024-10-14 17:22:38,706   INFO  batch_size       3
+2024-10-14 17:22:38,706   INFO  epochs           80
+2024-10-14 17:22:38,706   INFO  workers          4
+2024-10-14 17:22:38,706   INFO  extra_tag        default
+2024-10-14 17:22:38,706   INFO  ckpt             None
+2024-10-14 17:22:38,706   INFO  pretrained_model /git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/centerpoint_dyn_pillar_1x/default/ckpt/checkpoint_epoch_62.pth
+2024-10-14 17:22:38,706   INFO  launcher         pytorch
+2024-10-14 17:22:38,706   INFO  tcp_port         18888
+2024-10-14 17:22:38,706   INFO  sync_bn          False
+2024-10-14 17:22:38,706   INFO  fix_random_seed  False
+2024-10-14 17:22:38,706   INFO  ckpt_save_interval 1
+2024-10-14 17:22:38,706   INFO  local_rank       0
+2024-10-14 17:22:38,706   INFO  max_ckpt_save_num 30
+2024-10-14 17:22:38,706   INFO  merge_all_iters_to_one_epoch False
+2024-10-14 17:22:38,706   INFO  set_cfgs         None
+2024-10-14 17:22:38,706   INFO  max_waiting_mins 0
+2024-10-14 17:22:38,706   INFO  start_epoch      0
+2024-10-14 17:22:38,706   INFO  num_epochs_to_eval 0
+2024-10-14 17:22:38,706   INFO  save_to_file     False
+2024-10-14 17:22:38,706   INFO  use_tqdm_to_record False
+2024-10-14 17:22:38,706   INFO  logger_iter_interval 50
+2024-10-14 17:22:38,706   INFO  ckpt_save_time_interval 300
+2024-10-14 17:22:38,706   INFO  wo_gpu_stat      False
+2024-10-14 17:22:38,706   INFO  use_amp          False
+2024-10-14 17:22:38,706   INFO  cfg.ROOT_DIR: /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model
+2024-10-14 17:22:38,706   INFO  cfg.LOCAL_RANK: 0
+2024-10-14 17:22:38,706   INFO  cfg.CLASS_NAMES: ['Vehicle', 'Pedestrian', 'Cyclist']
+2024-10-14 17:22:38,706   INFO  ----------- DATA_CONFIG -----------
+2024-10-14 17:22:38,706   INFO  cfg.DATA_CONFIG.DATASET: CustomAvDataset
+2024-10-14 17:22:38,706   INFO  cfg.DATA_CONFIG.DATA_PATH: /home/ailab/AILabDataset/01_Open_Dataset/39_AutoDna/3d_object_detection/3d_mod_av_db
+2024-10-14 17:22:38,706   INFO  cfg.DATA_CONFIG.POINT_CLOUD_RANGE: [-70.0, -70.0, -4.0, 70.0, 70.0, 4.0]
+2024-10-14 17:22:38,706   INFO  ----------- MAP_CLASS_TO_KITTI -----------
+2024-10-14 17:22:38,706   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Vehicle: Car
+2024-10-14 17:22:38,706   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Pedestrian: Pedestrian
+2024-10-14 17:22:38,706   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Cyclist: Cyclist
+2024-10-14 17:22:38,707   INFO  ----------- DATA_SPLIT -----------
+2024-10-14 17:22:38,707   INFO  cfg.DATA_CONFIG.DATA_SPLIT.train: train
+2024-10-14 17:22:38,707   INFO  cfg.DATA_CONFIG.DATA_SPLIT.test: val
+2024-10-14 17:22:38,707   INFO  ----------- INFO_PATH -----------
+2024-10-14 17:22:38,707   INFO  cfg.DATA_CONFIG.INFO_PATH.train: ['Team_3_custom_av_infos_train.pkl']
+2024-10-14 17:22:38,707   INFO  cfg.DATA_CONFIG.INFO_PATH.test: ['Team_3_custom_av_infos_val.pkl']
+2024-10-14 17:22:38,707   INFO  ----------- POINT_FEATURE_ENCODING -----------
+2024-10-14 17:22:38,707   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.encoding_type: absolute_coordinates_encoding
+2024-10-14 17:22:38,707   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.used_feature_list: ['x', 'y', 'z']
+2024-10-14 17:22:38,707   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.src_feature_list: ['x', 'y', 'z', 'intensity']
+2024-10-14 17:22:38,707   INFO  ----------- DATA_AUGMENTOR -----------
+2024-10-14 17:22:38,707   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.DISABLE_AUG_LIST: ['placeholder']
+2024-10-14 17:22:38,707   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.AUG_CONFIG_LIST: [{'NAME': 'gt_sampling', 'USE_ROAD_PLANE': False, 'DB_INFO_PATH': ['Team_3_custom_av_dbinfos_train.pkl'], 'PREPARE': {'filter_by_min_points': ['Vehicle:5', 'Pedestrian:5', 'Cyclist:5']}, 'SAMPLE_GROUPS': ['Vehicle:15', 'Pedestrian:10', 'Cyclist:10'], 'NUM_POINT_FEATURES': 4, 'DATABASE_WITH_FAKELIDAR': False, 'REMOVE_EXTRA_WIDTH': [0.0, 0.0, 0.0], 'LIMIT_WHOLE_SCENE': True}, {'NAME': 'random_world_flip', 'ALONG_AXIS_LIST': ['x', 'y']}, {'NAME': 'random_world_rotation', 'WORLD_ROT_ANGLE': [-0.78539816, 0.78539816]}, {'NAME': 'random_world_scaling', 'WORLD_SCALE_RANGE': [0.95, 1.05]}]
+2024-10-14 17:22:38,707   INFO  cfg.DATA_CONFIG.DATA_PROCESSOR: [{'NAME': 'mask_points_and_boxes_outside_range', 'REMOVE_OUTSIDE_BOXES': True}, {'NAME': 'shuffle_points', 'SHUFFLE_ENABLED': {'train': True, 'test': True}}, {'NAME': 'transform_points_to_voxels_placeholder', 'VOXEL_SIZE': [0.25, 0.25, 8.0]}]
+2024-10-14 17:22:38,707   INFO  cfg.DATA_CONFIG._BASE_CONFIG_: cfgs/dataset_configs/custom_av_dataset.yaml
+2024-10-14 17:22:38,707   INFO  ----------- MODEL -----------
+2024-10-14 17:22:38,707   INFO  cfg.MODEL.NAME: CenterPoint
+2024-10-14 17:22:38,707   INFO  ----------- VFE -----------
+2024-10-14 17:22:38,707   INFO  cfg.MODEL.VFE.NAME: DynPillarVFE
+2024-10-14 17:22:38,707   INFO  cfg.MODEL.VFE.WITH_DISTANCE: False
+2024-10-14 17:22:38,707   INFO  cfg.MODEL.VFE.USE_ABSLOTE_XYZ: True
+2024-10-14 17:22:38,707   INFO  cfg.MODEL.VFE.USE_NORM: True
+2024-10-14 17:22:38,707   INFO  cfg.MODEL.VFE.NUM_FILTERS: [64, 64]
+2024-10-14 17:22:38,707   INFO  ----------- MAP_TO_BEV -----------
+2024-10-14 17:22:38,707   INFO  cfg.MODEL.MAP_TO_BEV.NAME: PointPillarScatter
+2024-10-14 17:22:38,707   INFO  cfg.MODEL.MAP_TO_BEV.NUM_BEV_FEATURES: 64
+2024-10-14 17:22:38,707   INFO  ----------- BACKBONE_2D -----------
+2024-10-14 17:22:38,707   INFO  cfg.MODEL.BACKBONE_2D.NAME: BaseBEVBackbone
+2024-10-14 17:22:38,707   INFO  cfg.MODEL.BACKBONE_2D.LAYER_NUMS: [3, 5, 5]
+2024-10-14 17:22:38,707   INFO  cfg.MODEL.BACKBONE_2D.LAYER_STRIDES: [1, 2, 2]
+2024-10-14 17:22:38,707   INFO  cfg.MODEL.BACKBONE_2D.NUM_FILTERS: [64, 128, 256]
+2024-10-14 17:22:38,707   INFO  cfg.MODEL.BACKBONE_2D.UPSAMPLE_STRIDES: [1, 2, 4]
+2024-10-14 17:22:38,707   INFO  cfg.MODEL.BACKBONE_2D.NUM_UPSAMPLE_FILTERS: [128, 128, 128]
+2024-10-14 17:22:38,707   INFO  ----------- DENSE_HEAD -----------
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.NAME: CenterHead
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.CLASS_AGNOSTIC: False
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.CLASS_NAMES_EACH_HEAD: [['Vehicle', 'Pedestrian', 'Cyclist']]
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.SHARED_CONV_CHANNEL: 64
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.USE_BIAS_BEFORE_NORM: True
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.NUM_HM_CONV: 2
+2024-10-14 17:22:38,708   INFO  ----------- SEPARATE_HEAD_CFG -----------
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_ORDER: ['center', 'center_z', 'dim', 'rot']
+2024-10-14 17:22:38,708   INFO  ----------- HEAD_DICT -----------
+2024-10-14 17:22:38,708   INFO  ----------- center -----------
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center.out_channels: 2
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center.num_conv: 2
+2024-10-14 17:22:38,708   INFO  ----------- center_z -----------
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center_z.out_channels: 1
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center_z.num_conv: 2
+2024-10-14 17:22:38,708   INFO  ----------- dim -----------
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.dim.out_channels: 3
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.dim.num_conv: 2
+2024-10-14 17:22:38,708   INFO  ----------- rot -----------
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.rot.out_channels: 2
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.rot.num_conv: 2
+2024-10-14 17:22:38,708   INFO  ----------- TARGET_ASSIGNER_CONFIG -----------
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.FEATURE_MAP_STRIDE: 1
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NUM_MAX_OBJS: 500
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.GAUSSIAN_OVERLAP: 0.1
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.MIN_RADIUS: 2
+2024-10-14 17:22:38,708   INFO  ----------- LOSS_CONFIG -----------
+2024-10-14 17:22:38,708   INFO  ----------- LOSS_WEIGHTS -----------
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.cls_weight: 1.0
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.loc_weight: 2.0
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.code_weights: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+2024-10-14 17:22:38,708   INFO  ----------- POST_PROCESSING -----------
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.SCORE_THRESH: 0.1
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.POST_CENTER_LIMIT_RANGE: [-80, -80, -10.0, 80, 80, 10.0]
+2024-10-14 17:22:38,708   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.MAX_OBJ_PER_SAMPLE: 500
+2024-10-14 17:22:38,708   INFO  ----------- NMS_CONFIG -----------
+2024-10-14 17:22:38,709   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_TYPE: nms_gpu
+2024-10-14 17:22:38,709   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_THRESH: 0.7
+2024-10-14 17:22:38,709   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_PRE_MAXSIZE: 4096
+2024-10-14 17:22:38,709   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_POST_MAXSIZE: 500
+2024-10-14 17:22:38,709   INFO  ----------- POST_PROCESSING -----------
+2024-10-14 17:22:38,709   INFO  cfg.MODEL.POST_PROCESSING.RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
+2024-10-14 17:22:38,709   INFO  cfg.MODEL.POST_PROCESSING.EVAL_METRIC: waymo
+2024-10-14 17:22:38,709   INFO  ----------- OPTIMIZATION -----------
+2024-10-14 17:22:38,709   INFO  cfg.OPTIMIZATION.BATCH_SIZE_PER_GPU: 3
+2024-10-14 17:22:38,709   INFO  cfg.OPTIMIZATION.NUM_EPOCHS: 80
+2024-10-14 17:22:38,709   INFO  cfg.OPTIMIZATION.OPTIMIZER: adam_onecycle
+2024-10-14 17:22:38,709   INFO  cfg.OPTIMIZATION.LR: 0.003
+2024-10-14 17:22:38,709   INFO  cfg.OPTIMIZATION.WEIGHT_DECAY: 0.01
+2024-10-14 17:22:38,709   INFO  cfg.OPTIMIZATION.MOMENTUM: 0.9
+2024-10-14 17:22:38,709   INFO  cfg.OPTIMIZATION.MOMS: [0.95, 0.85]
+2024-10-14 17:22:38,709   INFO  cfg.OPTIMIZATION.PCT_START: 0.4
+2024-10-14 17:22:38,709   INFO  cfg.OPTIMIZATION.DIV_FACTOR: 10
+2024-10-14 17:22:38,709   INFO  cfg.OPTIMIZATION.DECAY_STEP_LIST: [35, 45]
+2024-10-14 17:22:38,709   INFO  cfg.OPTIMIZATION.LR_DECAY: 0.1
+2024-10-14 17:22:38,709   INFO  cfg.OPTIMIZATION.LR_CLIP: 1e-07
+2024-10-14 17:22:38,709   INFO  cfg.OPTIMIZATION.LR_WARMUP: False
+2024-10-14 17:22:38,709   INFO  cfg.OPTIMIZATION.WARMUP_EPOCH: 1
+2024-10-14 17:22:38,709   INFO  cfg.OPTIMIZATION.GRAD_NORM_CLIP: 10
+2024-10-14 17:22:38,709   INFO  cfg.TAG: centerpoint_dyn_pillar_1x
+2024-10-14 17:22:38,709   INFO  cfg.EXP_GROUP_PATH: waymo_models
+2024-10-14 17:22:38,760   INFO  ----------- Create dataloader & network & optimizer -----------
+2024-10-14 17:22:39,113   INFO  Database filter by min points Vehicle: 84700 => 83962
+2024-10-14 17:22:39,119   INFO  Database filter by min points Pedestrian: 46175 => 45511
+2024-10-14 17:22:39,121   INFO  Database filter by min points Cyclist: 3054 => 3018
+2024-10-14 17:22:39,125   INFO  Loading Custom AV dataset.
+2024-10-14 17:22:39,168   INFO  Total samples for Custom AV dataset: 3950
+Traceback (most recent call last):
+  File "/home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/tools/train.py", line 234, in <module>
+    main()
+  File "/home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/tools/train.py", line 144, in main
+    model.load_params_from_file(filename=args.pretrained_model, to_cpu=dist_train, logger=logger)
+  File "/home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/tools/../pcdet/models/detectors/detector3d_template.py", line 363, in load_params_from_file
+    raise FileNotFoundError
+FileNotFoundError
+Traceback (most recent call last):
+  File "/home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/tools/train.py", line 234, in <module>
+    main()
+  File "/home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/tools/train.py", line 144, in main
+    model.load_params_from_file(filename=args.pretrained_model, to_cpu=dist_train, logger=logger)
+  File "/home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/tools/../pcdet/models/detectors/detector3d_template.py", line 363, in load_params_from_file
+    raise FileNotFoundError
+FileNotFoundError
+ERROR:torch.distributed.elastic.multiprocessing.api:failed (exitcode: 1) local_rank: 0 (pid: 8697) of binary: /home/ailab/anaconda3/envs/Team_3/bin/python
+Traceback (most recent call last):
+  File "/home/ailab/anaconda3/envs/Team_3/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/home/ailab/anaconda3/envs/Team_3/lib/python3.9/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 345, in wrapper
+    return f(*args, **kwargs)
+  File "/home/ailab/anaconda3/envs/Team_3/lib/python3.9/site-packages/torch/distributed/run.py", line 719, in main
+    run(args)
+  File "/home/ailab/anaconda3/envs/Team_3/lib/python3.9/site-packages/torch/distributed/run.py", line 710, in run
+    elastic_launch(
+  File "/home/ailab/anaconda3/envs/Team_3/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 131, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/ailab/anaconda3/envs/Team_3/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 259, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+train.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2024-10-14_17:22:47
+  host      : 3090-1
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 8698)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2024-10-14_17:22:47
+  host      : 3090-1
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 8697)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
++ NGPUS=2
++ PY_ARGS='--cfg_file cfgs/waymo_models/centerpoint_dyn_pillar_1x.yaml'
++ true
++ PORT=23672
+++ nc -z 127.0.0.1 23672
+++ echo 1
++ status=1
++ '[' 1 '!=' 0 ']'
++ break
++ echo 23672
+23672
++ CUDA_VISIBLE_DEVICES=2,3
++ torchrun --nproc_per_node=2 --rdzv_endpoint=localhost:23672 train.py --launcher pytorch --cfg_file cfgs/waymo_models/centerpoint_dyn_pillar_1x.yaml
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+2024-10-14 17:23:21,729   INFO  **********************Start logging**********************
+2024-10-14 17:23:21,729   INFO  CUDA_VISIBLE_DEVICES=2,3
+2024-10-14 17:23:21,729   INFO  Training in distributed mode : total_batch_size: 6
+2024-10-14 17:23:21,729   INFO  cfg_file         cfgs/waymo_models/centerpoint_dyn_pillar_1x.yaml
+2024-10-14 17:23:21,729   INFO  batch_size       3
+2024-10-14 17:23:21,729   INFO  epochs           80
+2024-10-14 17:23:21,729   INFO  workers          4
+2024-10-14 17:23:21,729   INFO  extra_tag        default
+2024-10-14 17:23:21,729   INFO  ckpt             None
+2024-10-14 17:23:21,729   INFO  pretrained_model None
+2024-10-14 17:23:21,730   INFO  launcher         pytorch
+2024-10-14 17:23:21,730   INFO  tcp_port         18888
+2024-10-14 17:23:21,730   INFO  sync_bn          False
+2024-10-14 17:23:21,730   INFO  fix_random_seed  False
+2024-10-14 17:23:21,730   INFO  ckpt_save_interval 1
+2024-10-14 17:23:21,730   INFO  local_rank       0
+2024-10-14 17:23:21,730   INFO  max_ckpt_save_num 30
+2024-10-14 17:23:21,730   INFO  merge_all_iters_to_one_epoch False
+2024-10-14 17:23:21,730   INFO  set_cfgs         None
+2024-10-14 17:23:21,730   INFO  max_waiting_mins 0
+2024-10-14 17:23:21,730   INFO  start_epoch      0
+2024-10-14 17:23:21,730   INFO  num_epochs_to_eval 0
+2024-10-14 17:23:21,730   INFO  save_to_file     False
+2024-10-14 17:23:21,730   INFO  use_tqdm_to_record False
+2024-10-14 17:23:21,730   INFO  logger_iter_interval 50
+2024-10-14 17:23:21,730   INFO  ckpt_save_time_interval 300
+2024-10-14 17:23:21,730   INFO  wo_gpu_stat      False
+2024-10-14 17:23:21,730   INFO  use_amp          False
+2024-10-14 17:23:21,730   INFO  cfg.ROOT_DIR: /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model
+2024-10-14 17:23:21,731   INFO  cfg.LOCAL_RANK: 0
+2024-10-14 17:23:21,731   INFO  cfg.CLASS_NAMES: ['Vehicle', 'Pedestrian', 'Cyclist']
+2024-10-14 17:23:21,731   INFO  ----------- DATA_CONFIG -----------
+2024-10-14 17:23:21,731   INFO  cfg.DATA_CONFIG.DATASET: CustomAvDataset
+2024-10-14 17:23:21,731   INFO  cfg.DATA_CONFIG.DATA_PATH: /home/ailab/AILabDataset/01_Open_Dataset/39_AutoDna/3d_object_detection/3d_mod_av_db
+2024-10-14 17:23:21,731   INFO  cfg.DATA_CONFIG.POINT_CLOUD_RANGE: [-70.0, -70.0, -4.0, 70.0, 70.0, 4.0]
+2024-10-14 17:23:21,731   INFO  ----------- MAP_CLASS_TO_KITTI -----------
+2024-10-14 17:23:21,731   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Vehicle: Car
+2024-10-14 17:23:21,731   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Pedestrian: Pedestrian
+2024-10-14 17:23:21,731   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Cyclist: Cyclist
+2024-10-14 17:23:21,731   INFO  ----------- DATA_SPLIT -----------
+2024-10-14 17:23:21,731   INFO  cfg.DATA_CONFIG.DATA_SPLIT.train: train
+2024-10-14 17:23:21,731   INFO  cfg.DATA_CONFIG.DATA_SPLIT.test: val
+2024-10-14 17:23:21,731   INFO  ----------- INFO_PATH -----------
+2024-10-14 17:23:21,731   INFO  cfg.DATA_CONFIG.INFO_PATH.train: ['Team_3_custom_av_infos_train.pkl']
+2024-10-14 17:23:21,731   INFO  cfg.DATA_CONFIG.INFO_PATH.test: ['Team_3_custom_av_infos_val.pkl']
+2024-10-14 17:23:21,731   INFO  ----------- POINT_FEATURE_ENCODING -----------
+2024-10-14 17:23:21,731   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.encoding_type: absolute_coordinates_encoding
+2024-10-14 17:23:21,731   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.used_feature_list: ['x', 'y', 'z']
+2024-10-14 17:23:21,732   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.src_feature_list: ['x', 'y', 'z', 'intensity']
+2024-10-14 17:23:21,732   INFO  ----------- DATA_AUGMENTOR -----------
+2024-10-14 17:23:21,732   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.DISABLE_AUG_LIST: ['placeholder']
+2024-10-14 17:23:21,732   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.AUG_CONFIG_LIST: [{'NAME': 'gt_sampling', 'USE_ROAD_PLANE': False, 'DB_INFO_PATH': ['Team_3_custom_av_dbinfos_train.pkl'], 'PREPARE': {'filter_by_min_points': ['Vehicle:5', 'Pedestrian:5', 'Cyclist:5']}, 'SAMPLE_GROUPS': ['Vehicle:15', 'Pedestrian:10', 'Cyclist:10'], 'NUM_POINT_FEATURES': 4, 'DATABASE_WITH_FAKELIDAR': False, 'REMOVE_EXTRA_WIDTH': [0.0, 0.0, 0.0], 'LIMIT_WHOLE_SCENE': True}, {'NAME': 'random_world_flip', 'ALONG_AXIS_LIST': ['x', 'y']}, {'NAME': 'random_world_rotation', 'WORLD_ROT_ANGLE': [-0.78539816, 0.78539816]}, {'NAME': 'random_world_scaling', 'WORLD_SCALE_RANGE': [0.95, 1.05]}]
+2024-10-14 17:23:21,732   INFO  cfg.DATA_CONFIG.DATA_PROCESSOR: [{'NAME': 'mask_points_and_boxes_outside_range', 'REMOVE_OUTSIDE_BOXES': True}, {'NAME': 'shuffle_points', 'SHUFFLE_ENABLED': {'train': True, 'test': True}}, {'NAME': 'transform_points_to_voxels_placeholder', 'VOXEL_SIZE': [0.25, 0.25, 8.0]}]
+2024-10-14 17:23:21,732   INFO  cfg.DATA_CONFIG._BASE_CONFIG_: cfgs/dataset_configs/custom_av_dataset.yaml
+2024-10-14 17:23:21,732   INFO  ----------- MODEL -----------
+2024-10-14 17:23:21,732   INFO  cfg.MODEL.NAME: CenterPoint
+2024-10-14 17:23:21,732   INFO  ----------- VFE -----------
+2024-10-14 17:23:21,732   INFO  cfg.MODEL.VFE.NAME: DynPillarVFE
+2024-10-14 17:23:21,732   INFO  cfg.MODEL.VFE.WITH_DISTANCE: False
+2024-10-14 17:23:21,732   INFO  cfg.MODEL.VFE.USE_ABSLOTE_XYZ: True
+2024-10-14 17:23:21,732   INFO  cfg.MODEL.VFE.USE_NORM: True
+2024-10-14 17:23:21,732   INFO  cfg.MODEL.VFE.NUM_FILTERS: [64, 64]
+2024-10-14 17:23:21,732   INFO  ----------- MAP_TO_BEV -----------
+2024-10-14 17:23:21,732   INFO  cfg.MODEL.MAP_TO_BEV.NAME: PointPillarScatter
+2024-10-14 17:23:21,732   INFO  cfg.MODEL.MAP_TO_BEV.NUM_BEV_FEATURES: 64
+2024-10-14 17:23:21,732   INFO  ----------- BACKBONE_2D -----------
+2024-10-14 17:23:21,732   INFO  cfg.MODEL.BACKBONE_2D.NAME: BaseBEVBackbone
+2024-10-14 17:23:21,733   INFO  cfg.MODEL.BACKBONE_2D.LAYER_NUMS: [3, 5, 5]
+2024-10-14 17:23:21,733   INFO  cfg.MODEL.BACKBONE_2D.LAYER_STRIDES: [1, 2, 2]
+2024-10-14 17:23:21,733   INFO  cfg.MODEL.BACKBONE_2D.NUM_FILTERS: [64, 128, 256]
+2024-10-14 17:23:21,733   INFO  cfg.MODEL.BACKBONE_2D.UPSAMPLE_STRIDES: [1, 2, 4]
+2024-10-14 17:23:21,733   INFO  cfg.MODEL.BACKBONE_2D.NUM_UPSAMPLE_FILTERS: [128, 128, 128]
+2024-10-14 17:23:21,733   INFO  ----------- DENSE_HEAD -----------
+2024-10-14 17:23:21,733   INFO  cfg.MODEL.DENSE_HEAD.NAME: CenterHead
+2024-10-14 17:23:21,733   INFO  cfg.MODEL.DENSE_HEAD.CLASS_AGNOSTIC: False
+2024-10-14 17:23:21,733   INFO  cfg.MODEL.DENSE_HEAD.CLASS_NAMES_EACH_HEAD: [['Vehicle', 'Pedestrian', 'Cyclist']]
+2024-10-14 17:23:21,733   INFO  cfg.MODEL.DENSE_HEAD.SHARED_CONV_CHANNEL: 64
+2024-10-14 17:23:21,733   INFO  cfg.MODEL.DENSE_HEAD.USE_BIAS_BEFORE_NORM: True
+2024-10-14 17:23:21,733   INFO  cfg.MODEL.DENSE_HEAD.NUM_HM_CONV: 2
+2024-10-14 17:23:21,733   INFO  ----------- SEPARATE_HEAD_CFG -----------
+2024-10-14 17:23:21,733   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_ORDER: ['center', 'center_z', 'dim', 'rot']
+2024-10-14 17:23:21,733   INFO  ----------- HEAD_DICT -----------
+2024-10-14 17:23:21,733   INFO  ----------- center -----------
+2024-10-14 17:23:21,733   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center.out_channels: 2
+2024-10-14 17:23:21,733   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center.num_conv: 2
+2024-10-14 17:23:21,733   INFO  ----------- center_z -----------
+2024-10-14 17:23:21,733   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center_z.out_channels: 1
+2024-10-14 17:23:21,734   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center_z.num_conv: 2
+2024-10-14 17:23:21,734   INFO  ----------- dim -----------
+2024-10-14 17:23:21,734   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.dim.out_channels: 3
+2024-10-14 17:23:21,734   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.dim.num_conv: 2
+2024-10-14 17:23:21,734   INFO  ----------- rot -----------
+2024-10-14 17:23:21,734   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.rot.out_channels: 2
+2024-10-14 17:23:21,734   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.rot.num_conv: 2
+2024-10-14 17:23:21,734   INFO  ----------- TARGET_ASSIGNER_CONFIG -----------
+2024-10-14 17:23:21,734   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.FEATURE_MAP_STRIDE: 1
+2024-10-14 17:23:21,734   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NUM_MAX_OBJS: 500
+2024-10-14 17:23:21,734   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.GAUSSIAN_OVERLAP: 0.1
+2024-10-14 17:23:21,734   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.MIN_RADIUS: 2
+2024-10-14 17:23:21,734   INFO  ----------- LOSS_CONFIG -----------
+2024-10-14 17:23:21,734   INFO  ----------- LOSS_WEIGHTS -----------
+2024-10-14 17:23:21,734   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.cls_weight: 1.0
+2024-10-14 17:23:21,734   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.loc_weight: 2.0
+2024-10-14 17:23:21,734   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.code_weights: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+2024-10-14 17:23:21,734   INFO  ----------- POST_PROCESSING -----------
+2024-10-14 17:23:21,734   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.SCORE_THRESH: 0.1
+2024-10-14 17:23:21,735   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.POST_CENTER_LIMIT_RANGE: [-80, -80, -10.0, 80, 80, 10.0]
+2024-10-14 17:23:21,735   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.MAX_OBJ_PER_SAMPLE: 500
+2024-10-14 17:23:21,735   INFO  ----------- NMS_CONFIG -----------
+2024-10-14 17:23:21,735   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_TYPE: nms_gpu
+2024-10-14 17:23:21,735   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_THRESH: 0.7
+2024-10-14 17:23:21,735   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_PRE_MAXSIZE: 4096
+2024-10-14 17:23:21,735   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_POST_MAXSIZE: 500
+2024-10-14 17:23:21,735   INFO  ----------- POST_PROCESSING -----------
+2024-10-14 17:23:21,735   INFO  cfg.MODEL.POST_PROCESSING.RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
+2024-10-14 17:23:21,735   INFO  cfg.MODEL.POST_PROCESSING.EVAL_METRIC: waymo
+2024-10-14 17:23:21,735   INFO  ----------- OPTIMIZATION -----------
+2024-10-14 17:23:21,735   INFO  cfg.OPTIMIZATION.BATCH_SIZE_PER_GPU: 3
+2024-10-14 17:23:21,735   INFO  cfg.OPTIMIZATION.NUM_EPOCHS: 80
+2024-10-14 17:23:21,735   INFO  cfg.OPTIMIZATION.OPTIMIZER: adam_onecycle
+2024-10-14 17:23:21,735   INFO  cfg.OPTIMIZATION.LR: 0.003
+2024-10-14 17:23:21,736   INFO  cfg.OPTIMIZATION.WEIGHT_DECAY: 0.01
+2024-10-14 17:23:21,736   INFO  cfg.OPTIMIZATION.MOMENTUM: 0.9
+2024-10-14 17:23:21,736   INFO  cfg.OPTIMIZATION.MOMS: [0.95, 0.85]
+2024-10-14 17:23:21,736   INFO  cfg.OPTIMIZATION.PCT_START: 0.4
+2024-10-14 17:23:21,736   INFO  cfg.OPTIMIZATION.DIV_FACTOR: 10
+2024-10-14 17:23:21,736   INFO  cfg.OPTIMIZATION.DECAY_STEP_LIST: [35, 45]
+2024-10-14 17:23:21,736   INFO  cfg.OPTIMIZATION.LR_DECAY: 0.1
+2024-10-14 17:23:21,736   INFO  cfg.OPTIMIZATION.LR_CLIP: 1e-07
+2024-10-14 17:23:21,736   INFO  cfg.OPTIMIZATION.LR_WARMUP: False
+2024-10-14 17:23:21,736   INFO  cfg.OPTIMIZATION.WARMUP_EPOCH: 1
+2024-10-14 17:23:21,736   INFO  cfg.OPTIMIZATION.GRAD_NORM_CLIP: 10
+2024-10-14 17:23:21,736   INFO  cfg.TAG: centerpoint_dyn_pillar_1x
+2024-10-14 17:23:21,736   INFO  cfg.EXP_GROUP_PATH: waymo_models
+2024-10-14 17:23:21,787   INFO  ----------- Create dataloader & network & optimizer -----------
+2024-10-14 17:23:22,127   INFO  Database filter by min points Vehicle: 84700 => 83962
+2024-10-14 17:23:22,133   INFO  Database filter by min points Pedestrian: 46175 => 45511
+2024-10-14 17:23:22,134   INFO  Database filter by min points Cyclist: 3054 => 3018
+2024-10-14 17:23:22,138   INFO  Loading Custom AV dataset.
+2024-10-14 17:23:22,181   INFO  Total samples for Custom AV dataset: 3950
+2024-10-14 17:23:25,208   INFO  ==> Loading parameters from checkpoint /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/centerpoint_dyn_pillar_1x/default/ckpt/checkpoint_epoch_62.pth to CPU
+==> Checkpoint trained from version: pcdet+0.6.0+0000000
+2024-10-14 17:23:25,245   INFO  ==> Loading optimizer parameters from checkpoint /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/centerpoint_dyn_pillar_1x/default/ckpt/checkpoint_epoch_62.pth to CPU
+==> Checkpoint trained from version: pcdet+0.6.0+0000000
+2024-10-14 17:23:25,275   INFO  ==> Done
+2024-10-14 17:23:25,383   INFO  ----------- Model CenterPoint created, param count: 5223979 -----------
+2024-10-14 17:23:25,383   INFO  DistributedDataParallel(
+  (module): CenterPoint(
+    (vfe): DynamicPillarVFE(
+      (pfn_layers): ModuleList(
+        (0): PFNLayerV2(
+          (linear): Linear(in_features=9, out_features=32, bias=False)
+          (norm): BatchNorm1d(32, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): PFNLayerV2(
+          (linear): Linear(in_features=64, out_features=64, bias=False)
+          (norm): BatchNorm1d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+    )
+    (backbone_3d): None
+    (map_to_bev_module): PointPillarScatter()
+    (pfe): None
+    (backbone_2d): BaseBEVBackbone(
+      (blocks): ModuleList(
+        (0): Sequential(
+          (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+          (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), bias=False)
+          (2): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (3): ReLU()
+          (4): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (5): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (6): ReLU()
+          (7): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (8): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (9): ReLU()
+          (10): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (11): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (12): ReLU()
+        )
+        (1): Sequential(
+          (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+          (1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (2): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (3): ReLU()
+          (4): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (5): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (6): ReLU()
+          (7): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (8): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (9): ReLU()
+          (10): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (11): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (12): ReLU()
+          (13): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (14): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (15): ReLU()
+          (16): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (17): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (18): ReLU()
+        )
+        (2): Sequential(
+          (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+          (1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (2): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (3): ReLU()
+          (4): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (5): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (6): ReLU()
+          (7): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (8): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (9): ReLU()
+          (10): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (11): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (12): ReLU()
+          (13): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (14): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (15): ReLU()
+          (16): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (17): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (18): ReLU()
+        )
+      )
+      (deblocks): ModuleList(
+        (0): Sequential(
+          (0): ConvTranspose2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+        (1): Sequential(
+          (0): ConvTranspose2d(128, 128, kernel_size=(2, 2), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+        (2): Sequential(
+          (0): ConvTranspose2d(256, 128, kernel_size=(4, 4), stride=(4, 4), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+      )
+    )
+    (dense_head): CenterHead(
+      (shared_conv): Sequential(
+        (0): Conv2d(384, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+      (heads_list): ModuleList(
+        (0): SeparateHead(
+          (center): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 2, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (center_z): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (dim): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (rot): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 2, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (hm): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+        )
+      )
+      (hm_loss_func): FocalLossCenterNet()
+      (reg_loss_func): RegLossCenterNet()
+    )
+    (point_head): None
+    (roi_head): None
+  )
+)
+2024-10-14 17:23:25,384   INFO  **********************Start training waymo_models/centerpoint_dyn_pillar_1x(default)**********************
+epochs:   0%|          | 0/18 [00:00<?, ?it/s]epochs:   0%|          | 0/18 [00:00<?, ?it/s]
+train:   0%|          | 0/659 [00:00<?, ?it/s][A/home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/tools/../pcdet/models/backbones_3d/vfe/dynamic_pillar_vfe.py:133: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the 'trunc' function NOT 'floor'). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode='trunc'), or for actual floor division, use torch.div(a, b, rounding_mode='floor').
+  voxel_coords = torch.stack((unq_coords // self.scale_xy,
+/home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/tools/../pcdet/models/backbones_3d/vfe/dynamic_pillar_vfe.py:134: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the 'trunc' function NOT 'floor'). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode='trunc'), or for actual floor division, use torch.div(a, b, rounding_mode='floor').
+  (unq_coords % self.scale_xy) // self.scale_y,
+/home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/tools/../pcdet/models/backbones_3d/vfe/dynamic_pillar_vfe.py:133: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the 'trunc' function NOT 'floor'). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode='trunc'), or for actual floor division, use torch.div(a, b, rounding_mode='floor').
+  voxel_coords = torch.stack((unq_coords // self.scale_xy,
+/home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/tools/../pcdet/models/backbones_3d/vfe/dynamic_pillar_vfe.py:134: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the 'trunc' function NOT 'floor'). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode='trunc'), or for actual floor division, use torch.div(a, b, rounding_mode='floor').
+  (unq_coords % self.scale_xy) // self.scale_y,
+2024-10-14 17:23:54,422   INFO  Train:   63/80 ( 79%) [   0/659 (  0%)]  Loss: 2.151 (2.15)  LR: 1.547e-04  Time cost: 00:00/08:36 [00:29/2:35:00]  Acc_iter 237900      Data time: 0.22(0.22)  Forward time: 0.55(0.55)  Batch time: 0.76(0.76)
+2024-10-14 17:23:54,734   INFO  3090-1                      Mon Oct 14 17:23:54 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 29'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 27'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 34'C,   0 % | 20330 / 24268 MB | ailab(20317M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 33'C,  91 % | 20579 / 24260 MB | ailab(20315M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+
+2024-10-14 17:24:17,365   INFO  Train:   63/80 ( 79%) [  50/659 (  8%)]  Loss: 2.070 (2.10)  LR: 1.514e-04  Time cost: 00:23/04:43 [00:51/1:31:35]  Acc_iter 237950      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:24:40,051   INFO  Train:   63/80 ( 79%) [ 100/659 ( 15%)]  Loss: 2.171 (2.08)  LR: 1.482e-04  Time cost: 00:46/04:16 [01:14/1:30:04]  Acc_iter 238000      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.46(0.46)
+2024-10-14 17:25:02,718   INFO  Train:   63/80 ( 79%) [ 150/659 ( 23%)]  Loss: 2.457 (2.08)  LR: 1.450e-04  Time cost: 01:09/03:52 [01:37/1:29:17]  Acc_iter 238050      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:25:02,992   INFO  3090-1                      Mon Oct 14 17:25:02 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 32'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 31'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 46'C,  40 % | 20334 / 24268 MB | ailab(20321M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 40'C,  98 % | 20583 / 24260 MB | ailab(20319M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+
+2024-10-14 17:25:25,648   INFO  Train:   63/80 ( 79%) [ 200/659 ( 30%)]  Loss: 2.095 (2.08)  LR: 1.418e-04  Time cost: 01:32/03:30 [02:00/1:28:58]  Acc_iter 238100      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:25:48,362   INFO  Train:   63/80 ( 79%) [ 250/659 ( 38%)]  Loss: 2.225 (2.09)  LR: 1.387e-04  Time cost: 01:54/03:06 [02:22/1:28:27]  Acc_iter 238150      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:26:10,997   INFO  Train:   63/80 ( 79%) [ 300/659 ( 46%)]  Loss: 2.114 (2.08)  LR: 1.356e-04  Time cost: 02:17/02:43 [02:45/1:27:56]  Acc_iter 238200      Data time: 0.00(0.01)  Forward time: 0.46(0.45)  Batch time: 0.46(0.46)
+2024-10-14 17:26:11,249   INFO  3090-1                      Mon Oct 14 17:26:11 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 33'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 33'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 49'C,   0 % | 20334 / 24268 MB | ailab(20321M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 42'C,  89 % | 20583 / 24260 MB | ailab(20319M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+
+2024-10-14 17:26:33,857   INFO  Train:   63/80 ( 79%) [ 350/659 ( 53%)]  Loss: 2.031 (2.08)  LR: 1.325e-04  Time cost: 02:40/02:21 [03:08/1:27:34]  Acc_iter 238250      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:26:56,594   INFO  Train:   63/80 ( 79%) [ 400/659 ( 61%)]  Loss: 2.203 (2.08)  LR: 1.294e-04  Time cost: 03:02/01:58 [03:31/1:27:09]  Acc_iter 238300      Data time: 0.00(0.01)  Forward time: 0.44(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:27:19,293   INFO  Train:   63/80 ( 79%) [ 450/659 ( 68%)]  Loss: 1.862 (2.08)  LR: 1.264e-04  Time cost: 03:25/01:35 [03:53/1:26:43]  Acc_iter 238350      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:27:19,582   INFO  3090-1                      Mon Oct 14 17:27:19 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 35'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 34'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 51'C,  47 % | 20334 / 24268 MB | ailab(20321M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 43'C, 100 % | 20583 / 24260 MB | ailab(20319M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+
+2024-10-14 17:27:42,407   INFO  Train:   63/80 ( 79%) [ 500/659 ( 76%)]  Loss: 2.734 (2.07)  LR: 1.234e-04  Time cost: 03:48/01:12 [04:17/1:26:28]  Acc_iter 238400      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:28:05,094   INFO  Train:   63/80 ( 79%) [ 550/659 ( 83%)]  Loss: 2.053 (2.07)  LR: 1.205e-04  Time cost: 04:11/00:49 [04:39/1:26:02]  Acc_iter 238450      Data time: 0.00(0.01)  Forward time: 0.44(0.45)  Batch time: 0.44(0.46)
+2024-10-14 17:28:27,841   INFO  Train:   63/80 ( 79%) [ 600/659 ( 91%)]  Loss: 2.294 (2.07)  LR: 1.176e-04  Time cost: 04:34/00:26 [05:02/1:25:38]  Acc_iter 238500      Data time: 0.00(0.01)  Forward time: 0.44(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:28:28,088   INFO  3090-1                      Mon Oct 14 17:28:28 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 36'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 35'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 52'C,  35 % | 20334 / 24268 MB | ailab(20321M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 44'C,  97 % | 20583 / 24260 MB | ailab(20319M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+
+2024-10-14 17:28:50,716   INFO  Train:   63/80 ( 79%) [ 650/659 ( 99%)]  Loss: 1.595 (2.07)  LR: 1.147e-04  Time cost: 04:57/00:04 [05:25/1:25:16]  Acc_iter 238550      Data time: 0.00(0.01)  Forward time: 0.44(0.45)  Batch time: 0.44(0.46)
+2024-10-14 17:28:53,950   INFO  Save latest model to /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/centerpoint_dyn_pillar_1x/default/ckpt/latest_model
+2024-10-14 17:28:54,149   INFO  Train:   63/80 ( 79%) [ 658/659 (100%)]  Loss: 1.867 (2.07)  LR: 1.143e-04  Time cost: 05:00/00:00 [05:28/1:25:09]  Acc_iter 238558      Data time: 0.05(0.01)  Forward time: 0.24(0.45)  Batch time: 0.28(0.46)
+
+                                              [Aepochs:   6%|▌         | 1/18 [05:29<1:33:18, 329.32s/it]epochs:   6%|▌         | 1/18 [05:29<1:33:20, 329.43s/it]
+train:   0%|          | 0/659 [00:00<?, ?it/s][A2024-10-14 17:29:09,427   INFO  Train:   64/80 ( 80%) [   0/659 (  0%)]  Loss: 2.108 (2.11)  LR: 1.142e-04  Time cost: 00:00/07:35 [05:44/2:08:59]  Acc_iter 238559      Data time: 0.21(0.21)  Forward time: 0.50(0.50)  Batch time: 0.72(0.72)
+2024-10-14 17:29:27,914   INFO  Train:   64/80 ( 80%) [  41/659 (  6%)]  Loss: 2.354 (2.03)  LR: 1.119e-04  Time cost: 00:19/04:42 [06:02/1:24:56]  Acc_iter 238600      Data time: 0.00(0.01)  Forward time: 0.44(0.45)  Batch time: 0.44(0.46)
+2024-10-14 17:29:50,641   INFO  Train:   64/80 ( 80%) [  91/659 ( 14%)]  Loss: 2.327 (2.05)  LR: 1.091e-04  Time cost: 00:41/04:18 [06:25/1:24:21]  Acc_iter 238650      Data time: 0.01(0.01)  Forward time: 0.45(0.45)  Batch time: 0.46(0.46)
+2024-10-14 17:29:50,896   INFO  3090-1                      Mon Oct 14 17:29:50 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 37'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 36'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 52'C,  41 % | 20334 / 24268 MB | ailab(20321M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 44'C,  98 % | 20583 / 24260 MB | ailab(20319M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+
+2024-10-14 17:30:13,582   INFO  Train:   64/80 ( 80%) [ 141/659 ( 21%)]  Loss: 2.589 (2.06)  LR: 1.063e-04  Time cost: 01:04/03:56 [06:48/1:24:11]  Acc_iter 238700      Data time: 0.00(0.01)  Forward time: 0.46(0.45)  Batch time: 0.46(0.46)
+2024-10-14 17:30:36,325   INFO  Train:   64/80 ( 80%) [ 191/659 ( 29%)]  Loss: 1.685 (2.05)  LR: 1.036e-04  Time cost: 01:27/03:33 [07:10/1:23:43]  Acc_iter 238750      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.46(0.46)
+2024-10-14 17:30:59,113   INFO  Train:   64/80 ( 80%) [ 241/659 ( 37%)]  Loss: 1.763 (2.05)  LR: 1.009e-04  Time cost: 01:50/03:10 [07:33/1:23:19]  Acc_iter 238800      Data time: 0.00(0.01)  Forward time: 0.46(0.45)  Batch time: 0.46(0.46)
+2024-10-14 17:30:59,398   INFO  3090-1                      Mon Oct 14 17:30:59 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 38'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 36'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 53'C,   0 % | 20334 / 24268 MB | ailab(20321M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 45'C,  98 % | 20583 / 24260 MB | ailab(20319M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+
+2024-10-14 17:31:22,203   INFO  Train:   64/80 ( 80%) [ 291/659 ( 44%)]  Loss: 2.082 (2.06)  LR: 9.820e-05  Time cost: 02:13/02:48 [07:56/1:23:07]  Acc_iter 238850      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:31:44,891   INFO  Train:   64/80 ( 80%) [ 341/659 ( 52%)]  Loss: 1.846 (2.06)  LR: 9.557e-05  Time cost: 02:36/02:25 [08:19/1:22:39]  Acc_iter 238900      Data time: 0.01(0.01)  Forward time: 0.44(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:32:07,600   INFO  Train:   64/80 ( 80%) [ 391/659 ( 59%)]  Loss: 1.722 (2.06)  LR: 9.297e-05  Time cost: 02:58/02:02 [08:42/1:22:13]  Acc_iter 238950      Data time: 0.01(0.01)  Forward time: 0.45(0.45)  Batch time: 0.46(0.46)
+2024-10-14 17:32:07,865   INFO  3090-1                      Mon Oct 14 17:32:07 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 38'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 37'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 53'C,  50 % | 20334 / 24268 MB | ailab(20321M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 45'C,  92 % | 20583 / 24260 MB | ailab(20319M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+
+2024-10-14 17:32:30,555   INFO  Train:   64/80 ( 80%) [ 441/659 ( 67%)]  Loss: 2.266 (2.05)  LR: 9.041e-05  Time cost: 03:21/01:39 [09:05/1:21:53]  Acc_iter 239000      Data time: 0.01(0.01)  Forward time: 0.44(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:32:53,230   INFO  Train:   64/80 ( 80%) [ 491/659 ( 75%)]  Loss: 2.397 (2.06)  LR: 8.788e-05  Time cost: 03:44/01:16 [09:27/1:21:27]  Acc_iter 239050      Data time: 0.00(0.01)  Forward time: 0.44(0.45)  Batch time: 0.44(0.46)
+2024-10-14 17:33:15,960   INFO  Train:   64/80 ( 80%) [ 541/659 ( 82%)]  Loss: 1.900 (2.05)  LR: 8.538e-05  Time cost: 04:07/00:53 [09:50/1:21:03]  Acc_iter 239100      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:33:16,221   INFO  3090-1                      Mon Oct 14 17:33:16 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 39'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 37'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 54'C,  41 % | 20334 / 24268 MB | ailab(20321M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 46'C,  92 % | 20583 / 24260 MB | ailab(20319M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+
+2024-10-14 17:33:38,950   INFO  Train:   64/80 ( 80%) [ 591/659 ( 90%)]  Loss: 1.897 (2.06)  LR: 8.292e-05  Time cost: 04:30/00:31 [10:13/1:20:43]  Acc_iter 239150      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:34:01,654   INFO  Train:   64/80 ( 80%) [ 641/659 ( 97%)]  Loss: 1.965 (2.06)  LR: 8.050e-05  Time cost: 04:52/00:08 [10:36/1:20:19]  Acc_iter 239200      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:34:08,934   INFO  Save latest model to /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/centerpoint_dyn_pillar_1x/default/ckpt/latest_model
+2024-10-14 17:34:09,118   INFO  Train:   64/80 ( 80%) [ 658/659 (100%)]  Loss: 1.395 (2.06)  LR: 7.968e-05  Time cost: 05:00/00:00 [10:43/1:20:06]  Acc_iter 239217      Data time: 0.05(0.01)  Forward time: 0.23(0.45)  Batch time: 0.27(0.46)
+
+                                              [Aepochs:  11%|█         | 2/18 [10:44<1:25:33, 320.87s/it]epochs:  11%|█         | 2/18 [10:44<1:25:34, 320.93s/it]
+train:   0%|          | 0/659 [00:00<?, ?it/s][A2024-10-14 17:34:24,458   INFO  Train:   65/80 ( 81%) [   0/659 (  0%)]  Loss: 2.275 (2.28)  LR: 7.963e-05  Time cost: 00:00/08:26 [10:59/2:14:56]  Acc_iter 239218      Data time: 0.26(0.26)  Forward time: 0.50(0.50)  Batch time: 0.75(0.75)
+2024-10-14 17:34:39,026   INFO  Train:   65/80 ( 81%) [  32/659 (  5%)]  Loss: 2.086 (2.03)  LR: 7.811e-05  Time cost: 00:15/04:51 [11:13/1:21:25]  Acc_iter 239250      Data time: 0.00(0.01)  Forward time: 0.44(0.45)  Batch time: 0.44(0.46)
+2024-10-14 17:34:39,272   INFO  3090-1                      Mon Oct 14 17:34:39 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 38'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 37'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 54'C,  88 % | 20334 / 24268 MB | ailab(20321M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 46'C,  98 % | 20583 / 24260 MB | ailab(20319M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+
+2024-10-14 17:35:02,022   INFO  Train:   65/80 ( 81%) [  82/659 ( 12%)]  Loss: 2.150 (2.03)  LR: 7.575e-05  Time cost: 00:38/04:26 [11:36/1:20:31]  Acc_iter 239300      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:35:24,782   INFO  Train:   65/80 ( 81%) [ 132/659 ( 20%)]  Loss: 1.918 (2.03)  LR: 7.344e-05  Time cost: 01:01/04:02 [11:59/1:19:42]  Acc_iter 239350      Data time: 0.01(0.01)  Forward time: 0.47(0.45)  Batch time: 0.49(0.46)
+2024-10-14 17:35:47,488   INFO  Train:   65/80 ( 81%) [ 182/659 ( 28%)]  Loss: 1.936 (2.04)  LR: 7.115e-05  Time cost: 01:23/03:38 [12:22/1:19:04]  Acc_iter 239400      Data time: 0.01(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:35:47,786   INFO  3090-1                      Mon Oct 14 17:35:47 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 39'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 37'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 54'C,  30 % | 20334 / 24268 MB | ailab(20321M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 46'C,  98 % | 20583 / 24260 MB | ailab(20319M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+
+2024-10-14 17:36:10,466   INFO  Train:   65/80 ( 81%) [ 232/659 ( 35%)]  Loss: 1.797 (2.04)  LR: 6.890e-05  Time cost: 01:46/03:15 [12:45/1:18:45]  Acc_iter 239450      Data time: 0.00(0.01)  Forward time: 0.44(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:36:33,143   INFO  Train:   65/80 ( 81%) [ 282/659 ( 43%)]  Loss: 2.022 (2.04)  LR: 6.669e-05  Time cost: 02:09/02:52 [13:07/1:18:14]  Acc_iter 239500      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.46(0.46)
+2024-10-14 17:36:55,988   INFO  Train:   65/80 ( 81%) [ 332/659 ( 50%)]  Loss: 1.974 (2.04)  LR: 6.451e-05  Time cost: 02:32/02:29 [13:30/1:17:50]  Acc_iter 239550      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:36:56,236   INFO  3090-1                      Mon Oct 14 17:36:56 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 39'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 37'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 54'C,  91 % | 20334 / 24268 MB | ailab(20321M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 46'C,  96 % | 20583 / 24260 MB | ailab(20319M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+
+2024-10-14 17:37:19,030   INFO  Train:   65/80 ( 81%) [ 382/659 ( 58%)]  Loss: 1.895 (2.04)  LR: 6.237e-05  Time cost: 02:55/02:06 [13:53/1:17:32]  Acc_iter 239600      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:37:41,810   INFO  Train:   65/80 ( 81%) [ 432/659 ( 66%)]  Loss: 1.931 (2.04)  LR: 6.026e-05  Time cost: 03:18/01:43 [14:16/1:17:06]  Acc_iter 239650      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.46(0.46)
+2024-10-14 17:38:04,621   INFO  Train:   65/80 ( 81%) [ 482/659 ( 73%)]  Loss: 2.053 (2.04)  LR: 5.819e-05  Time cost: 03:40/01:20 [14:39/1:16:42]  Acc_iter 239700      Data time: 0.00(0.01)  Forward time: 0.46(0.45)  Batch time: 0.46(0.46)
+2024-10-14 17:38:04,885   INFO  3090-1                      Mon Oct 14 17:38:04 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 39'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 38'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 54'C,  18 % | 20334 / 24268 MB | ailab(20321M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 46'C,  91 % | 20583 / 24260 MB | ailab(20319M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+
+2024-10-14 17:38:27,730   INFO  Train:   65/80 ( 81%) [ 532/659 ( 81%)]  Loss: 2.167 (2.04)  LR: 5.615e-05  Time cost: 04:04/00:58 [15:02/1:16:24]  Acc_iter 239750      Data time: 0.00(0.01)  Forward time: 0.46(0.45)  Batch time: 0.46(0.46)
+2024-10-14 17:38:50,620   INFO  Train:   65/80 ( 81%) [ 582/659 ( 88%)]  Loss: 2.194 (2.04)  LR: 5.415e-05  Time cost: 04:26/00:35 [15:25/1:16:01]  Acc_iter 239800      Data time: 0.01(0.01)  Forward time: 0.44(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:39:13,693   INFO  Train:   65/80 ( 81%) [ 632/659 ( 96%)]  Loss: 2.427 (2.04)  LR: 5.219e-05  Time cost: 04:50/00:12 [15:48/1:15:41]  Acc_iter 239850      Data time: 0.00(0.01)  Forward time: 0.46(0.45)  Batch time: 0.46(0.46)
+2024-10-14 17:39:13,977   INFO  3090-1                      Mon Oct 14 17:39:13 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 39'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 38'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 54'C,  57 % | 20334 / 24268 MB | ailab(20321M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 46'C, 100 % | 20583 / 24260 MB | ailab(20319M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+
+2024-10-14 17:39:24,122   INFO  Save latest model to /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/centerpoint_dyn_pillar_1x/default/ckpt/latest_model
+2024-10-14 17:39:25,699   INFO  Train:   65/80 ( 81%) [ 658/659 (100%)]  Loss: 1.694 (2.04)  LR: 5.118e-05  Time cost: 05:02/00:00 [16:00/1:15:30]  Acc_iter 239876      Data time: 0.00(0.01)  Forward time: 0.19(0.45)  Batch time: 0.19(0.46)
+
+                                              [Aepochs:  17%|█▋        | 3/18 [16:00<1:19:43, 318.92s/it]epochs:  17%|█▋        | 3/18 [16:00<1:19:44, 318.94s/it]
+train:   0%|          | 0/659 [00:00<?, ?it/s][A2024-10-14 17:39:41,009   INFO  Train:   66/80 ( 82%) [   0/659 (  0%)]  Loss: 2.109 (2.11)  LR: 5.114e-05  Time cost: 00:00/08:00 [16:15/2:00:09]  Acc_iter 239877      Data time: 0.19(0.19)  Forward time: 0.52(0.52)  Batch time: 0.71(0.71)
+2024-10-14 17:39:51,499   INFO  Train:   66/80 ( 82%) [  23/659 (  3%)]  Loss: 2.014 (2.06)  LR: 5.026e-05  Time cost: 00:11/04:57 [16:26/1:16:50]  Acc_iter 239900      Data time: 0.01(0.01)  Forward time: 0.45(0.45)  Batch time: 0.46(0.47)
+2024-10-14 17:40:14,078   INFO  Train:   66/80 ( 82%) [  73/659 ( 11%)]  Loss: 2.061 (2.04)  LR: 4.836e-05  Time cost: 00:33/04:27 [16:48/1:14:41]  Acc_iter 239950      Data time: 0.01(0.01)  Forward time: 0.46(0.45)  Batch time: 0.46(0.46)
+2024-10-14 17:40:36,877   INFO  Train:   66/80 ( 82%) [ 123/659 ( 19%)]  Loss: 2.319 (2.05)  LR: 4.651e-05  Time cost: 00:56/04:04 [17:11/1:14:15]  Acc_iter 240000      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.46(0.46)
+2024-10-14 17:40:37,132   INFO  3090-1                      Mon Oct 14 17:40:37 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 39'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 38'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 54'C,  65 % | 20334 / 24268 MB | ailab(20321M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 46'C, 100 % | 20583 / 24260 MB | ailab(20319M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+
+2024-10-14 17:40:59,977   INFO  Train:   66/80 ( 82%) [ 173/659 ( 26%)]  Loss: 2.201 (2.07)  LR: 4.468e-05  Time cost: 01:19/03:42 [17:34/1:14:08]  Acc_iter 240050      Data time: 0.01(0.01)  Forward time: 0.46(0.45)  Batch time: 0.47(0.46)
+2024-10-14 17:41:22,791   INFO  Train:   66/80 ( 82%) [ 223/659 ( 34%)]  Loss: 1.977 (2.06)  LR: 4.290e-05  Time cost: 01:42/03:19 [17:57/1:13:41]  Acc_iter 240100      Data time: 0.01(0.01)  Forward time: 0.46(0.45)  Batch time: 0.47(0.46)
+2024-10-14 17:41:45,642   INFO  Train:   66/80 ( 82%) [ 273/659 ( 41%)]  Loss: 1.908 (2.06)  LR: 4.115e-05  Time cost: 02:05/02:56 [18:20/1:13:17]  Acc_iter 240150      Data time: 0.01(0.01)  Forward time: 0.46(0.45)  Batch time: 0.46(0.46)
+2024-10-14 17:41:45,902   INFO  3090-1                      Mon Oct 14 17:41:45 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 40'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 38'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 54'C,  64 % | 20334 / 24268 MB | ailab(20321M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 47'C, 100 % | 20583 / 24260 MB | ailab(20319M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+
+2024-10-14 17:42:08,708   INFO  Train:   66/80 ( 82%) [ 323/659 ( 49%)]  Loss: 1.988 (2.06)  LR: 3.943e-05  Time cost: 02:28/02:33 [18:43/1:13:00]  Acc_iter 240200      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:42:31,439   INFO  Train:   66/80 ( 82%) [ 373/659 ( 57%)]  Loss: 2.115 (2.06)  LR: 3.776e-05  Time cost: 02:51/02:10 [19:06/1:12:33]  Acc_iter 240250      Data time: 0.00(0.01)  Forward time: 0.44(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:42:54,235   INFO  Train:   66/80 ( 82%) [ 423/659 ( 64%)]  Loss: 2.118 (2.05)  LR: 3.611e-05  Time cost: 03:13/01:47 [19:28/1:12:08]  Acc_iter 240300      Data time: 0.01(0.01)  Forward time: 0.47(0.45)  Batch time: 0.48(0.46)
+2024-10-14 17:42:54,505   INFO  3090-1                      Mon Oct 14 17:42:54 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 39'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 38'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 55'C,  72 % | 20334 / 24268 MB | ailab(20321M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 47'C,  99 % | 20583 / 24260 MB | ailab(20319M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+
+2024-10-14 17:43:17,430   INFO  Train:   66/80 ( 82%) [ 473/659 ( 72%)]  Loss: 2.055 (2.05)  LR: 3.451e-05  Time cost: 03:37/01:25 [19:52/1:11:51]  Acc_iter 240350      Data time: 0.01(0.01)  Forward time: 0.47(0.45)  Batch time: 0.48(0.46)
+2024-10-14 17:43:40,254   INFO  Train:   66/80 ( 82%) [ 523/659 ( 79%)]  Loss: 2.085 (2.05)  LR: 3.294e-05  Time cost: 03:59/01:02 [20:14/1:11:27]  Acc_iter 240400      Data time: 0.00(0.01)  Forward time: 0.44(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:44:02,993   INFO  Train:   66/80 ( 82%) [ 573/659 ( 87%)]  Loss: 2.018 (2.05)  LR: 3.140e-05  Time cost: 04:22/00:39 [20:37/1:11:01]  Acc_iter 240450      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:44:03,250   INFO  3090-1                      Mon Oct 14 17:44:03 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 40'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 39'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 55'C,  56 % | 20334 / 24268 MB | ailab(20321M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 47'C, 100 % | 20583 / 24260 MB | ailab(20319M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+
+2024-10-14 17:44:26,109   INFO  Train:   66/80 ( 82%) [ 623/659 ( 95%)]  Loss: 1.811 (2.05)  LR: 2.991e-05  Time cost: 04:45/00:16 [21:00/1:10:42]  Acc_iter 240500      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:44:40,801   INFO  Save latest model to /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/centerpoint_dyn_pillar_1x/default/ckpt/latest_model
+2024-10-14 17:44:41,894   INFO  Train:   66/80 ( 82%) [ 658/659 (100%)]  Loss: 1.466 (2.06)  LR: 2.888e-05  Time cost: 05:01/00:00 [21:16/1:10:23]  Acc_iter 240535      Data time: 0.01(0.01)  Forward time: 0.19(0.45)  Batch time: 0.19(0.46)
+
+                                              [Aepochs:  22%|██▏       | 4/18 [21:17<1:14:09, 317.85s/it]epochs:  22%|██▏       | 4/18 [21:17<1:14:10, 317.88s/it]
+train:   0%|          | 0/659 [00:00<?, ?it/s][A2024-10-14 17:44:57,562   INFO  Train:   67/80 ( 84%) [   0/659 (  0%)]  Loss: 2.129 (2.13)  LR: 2.885e-05  Time cost: 00:00/08:14 [21:32/1:55:19]  Acc_iter 240536      Data time: 0.24(0.24)  Forward time: 0.48(0.48)  Batch time: 0.72(0.72)
+2024-10-14 17:45:03,971   INFO  Train:   67/80 ( 84%) [  14/659 (  2%)]  Loss: 2.615 (2.01)  LR: 2.845e-05  Time cost: 00:07/05:07 [21:38/1:13:16]  Acc_iter 240550      Data time: 0.00(0.02)  Forward time: 0.45(0.45)  Batch time: 0.45(0.48)
+2024-10-14 17:45:26,694   INFO  Train:   67/80 ( 84%) [  64/659 ( 10%)]  Loss: 2.061 (2.00)  LR: 2.702e-05  Time cost: 00:29/04:33 [22:01/1:10:11]  Acc_iter 240600      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:45:26,999   INFO  3090-1                      Mon Oct 14 17:45:26 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 40'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 38'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 55'C,  26 % | 20334 / 24268 MB | ailab(20321M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 47'C,  98 % | 20583 / 24260 MB | ailab(20319M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+
+2024-10-14 17:45:49,850   INFO  Train:   67/80 ( 84%) [ 114/659 ( 17%)]  Loss: 1.954 (2.01)  LR: 2.563e-05  Time cost: 00:53/04:11 [22:24/1:10:02]  Acc_iter 240650      Data time: 0.01(0.01)  Forward time: 0.45(0.45)  Batch time: 0.46(0.46)
+2024-10-14 17:46:12,716   INFO  Train:   67/80 ( 84%) [ 164/659 ( 25%)]  Loss: 2.220 (2.00)  LR: 2.428e-05  Time cost: 01:15/03:47 [22:47/1:09:28]  Acc_iter 240700      Data time: 0.00(0.01)  Forward time: 0.47(0.45)  Batch time: 0.47(0.46)
+2024-10-14 17:46:35,635   INFO  Train:   67/80 ( 84%) [ 214/659 ( 32%)]  Loss: 2.219 (2.02)  LR: 2.296e-05  Time cost: 01:38/03:24 [23:10/1:09:02]  Acc_iter 240750      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
+2024-10-14 17:46:35,929   INFO  3090-1                      Mon Oct 14 17:46:35 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 40'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 39'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 55'C,   8 % | 20334 / 24268 MB | ailab(20321M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 47'C,  98 % | 20583 / 24260 MB | ailab(20319M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+
+2024-10-14 17:46:58,774   INFO  Train:   67/80 ( 84%) [ 264/659 ( 40%)]  Loss: 2.204 (2.02)  LR: 2.169e-05  Time cost: 02:01/03:01 [23:33/1:08:44]  Acc_iter 240800      Data time: 0.00(0.01)  Forward time: 0.45(0.45)  Batch time: 0.45(0.46)
