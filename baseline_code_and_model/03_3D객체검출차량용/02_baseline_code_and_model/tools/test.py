@@ -87,7 +87,7 @@ def main():
     model.cuda()
     model.eval()
 
-    save_filename = "%s/result_Team3.pkl"%(args.data_path)
+    save_filename = "%s/result_Team3_dsvt.pkl"%(args.data_path)
 
     det_annos = list() 
     with torch.no_grad():

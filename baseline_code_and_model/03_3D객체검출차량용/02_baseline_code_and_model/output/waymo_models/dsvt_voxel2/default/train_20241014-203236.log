@@ -626,3 +626,5 @@
 )
 2024-10-14 20:32:40,111   INFO  **********************Start training waymo_models/dsvt_voxel2(default)**********************
 2024-10-14 20:33:40,822   INFO  Train:    1/24 (  4%) [   0/988 (  0%)]  Loss: 66.84 (66.8)  LR: 3.000e-05  Time cost: 00:31/8:42:49 [01:00/209:07:36]  Acc_iter 1           Data time: 15.52(15.52)  Forward time: 16.26(16.26)  Batch time: 31.78(31.78)
+2024-10-14 20:38:07,616   INFO  Train:    1/24 (  4%) [  49/988 (  5%)]  Loss: 21.73 (31.4)  LR: 3.313e-05  Time cost: 04:58/1:33:26 [05:27/39:14:48]  Acc_iter 50          Data time: 0.01(2.75)  Forward time: 0.82(3.22)  Batch time: 0.83(5.97)
+2024-10-14 20:38:09,497   INFO  Save latest model to /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/dsvt_voxel2/default/ckpt/latest_model

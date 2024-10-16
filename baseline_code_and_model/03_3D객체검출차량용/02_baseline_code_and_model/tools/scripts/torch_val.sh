@@ -14,5 +14,4 @@ do
 done
 echo $PORT
 
-CUCDA_VISIBLE_DEVICES=2 torchrun --nproc_per_node=${NGPUS} --rdzv_endpoint=localhost:${PORT} val.py --launcher pytorch ${PY_ARGS}
-
+CUDA_VISIBLE_DEVICES=2,3 torchrun --nproc_per_node=${NGPUS} --rdzv_endpoint=localhost:${PORT} val.py --launcher pytorch ${PY_ARGS}
