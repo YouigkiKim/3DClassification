@@ -635,3 +635,23 @@
 [2] NVIDIA GeForce RTX 3090 | 47'C,   6 % | 24164 / 24268 MB | ailab(24151M) gdm(4M) ailab(4M)
 [3] NVIDIA GeForce RTX 3090 | 40'C,  82 % | 24003 / 24260 MB | ailab(23739M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
 
+2024-10-16 22:29:22,253   INFO  Train:    1/30 (  3%) [ 199/3435 (  6%)]  Loss: 11.94 (21.4)  LR: 3.273e-05  Time cost: 09:14/2:29:39 [09:46/79:16:24]  Acc_iter 200         Data time: 0.00(0.94)  Forward time: 1.13(1.84)  Batch time: 1.13(2.77)
+2024-10-16 22:30:13,054   INFO  Save latest model to /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/dsvt_voxel_whole/default/ckpt/latest_model
+2024-10-16 22:31:06,253   INFO  Train:    1/30 (  3%) [ 249/3435 (  7%)]  Loss: 11.56 (19.5)  LR: 3.428e-05  Time cost: 10:58/2:19:57 [11:30/75:16:01]  Acc_iter 250         Data time: 0.00(0.86)  Forward time: 1.04(1.78)  Batch time: 1.04(2.64)
+2024-10-16 22:32:49,194   INFO  Train:    1/30 (  3%) [ 299/3435 (  9%)]  Loss: 10.79 (18.2)  LR: 3.617e-05  Time cost: 12:41/2:12:44 [13:13/72:29:09]  Acc_iter 300         Data time: 0.00(0.81)  Forward time: 1.04(1.73)  Batch time: 1.05(2.54)
+2024-10-16 22:32:49,506   INFO  3090-1                      Wed Oct 16 22:32:49 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 34'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 34'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 49'C,  26 % | 24164 / 24268 MB | ailab(24151M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 42'C, 100 % | 24129 / 24260 MB | ailab(23865M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+
+2024-10-16 22:34:22,612   INFO  Train:    1/30 (  3%) [ 349/3435 ( 10%)]  Loss: 10.57 (17.2)  LR: 3.840e-05  Time cost: 14:15/2:05:41 [14:47/69:42:53]  Acc_iter 350         Data time: 0.00(0.76)  Forward time: 1.06(1.69)  Batch time: 1.07(2.44)
+2024-10-16 22:35:08,158   INFO  Save latest model to /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/dsvt_voxel_whole/default/ckpt/latest_model
+2024-10-16 22:35:44,432   INFO  Train:    1/30 (  3%) [ 399/3435 ( 12%)]  Loss: 10.05 (16.4)  LR: 4.097e-05  Time cost: 15:37/1:58:32 [16:09/66:48:12]  Acc_iter 400         Data time: 0.00(0.70)  Forward time: 0.96(1.64)  Batch time: 0.97(2.34)
+2024-10-16 22:37:20,619   INFO  Train:    1/30 (  3%) [ 449/3435 ( 13%)]  Loss: 10.87 (15.7)  LR: 4.389e-05  Time cost: 17:13/1:54:16 [17:45/65:26:37]  Acc_iter 450         Data time: 0.00(0.68)  Forward time: 0.95(1.62)  Batch time: 0.96(2.30)
+2024-10-16 22:37:20,901   INFO  3090-1                      Wed Oct 16 22:37:20 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 36'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 35'C,   0 % |    10 / 24268 MB | gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 51'C,   0 % | 24164 / 24268 MB | ailab(24151M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 42'C,  95 % | 24131 / 24260 MB | ailab(23867M) gdm(26M) gdm(73M) ailab(94M) ailab(63M)
+

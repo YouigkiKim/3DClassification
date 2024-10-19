@@ -15,7 +15,7 @@ DATA_CONFIG:
             }
 
         -   NAME: transform_points_to_voxels_placeholder
-            VOXEL_SIZE: [0.5, 0.5, 0.5]
+            VOXEL_SIZE: [0.25, 0.25, 8.0]
 
     DATA_AUGMENTOR:
         DISABLE_AUG_LIST: ['placeholder']
@@ -59,7 +59,7 @@ MODEL:
     BACKBONE_3D:
         NAME: DSVT
         INPUT_LAYER:
-            sparse_shape: [280, 280, 1]
+            sparse_shape: [560, 560, 1]
             downsample_stride: []
             d_model: [192]
             set_info: [[36, 4]]
@@ -75,14 +75,14 @@ MODEL:
         dim_feedforward: [384]
         dropout: 0.0
         activation: gelu
-        output_shape: [280, 280]
+        output_shape: [560, 560]
         conv_out_channel: 192
         # You can enable torch.utils.checkpoint to save GPU memory
         USE_CHECKPOINT: True
 
     MAP_TO_BEV:
         NAME: PointPillarScatter3d
-        INPUT_SHAPE: [280, 280, 1]
+        INPUT_SHAPE: [560, 560, 1]
         NUM_BEV_FEATURES: 192
 
     BACKBONE_2D:
@@ -152,7 +152,7 @@ MODEL:
 
 OPTIMIZATION:
     BATCH_SIZE_PER_GPU: 1
-    NUM_EPOCHS: 24
+    NUM_EPOCHS: 30
 
     OPTIMIZER: adam_onecycle
     LR: 0.003 #
