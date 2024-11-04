@@ -1,0 +1,634 @@
+2024-10-31 16:32:40,947   INFO  **********************Start logging**********************
+2024-10-31 16:32:40,947   INFO  CUDA_VISIBLE_DEVICES=0,1,2,3
+2024-10-31 16:32:40,947   INFO  Training in distributed mode : total_batch_size: 8
+2024-10-31 16:32:40,947   INFO  cfg_file         cfgs/waymo_models/dsvt_pillar_whole_datachange.yaml
+2024-10-31 16:32:40,947   INFO  batch_size       2
+2024-10-31 16:32:40,947   INFO  epochs           60
+2024-10-31 16:32:40,947   INFO  workers          4
+2024-10-31 16:32:40,948   INFO  extra_tag        default
+2024-10-31 16:32:40,948   INFO  ckpt             None
+2024-10-31 16:32:40,948   INFO  pretrained_model None
+2024-10-31 16:32:40,948   INFO  launcher         pytorch
+2024-10-31 16:32:40,948   INFO  tcp_port         18888
+2024-10-31 16:32:40,948   INFO  sync_bn          False
+2024-10-31 16:32:40,948   INFO  fix_random_seed  False
+2024-10-31 16:32:40,948   INFO  ckpt_save_interval 1
+2024-10-31 16:32:40,948   INFO  local_rank       0
+2024-10-31 16:32:40,948   INFO  max_ckpt_save_num 30
+2024-10-31 16:32:40,948   INFO  merge_all_iters_to_one_epoch False
+2024-10-31 16:32:40,949   INFO  set_cfgs         None
+2024-10-31 16:32:40,949   INFO  max_waiting_mins 0
+2024-10-31 16:32:40,949   INFO  start_epoch      0
+2024-10-31 16:32:40,949   INFO  num_epochs_to_eval 0
+2024-10-31 16:32:40,949   INFO  save_to_file     False
+2024-10-31 16:32:40,949   INFO  use_tqdm_to_record False
+2024-10-31 16:32:40,949   INFO  logger_iter_interval 50
+2024-10-31 16:32:40,949   INFO  ckpt_save_time_interval 300
+2024-10-31 16:32:40,949   INFO  wo_gpu_stat      False
+2024-10-31 16:32:40,949   INFO  use_amp          False
+2024-10-31 16:32:40,950   INFO  cfg.ROOT_DIR: /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model
+2024-10-31 16:32:40,950   INFO  cfg.LOCAL_RANK: 0
+2024-10-31 16:32:40,950   INFO  cfg.CLASS_NAMES: ['Vehicle', 'Pedestrian', 'Cyclist']
+2024-10-31 16:32:40,950   INFO  ----------- DATA_CONFIG -----------
+2024-10-31 16:32:40,950   INFO  cfg.DATA_CONFIG.DATASET: CustomAvDataset
+2024-10-31 16:32:40,950   INFO  cfg.DATA_CONFIG.DATA_PATH: /home/ailab/AILabDataset/01_Open_Dataset/39_AutoDna/3d_object_detection/3d_mod_av_db
+2024-10-31 16:32:40,950   INFO  cfg.DATA_CONFIG.POINT_CLOUD_RANGE: [-70.0, -70.0, -4.0, 70.0, 70.0, 4.0]
+2024-10-31 16:32:40,950   INFO  ----------- MAP_CLASS_TO_KITTI -----------
+2024-10-31 16:32:40,950   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Vehicle: Vehicle
+2024-10-31 16:32:40,950   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Pedestrian: Pedestrian
+2024-10-31 16:32:40,951   INFO  cfg.DATA_CONFIG.MAP_CLASS_TO_KITTI.Cyclist: Cyclist
+2024-10-31 16:32:40,951   INFO  ----------- DATA_SPLIT -----------
+2024-10-31 16:32:40,951   INFO  cfg.DATA_CONFIG.DATA_SPLIT.train: train
+2024-10-31 16:32:40,951   INFO  cfg.DATA_CONFIG.DATA_SPLIT.test: val
+2024-10-31 16:32:40,951   INFO  ----------- INFO_PATH -----------
+2024-10-31 16:32:40,951   INFO  cfg.DATA_CONFIG.INFO_PATH.train: ['/home/ailab/AILabDataset/01_Open_Dataset/39_AutoDna/3d_object_detection/3d_mod_av_db/Team_1_custom_av_infos_train_all.pkl']
+2024-10-31 16:32:40,951   INFO  cfg.DATA_CONFIG.INFO_PATH.test: ['/home/ailab/AILabDataset/01_Open_Dataset/39_AutoDna/3d_object_detection/3d_mod_av_db/Team_1_custom_av_infos_val.pkl']
+2024-10-31 16:32:40,951   INFO  ----------- POINT_FEATURE_ENCODING -----------
+2024-10-31 16:32:40,951   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.encoding_type: absolute_coordinates_encoding
+2024-10-31 16:32:40,952   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.used_feature_list: ['x', 'y', 'z', 'intensity']
+2024-10-31 16:32:40,952   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.src_feature_list: ['x', 'y', 'z', 'intensity']
+2024-10-31 16:32:40,952   INFO  ----------- DATA_AUGMENTOR -----------
+2024-10-31 16:32:40,952   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.DISABLE_AUG_LIST: ['placeholder']
+2024-10-31 16:32:40,952   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.AUG_CONFIG_LIST: [{'NAME': 'gt_sampling', 'USE_ROAD_PLANE': False, 'DB_INFO_PATH': ['/home/ailab/AILabDataset/01_Open_Dataset/39_AutoDna/3d_object_detection/3d_mod_av_db/Team_1_custom_av_dbinfos_train.pkl'], 'PREPARE': {'filter_by_min_points': ['Car:5', 'Pedestrian:5', 'Cyclist:5']}, 'SAMPLE_GROUPS': ['Vehicle:15', 'Pedestrian:10', 'Cyclist:10'], 'NUM_POINT_FEATURES': 4, 'DATABASE_WITH_FAKELIDAR': False, 'REMOVE_EXTRA_WIDTH': [0.0, 0.0, 0.0], 'LIMIT_WHOLE_SCENE': True}, {'NAME': 'random_world_flip', 'ALONG_AXIS_LIST': ['x', 'y']}, {'NAME': 'random_world_rotation', 'WORLD_ROT_ANGLE': [-0.78539816, 0.78539816]}, {'NAME': 'random_world_scaling', 'WORLD_SCALE_RANGE': [0.95, 1.05]}, {'NAME': 'random_world_translation', 'NOISE_TRANSLATE_STD': [0.5, 0.5, 0.5]}]
+2024-10-31 16:32:40,952   INFO  cfg.DATA_CONFIG.DATA_PROCESSOR: [{'NAME': 'mask_points_and_boxes_outside_range', 'REMOVE_OUTSIDE_BOXES': True}, {'NAME': 'shuffle_points', 'SHUFFLE_ENABLED': {'train': True, 'test': False}}, {'NAME': 'transform_points_to_voxels_placeholder', 'VOXEL_SIZE': [0.25, 0.25, 8.0]}]
+2024-10-31 16:32:40,952   INFO  cfg.DATA_CONFIG._BASE_CONFIG_: cfgs/dataset_configs/custom_av_dataset_all.yaml
+2024-10-31 16:32:40,953   INFO  ----------- MODEL -----------
+2024-10-31 16:32:40,953   INFO  cfg.MODEL.NAME: CenterPoint
+2024-10-31 16:32:40,953   INFO  ----------- VFE -----------
+2024-10-31 16:32:40,953   INFO  cfg.MODEL.VFE.NAME: DynamicVoxelVFE
+2024-10-31 16:32:40,953   INFO  cfg.MODEL.VFE.WITH_DISTANCE: False
+2024-10-31 16:32:40,953   INFO  cfg.MODEL.VFE.USE_ABSLOTE_XYZ: True
+2024-10-31 16:32:40,953   INFO  cfg.MODEL.VFE.USE_NORM: True
+2024-10-31 16:32:40,954   INFO  cfg.MODEL.VFE.NUM_FILTERS: [192, 192]
+2024-10-31 16:32:40,954   INFO  ----------- BACKBONE_3D -----------
+2024-10-31 16:32:40,954   INFO  cfg.MODEL.BACKBONE_3D.NAME: DSVT
+2024-10-31 16:32:40,954   INFO  ----------- INPUT_LAYER -----------
+2024-10-31 16:32:40,954   INFO  cfg.MODEL.BACKBONE_3D.INPUT_LAYER.sparse_shape: [560, 560, 1]
+2024-10-31 16:32:40,954   INFO  cfg.MODEL.BACKBONE_3D.INPUT_LAYER.downsample_stride: []
+2024-10-31 16:32:40,954   INFO  cfg.MODEL.BACKBONE_3D.INPUT_LAYER.d_model: [192]
+2024-10-31 16:32:40,954   INFO  cfg.MODEL.BACKBONE_3D.INPUT_LAYER.set_info: [[36, 4]]
+2024-10-31 16:32:40,954   INFO  cfg.MODEL.BACKBONE_3D.INPUT_LAYER.window_shape: [[12, 12, 1]]
+2024-10-31 16:32:40,955   INFO  cfg.MODEL.BACKBONE_3D.INPUT_LAYER.hybrid_factor: [2, 2, 1]
+2024-10-31 16:32:40,955   INFO  cfg.MODEL.BACKBONE_3D.INPUT_LAYER.shifts_list: [[[0, 0, 0], [6, 6, 0]]]
+2024-10-31 16:32:40,955   INFO  cfg.MODEL.BACKBONE_3D.INPUT_LAYER.normalize_pos: False
+2024-10-31 16:32:40,955   INFO  cfg.MODEL.BACKBONE_3D.block_name: ['DSVTBlock']
+2024-10-31 16:32:40,955   INFO  cfg.MODEL.BACKBONE_3D.set_info: [[36, 4]]
+2024-10-31 16:32:40,955   INFO  cfg.MODEL.BACKBONE_3D.d_model: [192]
+2024-10-31 16:32:40,955   INFO  cfg.MODEL.BACKBONE_3D.nhead: [8]
+2024-10-31 16:32:40,955   INFO  cfg.MODEL.BACKBONE_3D.dim_feedforward: [384]
+2024-10-31 16:32:40,955   INFO  cfg.MODEL.BACKBONE_3D.dropout: 0.0
+2024-10-31 16:32:40,955   INFO  cfg.MODEL.BACKBONE_3D.activation: gelu
+2024-10-31 16:32:40,955   INFO  cfg.MODEL.BACKBONE_3D.output_shape: [560, 560]
+2024-10-31 16:32:40,956   INFO  cfg.MODEL.BACKBONE_3D.conv_out_channel: 192
+2024-10-31 16:32:40,956   INFO  cfg.MODEL.BACKBONE_3D.USE_CHECKPOINT: True
+2024-10-31 16:32:40,956   INFO  ----------- MAP_TO_BEV -----------
+2024-10-31 16:32:40,956   INFO  cfg.MODEL.MAP_TO_BEV.NAME: PointPillarScatter3d
+2024-10-31 16:32:40,956   INFO  cfg.MODEL.MAP_TO_BEV.INPUT_SHAPE: [560, 560, 1]
+2024-10-31 16:32:40,956   INFO  cfg.MODEL.MAP_TO_BEV.NUM_BEV_FEATURES: 192
+2024-10-31 16:32:40,956   INFO  ----------- BACKBONE_2D -----------
+2024-10-31 16:32:40,956   INFO  cfg.MODEL.BACKBONE_2D.NAME: BaseBEVResBackbone
+2024-10-31 16:32:40,956   INFO  cfg.MODEL.BACKBONE_2D.LAYER_NUMS: [1, 2, 2]
+2024-10-31 16:32:40,956   INFO  cfg.MODEL.BACKBONE_2D.LAYER_STRIDES: [1, 2, 2]
+2024-10-31 16:32:40,957   INFO  cfg.MODEL.BACKBONE_2D.NUM_FILTERS: [128, 128, 256]
+2024-10-31 16:32:40,957   INFO  cfg.MODEL.BACKBONE_2D.UPSAMPLE_STRIDES: [1, 2, 4]
+2024-10-31 16:32:40,957   INFO  cfg.MODEL.BACKBONE_2D.NUM_UPSAMPLE_FILTERS: [128, 128, 128]
+2024-10-31 16:32:40,957   INFO  ----------- DENSE_HEAD -----------
+2024-10-31 16:32:40,957   INFO  cfg.MODEL.DENSE_HEAD.NAME: CenterHead
+2024-10-31 16:32:40,957   INFO  cfg.MODEL.DENSE_HEAD.CLASS_AGNOSTIC: False
+2024-10-31 16:32:40,957   INFO  cfg.MODEL.DENSE_HEAD.CLASS_NAMES_EACH_HEAD: [['Vehicle', 'Pedestrian', 'Cyclist']]
+2024-10-31 16:32:40,957   INFO  cfg.MODEL.DENSE_HEAD.SHARED_CONV_CHANNEL: 64
+2024-10-31 16:32:40,957   INFO  cfg.MODEL.DENSE_HEAD.USE_BIAS_BEFORE_NORM: False
+2024-10-31 16:32:40,957   INFO  cfg.MODEL.DENSE_HEAD.NUM_HM_CONV: 2
+2024-10-31 16:32:40,958   INFO  cfg.MODEL.DENSE_HEAD.BN_EPS: 0.001
+2024-10-31 16:32:40,958   INFO  cfg.MODEL.DENSE_HEAD.BN_MOM: 0.01
+2024-10-31 16:32:40,958   INFO  ----------- SEPARATE_HEAD_CFG -----------
+2024-10-31 16:32:40,958   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_ORDER: ['center', 'center_z', 'dim', 'rot']
+2024-10-31 16:32:40,958   INFO  ----------- HEAD_DICT -----------
+2024-10-31 16:32:40,958   INFO  ----------- center -----------
+2024-10-31 16:32:40,958   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center.out_channels: 2
+2024-10-31 16:32:40,958   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center.num_conv: 2
+2024-10-31 16:32:40,958   INFO  ----------- center_z -----------
+2024-10-31 16:32:40,958   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center_z.out_channels: 1
+2024-10-31 16:32:40,958   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.center_z.num_conv: 2
+2024-10-31 16:32:40,959   INFO  ----------- dim -----------
+2024-10-31 16:32:40,959   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.dim.out_channels: 3
+2024-10-31 16:32:40,959   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.dim.num_conv: 2
+2024-10-31 16:32:40,959   INFO  ----------- rot -----------
+2024-10-31 16:32:40,959   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.rot.out_channels: 2
+2024-10-31 16:32:40,959   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.rot.num_conv: 2
+2024-10-31 16:32:40,959   INFO  ----------- iou -----------
+2024-10-31 16:32:40,959   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.iou.out_channels: 1
+2024-10-31 16:32:40,959   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_HEAD_CFG.HEAD_DICT.iou.num_conv: 2
+2024-10-31 16:32:40,959   INFO  ----------- TARGET_ASSIGNER_CONFIG -----------
+2024-10-31 16:32:40,959   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.FEATURE_MAP_STRIDE: 1
+2024-10-31 16:32:40,960   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NUM_MAX_OBJS: 500
+2024-10-31 16:32:40,960   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.GAUSSIAN_OVERLAP: 0.1
+2024-10-31 16:32:40,960   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.MIN_RADIUS: 2
+2024-10-31 16:32:40,960   INFO  cfg.MODEL.DENSE_HEAD.IOU_REG_LOSS: True
+2024-10-31 16:32:40,960   INFO  ----------- LOSS_CONFIG -----------
+2024-10-31 16:32:40,960   INFO  ----------- LOSS_WEIGHTS -----------
+2024-10-31 16:32:40,960   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.cls_weight: 1.0
+2024-10-31 16:32:40,960   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.loc_weight: 2.0
+2024-10-31 16:32:40,960   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.code_weights: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+2024-10-31 16:32:40,960   INFO  ----------- POST_PROCESSING -----------
+2024-10-31 16:32:40,961   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.SCORE_THRESH: 0.1
+2024-10-31 16:32:40,961   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.POST_CENTER_LIMIT_RANGE: [-80, -80, -10.0, 80, 80, 10.0]
+2024-10-31 16:32:40,961   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.MAX_OBJ_PER_SAMPLE: 500
+2024-10-31 16:32:40,961   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.USE_IOU_TO_RECTIFY_SCORE: True
+2024-10-31 16:32:40,961   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.IOU_RECTIFIER: [0.68, 0.71, 0.65]
+2024-10-31 16:32:40,961   INFO  ----------- NMS_CONFIG -----------
+2024-10-31 16:32:40,961   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_TYPE: class_specific_nms
+2024-10-31 16:32:40,961   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_THRESH: [0.75, 0.6, 0.55]
+2024-10-31 16:32:40,961   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_PRE_MAXSIZE: [4096, 4096, 4096]
+2024-10-31 16:32:40,961   INFO  cfg.MODEL.DENSE_HEAD.POST_PROCESSING.NMS_CONFIG.NMS_POST_MAXSIZE: [500, 500, 500]
+2024-10-31 16:32:40,961   INFO  ----------- POST_PROCESSING -----------
+2024-10-31 16:32:40,961   INFO  cfg.MODEL.POST_PROCESSING.RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
+2024-10-31 16:32:40,961   INFO  cfg.MODEL.POST_PROCESSING.EVAL_METRIC: waymo
+2024-10-31 16:32:40,962   INFO  ----------- OPTIMIZATION -----------
+2024-10-31 16:32:40,962   INFO  cfg.OPTIMIZATION.BATCH_SIZE_PER_GPU: 2
+2024-10-31 16:32:40,962   INFO  cfg.OPTIMIZATION.NUM_EPOCHS: 60
+2024-10-31 16:32:40,962   INFO  cfg.OPTIMIZATION.OPTIMIZER: adam_onecycle
+2024-10-31 16:32:40,962   INFO  cfg.OPTIMIZATION.LR: 0.003
+2024-10-31 16:32:40,962   INFO  cfg.OPTIMIZATION.WEIGHT_DECAY: 0.05
+2024-10-31 16:32:40,962   INFO  cfg.OPTIMIZATION.MOMENTUM: 0.9
+2024-10-31 16:32:40,962   INFO  cfg.OPTIMIZATION.MOMS: [0.95, 0.85]
+2024-10-31 16:32:40,962   INFO  cfg.OPTIMIZATION.PCT_START: 0.1
+2024-10-31 16:32:40,962   INFO  cfg.OPTIMIZATION.DIV_FACTOR: 100
+2024-10-31 16:32:40,962   INFO  cfg.OPTIMIZATION.DECAY_STEP_LIST: [35, 45]
+2024-10-31 16:32:40,962   INFO  cfg.OPTIMIZATION.LR_DECAY: 0.1
+2024-10-31 16:32:40,962   INFO  cfg.OPTIMIZATION.LR_CLIP: 1e-07
+2024-10-31 16:32:40,962   INFO  cfg.OPTIMIZATION.LR_WARMUP: False
+2024-10-31 16:32:40,962   INFO  cfg.OPTIMIZATION.WARMUP_EPOCH: 1
+2024-10-31 16:32:40,962   INFO  cfg.OPTIMIZATION.GRAD_NORM_CLIP: 10
+2024-10-31 16:32:40,962   INFO  cfg.OPTIMIZATION.LOSS_SCALE_FP16: 32.0
+2024-10-31 16:32:40,963   INFO  ----------- HOOK -----------
+2024-10-31 16:32:40,963   INFO  ----------- DisableAugmentationHook -----------
+2024-10-31 16:32:40,963   INFO  cfg.HOOK.DisableAugmentationHook.DISABLE_AUG_LIST: ['gt_sampling', 'random_world_flip', 'random_world_rotation', 'random_world_scaling', 'random_world_translation']
+2024-10-31 16:32:40,963   INFO  cfg.HOOK.DisableAugmentationHook.NUM_LAST_EPOCHS: 1
+2024-10-31 16:32:40,963   INFO  cfg.TAG: dsvt_pillar_whole_datachange
+2024-10-31 16:32:40,963   INFO  cfg.EXP_GROUP_PATH: waymo_models
+2024-10-31 16:32:41,022   INFO  ----------- Create dataloader & network & optimizer -----------
+2024-10-31 16:32:42,312   INFO  Database filter by min points Pedestrian: 145919 => 141496
+2024-10-31 16:32:42,316   INFO  Database filter by min points Cyclist: 14084 => 13764
+2024-10-31 16:32:42,331   INFO  Loading Custom AV dataset.
+2024-10-31 16:32:42,583   INFO  Total samples for Custom AV dataset: 12016
+2024-10-31 16:32:46,365   INFO  ----------- Model CenterPoint created, param count: 8653196 -----------
+2024-10-31 16:32:46,365   INFO  DistributedDataParallel(
+  (module): CenterPoint(
+    (vfe): DynamicVoxelVFE(
+      (pfn_layers): ModuleList(
+        (0): PFNLayerV2(
+          (linear): Linear(in_features=10, out_features=96, bias=False)
+          (norm): BatchNorm1d(96, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): PFNLayerV2(
+          (linear): Linear(in_features=192, out_features=192, bias=False)
+          (norm): BatchNorm1d(192, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+    )
+    (backbone_3d): DSVT(
+      (input_layer): DSVTInputLayer(
+        (posembed_layers): ModuleList(
+          (0): ModuleList(
+            (0): ModuleList(
+              (0): PositionEmbeddingLearned(
+                (position_embedding_head): Sequential(
+                  (0): Linear(in_features=2, out_features=192, bias=True)
+                  (1): BatchNorm1d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): ReLU(inplace=True)
+                  (3): Linear(in_features=192, out_features=192, bias=True)
+                )
+              )
+              (1): PositionEmbeddingLearned(
+                (position_embedding_head): Sequential(
+                  (0): Linear(in_features=2, out_features=192, bias=True)
+                  (1): BatchNorm1d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): ReLU(inplace=True)
+                  (3): Linear(in_features=192, out_features=192, bias=True)
+                )
+              )
+            )
+            (1): ModuleList(
+              (0): PositionEmbeddingLearned(
+                (position_embedding_head): Sequential(
+                  (0): Linear(in_features=2, out_features=192, bias=True)
+                  (1): BatchNorm1d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): ReLU(inplace=True)
+                  (3): Linear(in_features=192, out_features=192, bias=True)
+                )
+              )
+              (1): PositionEmbeddingLearned(
+                (position_embedding_head): Sequential(
+                  (0): Linear(in_features=2, out_features=192, bias=True)
+                  (1): BatchNorm1d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): ReLU(inplace=True)
+                  (3): Linear(in_features=192, out_features=192, bias=True)
+                )
+              )
+            )
+            (2): ModuleList(
+              (0): PositionEmbeddingLearned(
+                (position_embedding_head): Sequential(
+                  (0): Linear(in_features=2, out_features=192, bias=True)
+                  (1): BatchNorm1d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): ReLU(inplace=True)
+                  (3): Linear(in_features=192, out_features=192, bias=True)
+                )
+              )
+              (1): PositionEmbeddingLearned(
+                (position_embedding_head): Sequential(
+                  (0): Linear(in_features=2, out_features=192, bias=True)
+                  (1): BatchNorm1d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): ReLU(inplace=True)
+                  (3): Linear(in_features=192, out_features=192, bias=True)
+                )
+              )
+            )
+            (3): ModuleList(
+              (0): PositionEmbeddingLearned(
+                (position_embedding_head): Sequential(
+                  (0): Linear(in_features=2, out_features=192, bias=True)
+                  (1): BatchNorm1d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): ReLU(inplace=True)
+                  (3): Linear(in_features=192, out_features=192, bias=True)
+                )
+              )
+              (1): PositionEmbeddingLearned(
+                (position_embedding_head): Sequential(
+                  (0): Linear(in_features=2, out_features=192, bias=True)
+                  (1): BatchNorm1d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): ReLU(inplace=True)
+                  (3): Linear(in_features=192, out_features=192, bias=True)
+                )
+              )
+            )
+          )
+        )
+      )
+      (stage_0): ModuleList(
+        (0): DSVTBlock(
+          (encoder_list): ModuleList(
+            (0): DSVT_EncoderLayer(
+              (win_attn): SetAttention(
+                (self_attn): MultiheadAttention(
+                  (out_proj): NonDynamicallyQuantizableLinear(in_features=192, out_features=192, bias=True)
+                )
+                (linear1): Linear(in_features=192, out_features=384, bias=True)
+                (dropout): Dropout(p=0, inplace=False)
+                (linear2): Linear(in_features=384, out_features=192, bias=True)
+                (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (dropout1): Identity()
+                (dropout2): Identity()
+              )
+              (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+            )
+            (1): DSVT_EncoderLayer(
+              (win_attn): SetAttention(
+                (self_attn): MultiheadAttention(
+                  (out_proj): NonDynamicallyQuantizableLinear(in_features=192, out_features=192, bias=True)
+                )
+                (linear1): Linear(in_features=192, out_features=384, bias=True)
+                (dropout): Dropout(p=0, inplace=False)
+                (linear2): Linear(in_features=384, out_features=192, bias=True)
+                (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (dropout1): Identity()
+                (dropout2): Identity()
+              )
+              (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+            )
+          )
+        )
+        (1): DSVTBlock(
+          (encoder_list): ModuleList(
+            (0): DSVT_EncoderLayer(
+              (win_attn): SetAttention(
+                (self_attn): MultiheadAttention(
+                  (out_proj): NonDynamicallyQuantizableLinear(in_features=192, out_features=192, bias=True)
+                )
+                (linear1): Linear(in_features=192, out_features=384, bias=True)
+                (dropout): Dropout(p=0, inplace=False)
+                (linear2): Linear(in_features=384, out_features=192, bias=True)
+                (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (dropout1): Identity()
+                (dropout2): Identity()
+              )
+              (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+            )
+            (1): DSVT_EncoderLayer(
+              (win_attn): SetAttention(
+                (self_attn): MultiheadAttention(
+                  (out_proj): NonDynamicallyQuantizableLinear(in_features=192, out_features=192, bias=True)
+                )
+                (linear1): Linear(in_features=192, out_features=384, bias=True)
+                (dropout): Dropout(p=0, inplace=False)
+                (linear2): Linear(in_features=384, out_features=192, bias=True)
+                (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (dropout1): Identity()
+                (dropout2): Identity()
+              )
+              (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+            )
+          )
+        )
+        (2): DSVTBlock(
+          (encoder_list): ModuleList(
+            (0): DSVT_EncoderLayer(
+              (win_attn): SetAttention(
+                (self_attn): MultiheadAttention(
+                  (out_proj): NonDynamicallyQuantizableLinear(in_features=192, out_features=192, bias=True)
+                )
+                (linear1): Linear(in_features=192, out_features=384, bias=True)
+                (dropout): Dropout(p=0, inplace=False)
+                (linear2): Linear(in_features=384, out_features=192, bias=True)
+                (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (dropout1): Identity()
+                (dropout2): Identity()
+              )
+              (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+            )
+            (1): DSVT_EncoderLayer(
+              (win_attn): SetAttention(
+                (self_attn): MultiheadAttention(
+                  (out_proj): NonDynamicallyQuantizableLinear(in_features=192, out_features=192, bias=True)
+                )
+                (linear1): Linear(in_features=192, out_features=384, bias=True)
+                (dropout): Dropout(p=0, inplace=False)
+                (linear2): Linear(in_features=384, out_features=192, bias=True)
+                (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (dropout1): Identity()
+                (dropout2): Identity()
+              )
+              (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+            )
+          )
+        )
+        (3): DSVTBlock(
+          (encoder_list): ModuleList(
+            (0): DSVT_EncoderLayer(
+              (win_attn): SetAttention(
+                (self_attn): MultiheadAttention(
+                  (out_proj): NonDynamicallyQuantizableLinear(in_features=192, out_features=192, bias=True)
+                )
+                (linear1): Linear(in_features=192, out_features=384, bias=True)
+                (dropout): Dropout(p=0, inplace=False)
+                (linear2): Linear(in_features=384, out_features=192, bias=True)
+                (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (dropout1): Identity()
+                (dropout2): Identity()
+              )
+              (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+            )
+            (1): DSVT_EncoderLayer(
+              (win_attn): SetAttention(
+                (self_attn): MultiheadAttention(
+                  (out_proj): NonDynamicallyQuantizableLinear(in_features=192, out_features=192, bias=True)
+                )
+                (linear1): Linear(in_features=192, out_features=384, bias=True)
+                (dropout): Dropout(p=0, inplace=False)
+                (linear2): Linear(in_features=384, out_features=192, bias=True)
+                (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+                (dropout1): Identity()
+                (dropout2): Identity()
+              )
+              (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+            )
+          )
+        )
+      )
+      (residual_norm_stage_0): ModuleList(
+        (0): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (3): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+    (map_to_bev_module): PointPillarScatter3d()
+    (pfe): None
+    (backbone_2d): BaseBEVResBackbone(
+      (blocks): ModuleList(
+        (0): Sequential(
+          (0): BasicBlock(
+            (conv1): Conv2d(192, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu1): ReLU()
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu2): ReLU()
+            (downsample_layer): Sequential(
+              (0): Conv2d(192, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            )
+          )
+          (1): BasicBlock(
+            (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu1): ReLU()
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu2): ReLU()
+          )
+        )
+        (1): Sequential(
+          (0): BasicBlock(
+            (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu1): ReLU()
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu2): ReLU()
+            (downsample_layer): Sequential(
+              (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+              (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            )
+          )
+          (1): BasicBlock(
+            (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu1): ReLU()
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu2): ReLU()
+          )
+          (2): BasicBlock(
+            (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu1): ReLU()
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu2): ReLU()
+          )
+        )
+        (2): Sequential(
+          (0): BasicBlock(
+            (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu1): ReLU()
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu2): ReLU()
+            (downsample_layer): Sequential(
+              (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+              (1): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            )
+          )
+          (1): BasicBlock(
+            (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu1): ReLU()
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu2): ReLU()
+          )
+          (2): BasicBlock(
+            (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu1): ReLU()
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+            (relu2): ReLU()
+          )
+        )
+      )
+      (deblocks): ModuleList(
+        (0): Sequential(
+          (0): ConvTranspose2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+        (1): Sequential(
+          (0): ConvTranspose2d(128, 128, kernel_size=(2, 2), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+        (2): Sequential(
+          (0): ConvTranspose2d(256, 128, kernel_size=(4, 4), stride=(4, 4), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+      )
+    )
+    (dense_head): CenterHead(
+      (shared_conv): Sequential(
+        (0): Conv2d(384, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+      (heads_list): ModuleList(
+        (0): SeparateHead(
+          (center): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 2, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (center_z): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (dim): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (rot): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 2, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (iou): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (hm): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+              (2): ReLU()
+            )
+            (1): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+        )
+      )
+      (hm_loss_func): FocalLossCenterNet()
+      (reg_loss_func): RegLossCenterNet()
+    )
+    (point_head): None
+    (roi_head): None
+  )
+)
+2024-10-31 16:32:46,369   INFO  **********************Start training waymo_models/dsvt_pillar_whole_datachange(default)**********************
+2024-10-31 16:34:01,310   INFO  Train:    1/60 (  2%) [   0/1502 (  0%)]  Loss: 71.00 (71.0)  LR: 3.000e-05  Time cost: 00:02/53:30 [01:14/53:30:48]  Acc_iter 1           Data time: 0.70(0.70)  Forward time: 1.12(1.12)  Batch time: 1.83(1.83)
+2024-10-31 16:34:43,666   INFO  Train:    1/60 (  2%) [  49/1502 (  3%)]  Loss: 24.43 (37.4)  LR: 3.022e-05  Time cost: 00:44/21:32 [01:57/22:15:52]  Acc_iter 50          Data time: 0.02(0.02)  Forward time: 0.78(0.86)  Batch time: 0.79(0.88)
+2024-10-31 16:35:26,523   INFO  Train:    1/60 (  2%) [  99/1502 (  7%)]  Loss: 15.31 (28.1)  LR: 3.088e-05  Time cost: 01:27/20:25 [02:40/21:50:34]  Acc_iter 100         Data time: 0.00(0.01)  Forward time: 0.84(0.86)  Batch time: 0.84(0.87)
+2024-10-31 16:36:09,838   INFO  Train:    1/60 (  2%) [ 149/1502 ( 10%)]  Loss: 12.29 (23.4)  LR: 3.200e-05  Time cost: 02:10/19:38 [03:23/21:46:14]  Acc_iter 150         Data time: 0.00(0.01)  Forward time: 0.81(0.86)  Batch time: 0.81(0.87)
+2024-10-31 16:36:10,267   INFO  3090-1                      Thu Oct 31 16:36:10 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 66'C,   0 % | 22488 / 24268 MB | ailab(22475M) gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 59'C, 100 % | 22210 / 24268 MB | ailab(22197M) gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 60'C, 100 % | 21516 / 24268 MB | ailab(21503M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 52'C, 100 % | 21585 / 24260 MB | ailab(21235M) gdm(26M) gdm(91M) ailab(159M) ailab(31M) ailab(33M)
+
+2024-10-31 16:36:54,096   INFO  Train:    1/60 (  2%) [ 199/1502 ( 13%)]  Loss: 11.79 (20.7)  LR: 3.357e-05  Time cost: 02:54/18:59 [04:07/21:50:46]  Acc_iter 200         Data time: 0.00(0.01)  Forward time: 0.94(0.86)  Batch time: 0.95(0.87)
+2024-10-31 16:37:37,945   INFO  Train:    1/60 (  2%) [ 249/1502 ( 17%)]  Loss: 11.10 (18.9)  LR: 3.559e-05  Time cost: 03:38/18:16 [04:51/21:50:45]  Acc_iter 250         Data time: 0.00(0.01)  Forward time: 0.77(0.87)  Batch time: 0.78(0.87)
+2024-10-31 16:38:22,064   INFO  Train:    1/60 (  2%) [ 299/1502 ( 20%)]  Loss: 11.61 (17.6)  LR: 3.806e-05  Time cost: 04:22/17:34 [05:35/21:51:50]  Acc_iter 300         Data time: 0.00(0.01)  Forward time: 0.94(0.87)  Batch time: 0.94(0.88)
+2024-10-31 16:38:22,440   INFO  3090-1                      Thu Oct 31 16:38:22 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 71'C,   0 % | 22492 / 24268 MB | ailab(22479M) gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 64'C, 100 % | 22212 / 24268 MB | ailab(22199M) gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 63'C, 100 % | 21516 / 24268 MB | ailab(21503M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 56'C, 100 % | 21591 / 24260 MB | ailab(21241M) gdm(26M) gdm(91M) ailab(159M) ailab(31M) ailab(33M)
+
+2024-10-31 16:39:00,221   INFO  Save latest model to /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/dsvt_pillar_whole_datachange/default/ckpt/latest_model
+2024-10-31 16:39:06,553   INFO  Train:    1/60 (  2%) [ 349/1502 ( 23%)]  Loss: 10.05 (16.6)  LR: 4.098e-05  Time cost: 05:07/16:52 [06:20/21:53:59]  Acc_iter 350         Data time: 0.00(0.01)  Forward time: 0.88(0.87)  Batch time: 0.88(0.88)
+2024-10-31 16:39:50,100   INFO  Train:    1/60 (  2%) [ 399/1502 ( 27%)]  Loss: 9.647 (15.8)  LR: 4.434e-05  Time cost: 05:50/16:07 [07:03/21:51:54]  Acc_iter 400         Data time: 0.00(0.01)  Forward time: 0.84(0.87)  Batch time: 0.84(0.88)
+2024-10-31 16:40:33,977   INFO  Train:    1/60 (  2%) [ 449/1502 ( 30%)]  Loss: 9.235 (15.1)  LR: 4.815e-05  Time cost: 06:34/15:23 [07:47/21:51:12]  Acc_iter 450         Data time: 0.00(0.01)  Forward time: 0.96(0.87)  Batch time: 0.96(0.88)
+2024-10-31 16:40:34,407   INFO  3090-1                      Thu Oct 31 16:40:34 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 72'C,   0 % | 22492 / 24268 MB | ailab(22479M) gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 66'C, 100 % | 22214 / 24268 MB | ailab(22201M) gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 67'C,  94 % | 21518 / 24268 MB | ailab(21505M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 58'C, 100 % | 21591 / 24260 MB | ailab(21241M) gdm(26M) gdm(91M) ailab(159M) ailab(31M) ailab(33M)
+
+2024-10-31 16:41:17,525   INFO  Train:    1/60 (  2%) [ 499/1502 ( 33%)]  Loss: 9.039 (14.6)  LR: 5.241e-05  Time cost: 07:18/14:39 [08:31/21:49:31]  Acc_iter 500         Data time: 0.00(0.01)  Forward time: 0.98(0.87)  Batch time: 0.98(0.88)
+2024-10-31 16:42:01,683   INFO  Train:    1/60 (  2%) [ 549/1502 ( 37%)]  Loss: 8.589 (14.1)  LR: 5.711e-05  Time cost: 08:02/13:56 [09:15/21:49:39]  Acc_iter 550         Data time: 0.00(0.01)  Forward time: 0.80(0.87)  Batch time: 0.80(0.88)
+2024-10-31 16:42:46,075   INFO  Train:    1/60 (  2%) [ 599/1502 ( 40%)]  Loss: 8.649 (13.7)  LR: 6.226e-05  Time cost: 08:46/13:12 [09:59/21:50:14]  Acc_iter 600         Data time: 0.00(0.01)  Forward time: 0.94(0.87)  Batch time: 0.94(0.88)
+2024-10-31 16:42:46,457   INFO  3090-1                      Thu Oct 31 16:42:46 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 75'C,  23 % | 22492 / 24268 MB | ailab(22479M) gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 67'C,  95 % | 22214 / 24268 MB | ailab(22201M) gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 67'C, 100 % | 21518 / 24268 MB | ailab(21505M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 59'C,  95 % | 21591 / 24260 MB | ailab(21241M) gdm(26M) gdm(91M) ailab(159M) ailab(31M) ailab(33M)
+
+2024-10-31 16:43:30,162   INFO  Train:    1/60 (  2%) [ 649/1502 ( 43%)]  Loss: 9.055 (13.3)  LR: 6.784e-05  Time cost: 09:30/12:29 [10:43/21:49:55]  Acc_iter 650         Data time: 0.00(0.01)  Forward time: 0.88(0.87)  Batch time: 0.88(0.88)
+2024-10-31 16:44:00,048   INFO  Save latest model to /home/ailab/git/Team_3/baseline_code_and_model/03_3D객체검출차량용/02_baseline_code_and_model/output/waymo_models/dsvt_pillar_whole_datachange/default/ckpt/latest_model
+2024-10-31 16:44:15,150   INFO  Train:    1/60 (  2%) [ 699/1502 ( 47%)]  Loss: 7.577 (13.0)  LR: 7.387e-05  Time cost: 10:15/11:46 [11:28/21:51:27]  Acc_iter 700         Data time: 0.01(0.01)  Forward time: 0.93(0.87)  Batch time: 0.93(0.88)
+2024-10-31 16:44:59,300   INFO  Train:    1/60 (  2%) [ 749/1502 ( 50%)]  Loss: 7.749 (12.7)  LR: 8.033e-05  Time cost: 11:00/11:02 [12:12/21:51:01]  Acc_iter 750         Data time: 0.00(0.01)  Forward time: 0.86(0.87)  Batch time: 0.87(0.88)
+2024-10-31 16:44:59,717   INFO  3090-1                      Thu Oct 31 16:44:59 2024  470.223.02
+[0] NVIDIA GeForce RTX 3090 | 76'C,   0 % | 22492 / 24268 MB | ailab(22479M) gdm(4M) ailab(4M)
+[1] NVIDIA GeForce RTX 3090 | 68'C, 100 % | 22214 / 24268 MB | ailab(22201M) gdm(4M) ailab(4M)
+[2] NVIDIA GeForce RTX 3090 | 68'C, 100 % | 21518 / 24268 MB | ailab(21505M) gdm(4M) ailab(4M)
+[3] NVIDIA GeForce RTX 3090 | 60'C, 100 % | 21590 / 24260 MB | ailab(21241M) gdm(26M) gdm(91M) ailab(159M) ailab(31M) ailab(33M)
+

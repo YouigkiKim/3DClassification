@@ -11,7 +11,7 @@ from ..dataset import DatasetTemplate
 
 
 
-class CustomAvDataset(DatasetTemplate):
+class CustomAvDataset_ver_10_30(DatasetTemplate):
     def __init__(self, dataset_cfg, class_names, training=True, root_path=None, logger=None):
         """
         Args:
@@ -26,7 +26,7 @@ class CustomAvDataset(DatasetTemplate):
         )
         self.split = self.dataset_cfg.DATA_SPLIT[self.mode]
 
-        split_dir = os.path.join(self.root_path, 'ImageSets_Team_3', (self.split + '.txt'))
+        split_dir = os.path.join(self.root_path, 'ImageSets_Team_2_ver_10_30', (self.split + '.txt'))
         self.sample_id_list = [x.strip() for x in open(split_dir).readlines()] if os.path.exists(split_dir) else None
 
         self.custom_av_infos = []
@@ -49,7 +49,7 @@ class CustomAvDataset(DatasetTemplate):
         self.logger.info('Total samples for Custom AV dataset: %d' % (len(custom_av_infos)))
 
     def get_label(self, idx):
-        label_file = self.root_path / 'labels' / ('%s.txt' % idx)
+        label_file = self.root_path / 'Team_2_labels' / ('%s.txt' % idx)
         assert label_file.exists()
         with open(label_file, 'r') as f:
             lines = f.readlines()
@@ -77,7 +77,7 @@ class CustomAvDataset(DatasetTemplate):
         )
         self.split = split
 
-        split_dir = self.root_path / 'ImageSets_Team_3' / (self.split + '.txt')
+        split_dir = self.root_path / 'ImageSets_Team_2_ver_10_30' / (self.split + '.txt')
         self.sample_id_list = [x.strip() for x in open(split_dir).readlines()] if split_dir.exists() else None
         self.sample_id_list = [sample_id for sample_id in self.sample_id_list if sample_id.strip()]
 
@@ -203,8 +203,8 @@ class CustomAvDataset(DatasetTemplate):
     def create_groundtruth_database(self, info_path=None, used_classes=None, split='train'):
         import torch
 
-        database_save_path = Path(self.root_path) / ('Team_3_whole_gt_database' if split == 'train' else ('Team_3_whole_gt_database_%s' % split))
-        db_info_save_path = Path(self.root_path) / ('Team_3_whole_dbinfos_%s.pkl' % split)
+        database_save_path = Path(self.root_path) / ('Team_2_gt_database' if split == 'train' else ('Team_2_gt_database_%s' % split))
+        db_info_save_path = Path(self.root_path) / ('Team_2_custom_av_dbinfos_%s.pkl' % split)
 
         database_save_path.mkdir(parents=True, exist_ok=True)
         all_db_infos = {}
@@ -267,25 +267,25 @@ class CustomAvDataset(DatasetTemplate):
 
 
 def create_custom_av_infos(dataset_cfg, class_names, data_path, save_path, workers=4):
-    dataset = CustomAvDataset(
+    dataset = CustomAvDataset_ver_10_30(
         dataset_cfg=dataset_cfg, class_names=class_names, root_path=data_path,
         training=False, logger=common_utils.create_logger()
     )
-    train_split, val_split = 'train_origin2', 'val_origin2'
+    train_split, val_split = 'train', 'val'
     num_features = len(dataset_cfg.POINT_FEATURE_ENCODING.src_feature_list)
 
-    train_filename = save_path / ('Team_3_whole_infos_%s.pkl' % train_split)
-    val_filename = save_path / ('Team_3_whole_infos_%s.pkl' % val_split)
+    train_filename = save_path / ('Team_2_custom_av_infos_%s_ver_10_30.pkl' % train_split)
+    val_filename = save_path / ('Team_2_custom_av_infos_%s_ver_10_30.pkl' % val_split)
 
     print('------------------------Start to generate data infos------------------------')
 
-    dataset.set_split(train_split)
-    custom_av_infos_train = dataset.get_infos(
-        class_names, num_workers=workers, has_label=True, num_features=num_features
-    )
-    with open(train_filename, 'wb') as f:
-        pickle.dump(custom_av_infos_train, f)
-    print('custom_av info train file is saved to %s' % train_filename)
+    # dataset.set_split(train_split)
+    # custom_av_infos_train = dataset.get_infos(
+    #     class_names, num_workers=workers, has_label=True, num_features=num_features
+    # )
+    # with open(train_filename, 'wb') as f:
+    #     pickle.dump(custom_av_infos_train, f)
+    # print('custom_av info train file is saved to %s' % train_filename)
 
     dataset.set_split(val_split)
     custom_av_infos_val = dataset.get_infos(
@@ -295,9 +295,9 @@ def create_custom_av_infos(dataset_cfg, class_names, data_path, save_path, worke
         pickle.dump(custom_av_infos_val, f)
     print('custom_av info val file is saved to %s' % val_filename)
 
-    print('------------------------Start create groundtruth database for data augmentation------------------------')
-    dataset.set_split(train_split)
-    dataset.create_groundtruth_database(train_filename, split=train_split)
+    # print('------------------------Start create groundtruth database for data augmentation------------------------')
+    # dataset.set_split(train_split)
+    # dataset.create_groundtruth_database(train_filename, split=train_split)
     print('------------------------Data preparation done------------------------')
 
 
@@ -314,6 +314,6 @@ if __name__ == '__main__':
         create_custom_av_infos(
             dataset_cfg=dataset_cfg,
             class_names=['Vehicle', 'Pedestrian', 'Cyclist'],
-            data_path= Path('/home/ailab/AILabDataset/01_Open_Dataset/39_AutoDna/3d_object_detection/3d_mod_av_db'),
-            save_path=Path('/home/ailab/AILabDataset/01_Open_Dataset/39_AutoDna/3d_object_detection/3d_mod_av_db'),
+            data_path=Path('/home/ailab/AILabDataset/01_Open_Dataset/39_AutoDna/3d_object_detection/3d_mod_av_db'),
+            save_path=Path('/home/ailab/AILabDataset/01_Open_Dataset/39_AutoDna/3d_object_detection/3d_mod_av_db')
         )

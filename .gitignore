@@ -84,4 +84,6 @@ dmypy.json
 **data/
 **.pkl
 **.pth
+**.txt
 **/checkpoint_epoch*
+**labels/

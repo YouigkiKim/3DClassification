@@ -14,7 +14,8 @@ from .lyft.lyft_dataset import LyftDataset
 from .once.once_dataset import ONCEDataset
 from .argo2.argo2_dataset import Argo2Dataset
 from .custom.custom_dataset import CustomDataset
-from .custom_av.custom_av_dataset import CustomAvDataset
+# from .custom_av.custom_av_dataset import CustomAvDataset
+from .custom_av.custom_av_dataset import CustomAvDataset_ver_10_30
 from .custom_infra.custom_infra_dataset import CustomInfraDataset
 
 
@@ -28,8 +29,9 @@ __all__ = {
     'ONCEDataset': ONCEDataset,
     'CustomDataset': CustomDataset,
     'Argo2Dataset': Argo2Dataset,
-    'CustomAvDataset': CustomAvDataset,
+    # 'CustomAvDataset': CustomAvDataset,
     'CustomInfraDataset': CustomInfraDataset,
+    'CustomAvDataset': CustomAvDataset_ver_10_30,
 }
 
 
